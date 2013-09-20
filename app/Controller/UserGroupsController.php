@@ -6,6 +6,11 @@ class UserGroupsController extends AppController {
         $this->set('userGroups', $this->UserGroup->find('all'));
     }
 	
+	public function about($userGroupId){
+		$userGroup = $this->UserGroup->findById($userGroupId);
+		$this->set('userGroup', $userGroup);
+	}
+	
 	public function add() {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');

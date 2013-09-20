@@ -9,9 +9,11 @@ class UsersController extends AppController {
 	public function home(){
 		$user = $this->getLoggedInUser();
 		
-		$organizations = $this->User->UserGroup->Organization->find(
+		pr($user);
+		
+		$organizations = $this->User->UserUserGroup->UserGroup->Organization->find(
 			'all', 
-			array('conditions' => array('Organization.user_group_id' => $user['UserGroup']['id']))
+			array('conditions' => array('Organization.user_group_id IN' => $user['UserUserGroup']['user_group_id'])) // <- NEEDS TO BE AN IN CLAUSE
 		);
 		
 		

@@ -20,22 +20,31 @@ CREATE TABLE `users`(
 	`modified` datetime NOT NULL,
 	active BOOLEAN default true,
 	email varchar(255) NOT NULL UNIQUE,
+	PRIMARY KEY (id)
+)ENGINE = MYISAM;
+INSERT INTO users (email, system_admin, password) VALUES("root", TRUE, '1234');
+
+CREATE TABLE user_user_groups(
+	id INT NOT NULL AUTO_INCREMENT,
+	user_id INT NOT NULL,
 	user_group_id INT NOT NULL,
 	PRIMARY KEY (id),
+	FOREIGN KEY (user_id)
+		REFERENCES users(id),
 	FOREIGN KEY (user_group_id)
 		REFERENCES user_groups(id)
 )ENGINE = MYISAM;
-INSERT INTO users (email, system_admin, user_group_id, password) VALUES("root", TRUE, 1, '1234');
+INSERT INTO user_user_groups (user_id, user_group_id) VALUES(1, 1);
 
 CREATE TABLE organizations(
 	id INT NOT NULL AUTO_INCREMENT,
-	organization_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	description TEXT,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
 	active BOOLEAN DEFAULT TRUE,
 	user_group_id INT NOT NULL,
-	FULLTEXT (organization_name, description),
+	FULLTEXT (name, description),
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_group_id)
 		REFERENCES user_groups(id)

@@ -1,7 +1,7 @@
 <?php
 
 class User extends AppModel {
-	var $belongsTo = array('UserGroup');
+	var $hasMany = array('UserUserGroup');
 }
 
 ?>

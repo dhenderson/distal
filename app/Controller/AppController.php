@@ -52,7 +52,7 @@ class AppController extends Controller {
 	//returns true if the logged in user is a system administrator
 	public function isSystemAdmin(){
 		$user = $this->Session->read('User');
-		if($user['system_admin'] == true){
+		if($user['User']['system_admin'] == true){
 			return true;
 		}
 		return false;
