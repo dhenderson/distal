@@ -1,6 +1,7 @@
 <?php
 
-class User extends AppModel {
+class Organization extends AppModel {
+
 	var $belongsTo = array('UserGroup');
 }
 

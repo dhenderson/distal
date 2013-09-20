@@ -9,7 +9,7 @@
 	if($isSystemAdmin) {
 		echo $this->form->input('system_admin');
 	}		
-	echo $this->form->input('user_id', array('type'=>'hidden'));
+	echo $this->form->input('id', array('type'=>'hidden'));
 	
 	echo $this->form->end('Save User');
 ?>

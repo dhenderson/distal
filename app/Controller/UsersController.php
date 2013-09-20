@@ -8,27 +8,25 @@ class UsersController extends AppController {
 	
 	public function home(){
 		$user = $this->getLoggedInUser();
+		
+		$organizations = $this->User->UserGroup->Organization->find(
+			'all', 
+			array('conditions' => array('Organization.user_group_id' => $user['UserGroup']['id']))
+		);
+		
+		
 		$this->set('user', $user);
+		$this->set('organizations', $organizations);
 	}
 	
-	public function add($organizationId = null) {
+	public function add($userGroupId = null) {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
 		
 		$user = $this->getLoggedInUser();
-				
-		//set navigation	
-		$navigationOptions = array();
-		$navigationOptions[] = array('display' => '&laquo; Back to All Users', 'url' => 'users');
-		$this->setNavigationMenuForLayout($navigationOptions);
 		
-		//set title
-		$this->setTitleForLayout('Add User');
-		
-		$this->set('isSystemAdmin', $this->isSystemAdmin());
-		$this->set('organizationId', $organizationId);
-		$this->set('organizationOptions', $this->User->Organization->getComboboxOptions($this->isSystemAdmin()));
+		$this->set('userGroupId', $userGroupId);
 	
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {
@@ -52,9 +50,6 @@ class UsersController extends AppController {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
-		
-		$isSystemAdmin = $this->isSystemAdmin();
-		$this->set('isSystemAdmin', $isSystemAdmin);
 		
 		if (!$id) {
 			throw new NotFoundException(__('Invalid user'));
@@ -103,8 +98,7 @@ class UsersController extends AppController {
 
                 // This means they were the same. We can now build some basic
                 // session information to remember this user as 'logged-in'.
-
-                $this->Session->write('User', $someone['User']);
+                $this->Session->write('User', $someone);
 
                 // Now that we have them stored in a session, forward them on
                 // to a landing page for the application.

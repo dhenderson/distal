@@ -1,6 +1,7 @@
 <!-- File: /app/View/Users/index.ctp -->
 <table cellpadding="0" cellspacing="0">
 	<tr>
+		<th>Group</th>
 		<th>Name</th>
 		<th>Email</th>
 		<th>Active</th>
@@ -9,6 +10,7 @@
 	</tr>
 	<?php foreach ($users as $user): ?>
 	<tr>
+		<td><?php echo  $this->html->link($user['UserGroup']['name'], '/usergroups/about/' . $user['UserGroup']['id']);?></td>
 		<td>
 			<?php echo $this->html->link(
 				$user['User']['first_name'] . ' ' . $user['User']['last_name'],

@@ -4,10 +4,11 @@ USE distal;
 
 CREATE TABLE user_groups(
 	id INT NOT NULL AUTO_INCREMENT,
-	user_group_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
+	active BOOLEAN default true,
 	PRIMARY KEY (id)
 )ENGINE = MYISAM;
-INSERT INTO user_groups (user_group_name) VALUES("My group");
+INSERT INTO user_groups (name) VALUES("My group");
 
 CREATE TABLE `users`(
 	`id` INT NOT NULL AUTO_INCREMENT,
@@ -57,7 +58,7 @@ CREATE TABLE projects(
 
 CREATE TABLE targets(
 	id INT NOT NULL AUTO_INCREMENT,
-	target_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	description TEXT,
 	project_id INT NOT NULL,
 	PRIMARY KEY (id),
@@ -67,7 +68,7 @@ CREATE TABLE targets(
 
 CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
-	outcome_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	description TEXT,
 	project_id INT NOT NULL,
 	PRIMARY KEY (id),
@@ -88,7 +89,7 @@ CREATE TABLE parent_child_outcomes(
 
 CREATE TABLE indicators(
 	id INT NOT NULL AUTO_INCREMENT,
-	indicator_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	data_type_id INT NOT NULL,
 	answer_option_type_id INT NOT NULL,
 	description TEXT,
@@ -127,7 +128,7 @@ INSERT INTO answer_option_types (answer_option_type, description) VALUES ('fill_
 
 CREATE TABLE interventions(
 	id INT NOT NULL AUTO_INCREMENT,
-	intervention_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	description TEXT,
 	outcome_id INT NOT NULL,
 	PRIMARY KEY (id),
