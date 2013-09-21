@@ -8,17 +8,14 @@ class UsersController extends AppController {
 	
 	public function home(){
 		$user = $this->getLoggedInUser();
-		
-		pr($user);
-		
-		$organizations = $this->User->UserUserGroup->UserGroup->Organization->find(
-			'all', 
-			array('conditions' => array('Organization.user_group_id IN' => $user['UserUserGroup']['user_group_id'])) // <- NEEDS TO BE AN IN CLAUSE
+
+		$userGroups = $this->User->UserUserGroup->UserGroup->find(
+			'all',
+			array('conditions' => array('UserGroup.id' => $this->User->getUserGroupIds($user['User']['id'])))
 		);
-		
-		
+
 		$this->set('user', $user);
-		$this->set('organizations', $organizations);
+		$this->set('userGroups', $userGroups);
 	}
 	
 	public function add($userGroupId = null) {
@@ -105,12 +102,7 @@ class UsersController extends AppController {
                 // Now that we have them stored in a session, forward them on
                 // to a landing page for the application.
 				
-				if($this->isSystemAdmin()){
-					$this->redirect('/admin');
-				}
-				else{
-					$this->redirect('/users/home');
-				}
+				$this->redirect('/users/home');
             }
             // Else, they supplied incorrect data:
             else{

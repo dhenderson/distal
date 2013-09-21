@@ -50,16 +50,15 @@ CREATE TABLE organizations(
 		REFERENCES user_groups(id)
 )ENGINE = MYISAM;
 
-CREATE TABLE projects(
+CREATE TABLE programs(
 	id INT NOT NULL AUTO_INCREMENT,
 	organization_id INT NOT NULL,
-	user_group_id INT,
 	description TEXT,
-	project_name varchar(255) NOT NULL,
+	name varchar(255) NOT NULL,
 	active BOOLEAN default true,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	FULLTEXT (project_name, description),
+	FULLTEXT (name, description),
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
@@ -69,20 +68,20 @@ CREATE TABLE targets(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	description TEXT,
-	project_id INT NOT NULL,
+	program_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (project_id)
-		REFERENCES projects(id)
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	description TEXT,
-	project_id INT NOT NULL,
+	program_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (project_id)
-		REFERENCES projects(id)
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE parent_child_outcomes(

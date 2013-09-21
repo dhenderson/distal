@@ -17,7 +17,7 @@ class OrganizationsController extends AppController {
 		}
 		
 		$user = $this->getLoggedInUser();
-		$this->set('userGroupId', $user['UserGroup']['id']);
+		$this->set('userGroupId', $userGroupId);
 	
 		if (!empty($this->data)) {
 			if ($this->Organization->save($this->data)) {
