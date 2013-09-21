@@ -41,7 +41,8 @@ class AppController extends Controller {
 	public function getLoggedInUser(){
         // If the session info hasn't been set...
         if (!$this->Session->check('User')){
-            return null;
+			// redirect to login
+			$this->redirect('/users/login');
         }
 		else{
 			$user = $this->Session->read('User');

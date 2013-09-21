@@ -8,7 +8,10 @@ class ProgramsController extends AppController {
 	
 	public function about($programId){
 		$program = $this->Program->findById($programId);
+		$outcomes = $this->Program->Outcome->find('all', 
+			array('conditions' => array('Outcome.program_id'=>$programId)));
 		$this->set('program', $program);
+		$this->set('outcomes', $outcomes);
 	}
 	
 	public function add($organizationId) {

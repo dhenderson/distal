@@ -18,7 +18,7 @@ CREATE TABLE `users`(
 	system_admin BOOLEAN default false,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	active BOOLEAN default true,
+	active BOOLEAN DEFAULT TRUE,
 	email varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
 )ENGINE = MYISAM;
@@ -28,6 +28,8 @@ CREATE TABLE user_user_groups(
 	id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
 	user_group_id INT NOT NULL,
+	group_admin BOOLEAN DEFAULT FALSE,
+	view_only BOOLEAN DEFAULT FALSE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id)
 		REFERENCES users(id),
