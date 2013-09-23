@@ -86,14 +86,14 @@ CREATE TABLE outcomes(
 		REFERENCES programs(id)
 )ENGINE = MYISAM;
 
-CREATE TABLE parent_child_outcomes(
+CREATE TABLE parent_outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
+	outcome_id INT NOT NULL,
 	parent_outcome_id INT NOT NULL,
-	child_outcome_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (parent_outcome_id)
+	FOREIGN KEY (outcome_id)
 		REFERENCES outcome(id),
-	FOREIGN KEY (child_outcome_id)
+	FOREIGN KEY (parent_outcome_id)
 		REFERENCES outcome(id)
 )ENGINE = MYISAM;
 
