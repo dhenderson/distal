@@ -19,11 +19,22 @@ class Outcome extends AppModel {
 		),
 	);
 
-	var $belongsTo = array('Program');
-	var $hasMany = array('Indicator', 'Intervention', 'OutcomeIntervention');
+	var $hasMany = array('Indicator', 'Intervention', 'OutcomeIntervention', 'ProgramOutcome');
 	
 	/**
-	*Links a given outcome to the specified parent outcome
+	* Links a given outcome to the specified program
+	* @params	$outcomeId	The outcome ID for the given outcome
+	* @params	$programId	The program the outcome is to be linked to
+	**/
+	public function linkToProgram($outcomeId, $programId){
+		$sql = "INSERT INTO program_outcomes (outcome_id, program_id) 
+			VALUES ($outcomeId, $programId)";
+			
+		$this->query($sql);
+	}
+	
+	/**
+	* Links a given outcome to the specified parent outcome
 	* @params	$outcomeId	The outcome ID for the given outcome
 	* @params	$parentOutcomeId	The parent outcome the specified outcome is being linked to
 	**/

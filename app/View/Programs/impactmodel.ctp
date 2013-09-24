@@ -8,13 +8,13 @@
 		<?php foreach ($outcomes as $outcome): ?>
 			var outcome<?php echo $outcome['Outcome']['id'];?> = graph.newNode({outcomeId: <?php echo $outcome['Outcome']['id'];?>, 
 				label: "<?php echo $outcome['Outcome']['name'];?>"
-				<?php if(sizeof($outcome['Parent']) == 0):?>
+				<?php if(sizeof($outcome['Outcome']['Parent']) == 0):?>
 					, color: "#FF2222"
 				<?php endif;?>
 				});
 		<?php endforeach; ?>
 		<?php foreach ($outcomes as $outcome): ?>	
-			<?php foreach ($outcome['Parent'] as $parent): ?>	
+			<?php foreach ($outcome['Outcome']['Parent'] as $parent): ?>	
 				graph.newEdge(outcome<?php echo $outcome['Outcome']['id'];?>, outcome<?php echo $parent['id'];?>);
 			<?php endforeach;?>
 		<?php endforeach; ?>
@@ -113,17 +113,17 @@
 					<ul class="nav nav-tabs">
 						<li class="active">
 							<a href="#outcome-options-<?php echo $outcomeId; ?>-children" data-toggle="tab">
-								Child outcomes (<?php echo sizeof($outcome['Child']);?>)
+								Child outcomes (<?php echo sizeof($outcome['Outcome']['Child']);?>)
 							</a>
 						</li>
 						<li>
 							<a href="#outcome-options-<?php echo $outcomeId; ?>-indicators" data-toggle="tab">
-								Indicators (<?php echo sizeof($outcome['Indicator']);?>)
+								Indicators (<?php echo sizeof($outcome['Outcome']['Indicator']);?>)
 							</a>
 						</li>
 						<li>
 							<a href="#outcome-options-<?php echo $outcomeId; ?>-interventions" data-toggle="tab">
-								Interventions (<?php echo sizeof($outcome['Intervention']);?>)
+								Interventions (<?php echo sizeof($outcome['Outcome']['Intervention']);?>)
 							</a>
 						</li>
 					</ul>
@@ -132,71 +132,77 @@
 							<div class="button">
 								<?php echo $this->html->link('Add child outcome', "/outcomes/add/$programId/$outcomeId");?>
 							</div>
-							<table class="table">
-								<tr>
-									<th>Child outcome</th>
-									<th>Edit</th>
-									<th>Remove as child</th>
-								</tr>
-								<?php foreach($outcome['Child'] as $childOutcome):?>
+							<?php if(sizeOf($outcome['Outcome']['Child']) > 0):?>
+								<table class="table">
 									<tr>
-										<td><?php echo $this->html->link($childOutcome['name'], "/outcomes/about/" . $childOutcome['id']);?></td>
-										<td><?php echo $this->html->link('Edit', "/outcomes/edit/" . $childOutcome['id']);?></td>
-										<td>Remove as child</td>
+										<th>Child outcome</th>
+										<th>Edit</th>
+										<th>Remove as child</th>
 									</tr>
-								<?php endforeach;?>
-							</table>
+									<?php foreach($outcome['Outcome']['Child'] as $childOutcome):?>
+										<tr>
+											<td><?php echo $this->html->link($childOutcome['name'], "/outcomes/about/" . $childOutcome['id']);?></td>
+											<td><?php echo $this->html->link('Edit', "/outcomes/edit/" . $childOutcome['id']);?></td>
+											<td>Remove as child</td>
+										</tr>
+									<?php endforeach;?>
+								</table>
+							<?php endif;?>
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
 							<div class="button">
 								<?php echo $this->html->link("Add indicator", "/indicators/add/$outcomeId");?>
 							</div>
-							<table class="table">
-								<tr>
-									<th>Indicator</th>
-									<th>Edit</th>
-									<th>Delete</th>
-								</tr>
-								<?php foreach($outcome['Indicator'] as $indicator):?>
-									<?php $indicatorName = $indicator['name'];?>
-									<?php $indicatorId = $indicator['id'];?>
+							<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
+								<table class="table">
 									<tr>
-										<td valign="top">
-											<?php echo $this->html->link($interventionName, "/indicators/about/$indicatorId");?>
-										</td> 
-										<td valign="top">
-											<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
-										</td>
+										<th>Indicator</th>
+										<th>Edit</th>
+										<th>Delete</th>
 									</tr>
-								<?php endforeach; ?>
-							</table>
+									<?php foreach($outcome['Outcome']['Indicator'] as $indicator):?>
+										<?php $indicatorName = $indicator['name'];?>
+										<?php $indicatorId = $indicator['id'];?>
+										<tr>
+											<td valign="top">
+												<?php echo $this->html->link($interventionName, "/indicators/about/$indicatorId");?>
+											</td> 
+											<td valign="top">
+												<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</table>
+							<?php endif;?>
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
 							<div class="button">
-								<?php echo $this->html->link("Add an intervention", "/interventions/add/$outcomeId");?>
+								<?php echo $this->html->link("Add intervention", "/interventions/add/$outcomeId");?>
 							</div>
-							<table class="table">
-								<tr>
-									<th>Intervention</th>
-									<th>Edit</th>
-									<th>Delete</th>
-								</tr>
-								<?php foreach($outcome['Intervention'] as $intervention):?>
-									<?php $interventionName = $intervention['name'];?>
-									<?php $interventionId = $intervention['id'];?>
+							<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>
+								<table class="table">
 									<tr>
-										<td>
-											<?php echo $this->html->link($interventionName, "/interventions/about/$interventionId");?>
-										</td>
-										<td valign="top">
-											<?php echo $this->html->link('Edit', "/interventions/edit/$interventionId");?>
-										</td>
-										<td valign="top">
-											<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
-										</td>
+										<th>Intervention</th>
+										<th>Edit</th>
+										<th>Delete</th>
 									</tr>
-								<?php endforeach; ?>
-							</table>
+									<?php foreach($outcome['Outcome']['Intervention'] as $intervention):?>
+										<?php $interventionName = $intervention['name'];?>
+										<?php $interventionId = $intervention['id'];?>
+										<tr>
+											<td>
+												<?php echo $this->html->link($interventionName, "/interventions/about/$interventionId");?>
+											</td>
+											<td valign="top">
+												<?php echo $this->html->link('Edit', "/interventions/edit/$interventionId");?>
+											</td>
+											<td valign="top">
+												<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</table>
+							<?php endif;?>
 						</div>
 					</div>
 				</div>

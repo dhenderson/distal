@@ -2,20 +2,31 @@
 class OutcomesController extends AppController {
     public $helpers = array('Html', 'Form');
 	
+	public function index(){
+		
+		$outcomes = $this->Outcome->find('all');
+		$outcomesByProgram = $this->Outcome->ProgramOutcome->find('all', array('order' => array('Outcome.name')));
+		$this->set('outcomes', $outcomes);
+		$this->set('outcomesByProgram', $outcomesByProgram);
+	}
+	
 	public function about($outcomeId){
 		$outcome = $this->Outcome->findById($outcomeId);
 		$this->set('outcome', $outcome);
 	}
 	
-	public function add($programId, $parentOutcomeId = null) {
+	public function add($programId = null, $parentOutcomeId = null) {
 		$user = $this->getLoggedInUser();
 		$this->set('programId', $programId);
 	
 		if (!empty($this->data)) {
 			if ($this->Outcome->save($this->data)) {
 				// if a parent id was passed, link this outcome to the parent
+				if($programId != null) {
+					$this->Outcome->linkToProgram($this->Outcome->id, $programId);
+				}
+				// if a parent id was passed, link this outcome to the parent
 				if($parentOutcomeId != null) {
-					echo "OUTCOME ID IS " . $this->Outcome->id;
 					$this->Outcome->linkToParentOutcome($this->Outcome->id, $parentOutcomeId);
 				}
 				$this->Session->setFlash('Your outcome has been saved.');

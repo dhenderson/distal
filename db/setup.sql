@@ -89,10 +89,7 @@ CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	description TEXT,
-	program_id INT NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (program_id)
-		REFERENCES programs(id)
+	PRIMARY KEY (id)
 )ENGINE = MYISAM;
 
 CREATE TABLE parent_outcomes(
@@ -104,6 +101,17 @@ CREATE TABLE parent_outcomes(
 		REFERENCES outcome(id),
 	FOREIGN KEY (parent_outcome_id)
 		REFERENCES outcome(id)
+)ENGINE = MYISAM;
+
+CREATE TABLE program_outcomes(
+	id INT NOT NULL AUTO_INCREMENT,
+	outcome_id INT NOT NULL,
+	program_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (outcome_id)
+		REFERENCES outcomes(id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE indicators(
