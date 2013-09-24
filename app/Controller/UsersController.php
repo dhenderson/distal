@@ -22,6 +22,8 @@ class UsersController extends AppController {
 		$this->set('user', $user);
 		$this->set('advisoryGroups', $advisoryGroups);
 		$this->set('organizations', $organizations);
+		
+		$this->set('title_for_layout', 'Welcome home ' . $user['User']['first_name']);
 	}
 	
 	public function add($advisoryGroupId = null) {
@@ -80,12 +82,11 @@ class UsersController extends AppController {
 	}
 	
     public function login(){
-	
-		// use the login layout
-		$this->layout = 'login';
 		
         //Don't show the error message if no data has been submitted.
         $this->set('error', false);
+		
+		$this->set('title_for_layout', 'Login');
 
         // If a user has submitted form data:
         if (!empty($this->data)){

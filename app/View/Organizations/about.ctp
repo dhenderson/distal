@@ -1,11 +1,12 @@
-<h1><?php echo $organization['Organization']['name'];?></h1>
-<div>
-	<?php echo $this->html->link('Add a program', '/programs/add/' . $organization['Organization']['id']);?>
-</div>
-<ul>
+<table class="table">
+	<tr>
+		<th>Program</th>
+		<th>Edit</th>
+	</tr>
 	<?php foreach($organization['Program'] as $program):?>
-		<li>
-			<?php echo $this->html->link($program['name'], '/programs/about/' . $program['id']);?>
-		</li>
+		<tr>
+			<td><?php echo $this->html->link($program['name'], '/programs/about/' . $program['id']);?></td>
+			<td><?php echo $this->html->link('Edit', '/programs/edit/' . $program['id']);?></td>
+		</tr>
 	<?php endforeach; ?>
-</ul>
+</table>

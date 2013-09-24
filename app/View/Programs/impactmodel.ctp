@@ -103,7 +103,7 @@
 			<?php $outcomeId = $outcome['Outcome']['id'];?>
 			<?php $outcomeName = $outcome['Outcome']['name'];?>
 			<div style="display: none" id="outcome<?php echo $outcomeId;?>">
-				<h2 style="margin-bottom: 0px; margin-top: 0px; cursor: pointer;" onclick="minMaxOutcomeDetails();"><?php echo $outcomeName;?></h2>
+				<h1 style="margin-bottom: 0px; margin-top: 0px; cursor: pointer;" onclick="minMaxOutcomeDetails();"><?php echo $outcomeName;?></h1>
 				<div style="font-size: 8pt; font-weight: normal; margin-bottom: 10px;">
 					<?php echo $this->html->link('Edit', "/outcomes/edit/$outcomeId");?>	| 
 					<?php echo $this->html->link('Delete', "/outcomes/delete/$outcomeId", null, 'Are you sure?' );?>

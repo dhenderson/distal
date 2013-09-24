@@ -9,6 +9,15 @@ class ProgramsController extends AppController {
 	public function about($programId){
 		$program = $this->Program->findById($programId);
 		$this->set('program', $program);
+		
+		// menu options
+		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
+		$navOptions['Add a target'] = '/targets/add/' . $programId;
+		$navOptions['View impact model'] = '/programs/impactmodel/' . $programId;
+		$this->set('navOptions', $navOptions);
+		
+		// title
+		$this->set('title_for_layout', $program['Program']['name']);
 	}
 	
 	public function impactModel($programId){
@@ -22,7 +31,12 @@ class ProgramsController extends AppController {
 			);
 		$this->set('program', $program);
 		$this->set('outcomes', $outcomes);
-		$this->set('title_for_layout', $program['Program']['name'] . ' program impact model');
+		$this->set('title_for_layout', $program['Program']['name'] . ' impact model');
+		
+		// menu options
+		$navOptions['Back to program'] = '/programs/about/' . $programId;
+		$this->set('navOptions', $navOptions);
+		
 	}
 	
 	public function add($organizationId) {

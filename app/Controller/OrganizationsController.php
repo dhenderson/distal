@@ -9,6 +9,11 @@ class OrganizationsController extends AppController {
 	public function about($organizationId){
 		$organization = $this->Organization->findById($organizationId);
 		$this->set('organization', $organization);
+		
+		$this->set('title_for_layout', $organization['Organization']['name']);
+		
+		$navOptions['Add a new program'] = '/programs/add/' . $organization['Organization']['id'];
+		$this->set('navOptions', $navOptions);
 	}
 	
 	public function add($advisoryGroupId = null) {

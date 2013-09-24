@@ -121,6 +121,21 @@ CREATE TABLE indicators(
 		REFERENCES outcomes(id)
 )ENGINE = MYISAM;
 
+CREATE TABLE indicator_outcomes(
+	id INT NOT NULL AUTO_INCREMENT,
+	outcome_id INT NOT NULL,
+	indicator_id INT NOT NULL,
+	program_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (outcome_id)
+		REFERENCES outcomes(id),
+	FOREIGN KEY (indicator_id)
+		REFERENCES indicators(id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id),
+	UNIQUE INDEX (outcome_id, indicator_id, program_id)
+)ENGINE = MYISAM;
+
 CREATE TABLE data_types(
 	id INT NOT NULL AUTO_INCREMENT,
 	data_type varchar(10) NOT NULL,
@@ -145,15 +160,19 @@ CREATE TABLE interventions(
 		REFERENCES outcomes(id)
 )ENGINE = MYISAM;
 
-CREATE TABLE outcome_interventions(
+CREATE TABLE intervention_outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
 	outcome_id INT NOT NULL,
 	intervention_id INT NOT NULL,
+	program_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (outcome_id)
 		REFERENCES outcomes(id),
 	FOREIGN KEY (intervention_id)
-		REFERENCES interventions(id)
+		REFERENCES interventions(id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id),
+	UNIQUE INDEX (outcome_id, intervention_id, program_id)
 )ENGINE = MYISAM;
 
 /** DEFAULT SETTINGS **/

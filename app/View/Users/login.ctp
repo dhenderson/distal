@@ -1,7 +1,6 @@
 <!-- File: /app/View/Users/login.ctp -->
 <div>
 	<?php echo $this->form->create('User'); ?>
-	<div>Sign in to your account</div>
 	<div>
 		<strong>Email</strong><br />
 		<?php echo $this->form->text('email', array('size' => 35));?>

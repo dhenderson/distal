@@ -55,9 +55,17 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			</span> 
 			<?php echo $title_for_layout; ?>
 		</header>
-		<nav>
-			Stuff here
-		</nav>
+		<?php if(isset($navOptions)):?>
+			<nav>
+				<ul>
+					<?php foreach($navOptions as $displayValue => $linkValue):?>
+						<li>
+							<?php echo $this->html->link($displayValue, $linkValue);?>
+						</li>
+					<?php endforeach;?>
+				</ul>
+			</nav>
+		<?php endif;?>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>

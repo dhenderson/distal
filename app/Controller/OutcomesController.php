@@ -13,6 +13,7 @@ class OutcomesController extends AppController {
 	public function about($outcomeId){
 		$outcome = $this->Outcome->findById($outcomeId);
 		$this->set('outcome', $outcome);
+		
 	}
 	
 	public function add($programId = null, $parentOutcomeId = null) {
