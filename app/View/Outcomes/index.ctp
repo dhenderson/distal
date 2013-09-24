@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="#outcomes-by-program" data-toggle="tab">
-				Outcomes by program
+				Outcomes by organization and program
 			</a>
 		</li>
 	</ul>
@@ -35,6 +35,7 @@
 		<table class="table">
 			<tr>
 				<th>Outcome</th>
+				<th>Organization</th>
 				<th>Programs</th>
 				<th>Edit</th>
 				<th>Delete</th>
@@ -42,9 +43,8 @@
 			<?php foreach ($outcomesByProgram as $outcomeByProgram): ?>
 				<tr>
 					<td><?php echo $this->html->link($outcomeByProgram['Outcome']['name'], 'about/' . $outcomeByProgram['Outcome']['id']);?></td>
-					<td>
-						<?php echo $outcomeByProgram['Program']['name'];?>
-					</td>
+					<td><?php echo $outcomeByProgram['Program']['Organization']['name'];?></td>
+					<td><?php echo $outcomeByProgram['Program']['name'];?></td>
 					<td><?php echo $this->html->link('Edit', array('action'=>'edit', $outcomeByProgram['Outcome']['id']));?></td>
 					<td><?php echo $this->html->link('Delete', array('action' => 'delete', $outcomeByProgram['Outcome']['id']), null, 'Are you sure?' )?></td>
 				</tr>
