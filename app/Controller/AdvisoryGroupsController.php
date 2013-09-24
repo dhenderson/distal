@@ -1,14 +1,14 @@
 <?php
-class UserGroupsController extends AppController {
+class AdvisoryGroupsController extends AppController {
     public $helpers = array('Html', 'Form');
 	
     public function index() {
-        $this->set('userGroups', $this->UserGroup->find('all'));
+        $this->set('advisoryGroups', $this->AdvisoryGroup->find('all'));
     }
 	
-	public function about($userGroupId){
-		$userGroup = $this->UserGroup->findById($userGroupId);
-		$this->set('userGroup', $userGroup);
+	public function about($advisoryGroupId){
+		$advisoryGroup = $this->AdvisoryGroup->findById($advisoryGroupId);
+		$this->set('userGroup', $advisoryGroup);
 	}
 	
 	public function add() {
@@ -19,7 +19,7 @@ class UserGroupsController extends AppController {
 		$user = $this->getLoggedInUser();
 	
 		if (!empty($this->data)) {
-			if ($this->UserGroup->save($this->data)) {
+			if ($this->AdvisoryGroup->save($this->data)) {
 				$this->Session->setFlash('Your user group has been saved.');
 				$this->redirect(array('action' => 'index'));
 			}
@@ -30,7 +30,7 @@ class UserGroupsController extends AppController {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
-		$this->UserGroup->delete($id);
+		$this->AdvisoryGroup->delete($id);
 		$this->Session->setFlash('The user group with id: '.$id.' has been deleted.');
 		$this->redirect(array('action'=>'index'));
 	}
@@ -45,14 +45,14 @@ class UserGroupsController extends AppController {
 			throw new NotFoundException(__('Invalid user group'));
 		}
 
-		$userGroup = $this->UserGroup->findById($id);
-		if (!$userGroup) {
+		$advisoryGroup = $this->AdvisoryGroup->findById($id);
+		if (!$advisoryGroup) {
 			throw new NotFoundException(__('Invalid user group'));
 		}
 
 		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->UserGroup->id = $id;
-			if ($this->UserGroup->save($this->request->data)) {
+			$this->AdvisoryGroup->id = $id;
+			if ($this->AdvisoryGroup->save($this->request->data)) {
 				$this->Session->setFlash(__('Your user group has been updated.'));
 				return $this->redirect(array('action' => 'index'));
 			}
@@ -60,7 +60,7 @@ class UserGroupsController extends AppController {
 		}
 
 		if (!$this->request->data) {
-			$this->request->data = $userGroup;
+			$this->request->data = $advisoryGroup;
 		}
 	}
 }

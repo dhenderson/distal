@@ -50,8 +50,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container">
 		<header>
-			Distal
+			<span id="app-name">
+				<?php echo $this->html->link('Distal', '/users/home'); ?>
+			</span> 
+			<?php echo $title_for_layout; ?>
 		</header>
+		<nav>
+			Stuff here
+		</nav>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>

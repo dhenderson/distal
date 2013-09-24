@@ -5,8 +5,11 @@ header, h1, h2, h3 {font-family: 'Raleway', sans-serif;}
 a {color: #445500;}
 a:hover {color: #668800;}
 
-header{font-size: 2em; color: #777; background-color: #EEE; padding: 10px;}
-nav {}
+header{font-size: 1.6em; color: #333; background-color: #EEE; padding: 10px; vertical-align:top;}
+header #app-name{font-size: 1.3em; color: #CCC; font-weight: bold; margin-right: 10px;}
+header #app-name a{color: #BBB;}
+header #app-name a:hover{color: #668800; text-decoration: none;}
+nav {padding: 5px 10px; background-color: #BBCCBB;}
 
 #container{}
 #content{padding: 10px;}

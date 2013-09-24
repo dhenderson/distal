@@ -1,28 +1,28 @@
 <?php
 
 class User extends AppModel {
-	var $hasMany = array('UserUserGroup');
+	var $hasMany = array('UserAdvisoryGroup');
 	
 	
 	/**
-	* Returns an array of UserGroup IDs a user is assigned to
+	* Returns an array of AdvisoryGroup IDs a user is assigned to
 	* @params	$userId		User ID for a given user
-	* @returns	array of UserGroup IDs
+	* @returns	array of AdvisoryGroup IDs
 	**/
-	function getUserGroupIds($userId){
+	function getAdvisoryGroupIds($userId){
 		
-		$userGroupIds = array();
+		$advisoryGroupIds = array();
 	
-		$userUserGroups = $this->UserUserGroup->find(
+		$userAdvisoryGroups = $this->UserAdvisoryGroup->find(
 			'all', 
-			array('conditions' => array('UserUserGroup.user_id' => $userId))
+			array('conditions' => array('UserAdvisoryGroup.user_id' => $userId))
 		);
 		
-		foreach ($userUserGroups as $userUserGroup) {
-			$userGroupIds[] = $userUserGroup['UserUserGroup']['user_group_id'];
+		foreach ($userAdvisoryGroups as $userAdvisoryGroup) {
+			$advisoryGroupIds[] = $userAdvisoryGroup['UserAdvisoryGroup']['advisory_group_id'];
 		}
 		
-		return $userGroupIds;
+		return $advisoryGroupIds;
 	}
 }
 

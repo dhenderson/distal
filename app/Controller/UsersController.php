@@ -9,29 +9,29 @@ class UsersController extends AppController {
 	public function home(){
 		$user = $this->getLoggedInUser();
 
-		$userGroups = $this->User->UserUserGroup->UserGroup->find(
+		$advisoryGroups = $this->User->UserAdvisoryGroup->AdvisoryGroup->find(
 			'all',
-			array('conditions' => array('UserGroup.id' => $this->User->getUserGroupIds($user['User']['id'])))
+			array('conditions' => array('AdvisoryGroup.id' => $this->User->getAdvisoryGroupIds($user['User']['id'])))
 		);
 		
-		$organizations = $this->User->UserUserGroup->UserGroup->OrganizationUserGroup->find(
+		$organizations = $this->User->UserAdvisoryGroup->AdvisoryGroup->OrganizationAdvisoryGroup->find(
 			'all',
-			array('conditions' => array('OrganizationUserGroup.user_group_id' => $this->User->getUserGroupIds($user['User']['id'])))
+			array('conditions' => array('OrganizationAdvisoryGroup.advisory_group_id' => $this->User->getAdvisoryGroupIds($user['User']['id'])))
 		);
 
 		$this->set('user', $user);
-		$this->set('userGroups', $userGroups);
+		$this->set('advisoryGroups', $advisoryGroups);
 		$this->set('organizations', $organizations);
 	}
 	
-	public function add($userGroupId = null) {
+	public function add($advisoryGroupId = null) {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
 		
 		$user = $this->getLoggedInUser();
 		
-		$this->set('userGroupId', $userGroupId);
+		$this->set('advisoryGroupId', $advisoryGroupId);
 	
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {

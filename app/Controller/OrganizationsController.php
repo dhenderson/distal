@@ -11,19 +11,19 @@ class OrganizationsController extends AppController {
 		$this->set('organization', $organization);
 	}
 	
-	public function add($userGroupId) {
+	public function add($advisoryGroupId = null) {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
 		
 		$user = $this->getLoggedInUser();
-		$this->set('userGroupId', $userGroupId);
+		$this->set('advisoryGroupId', $advisoryGroupId);
 	
 		if (!empty($this->data)) {
 		
 			if ($this->Organization->save($this->data)) {
 				// link this user's user group to the organization
-				$this->Organization->OrganizationUserGroup->addUserGroupToOrganization($this->Organization->id, $userGroupId);
+				$this->Organization->OrganizationAdvisoryGroup->addAdvisoryGroupToOrganization($this->Organization->id, $advisoryGroupId);
 				$this->Session->setFlash('Your organization has been saved');
 				$this->redirect(array('action' => 'index'));
 			}

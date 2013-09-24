@@ -1,5 +1,5 @@
 <!-- File: /app/View/Users/index.ctp -->
-<table cellpadding="0" cellspacing="0">
+<table class="table">
 	<tr>
 		<th>Name</th>
 		<th>Email</th>

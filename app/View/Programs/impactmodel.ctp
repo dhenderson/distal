@@ -1,4 +1,3 @@
-<h1><?php echo $program['Program']['name'];?></h1>
 <?php $programId = $program['Program']['id'];?>
 		
 <?php if(sizeOf($outcomes) > 0):?>
@@ -84,7 +83,7 @@
 	</script>
 <?php endif;?>
 <!-- impact theory chart -->
-<div style="margin-left: auto; margin-right: auto; border: 1px dashed #AAA;">
+<div style="margin-left: auto; margin-right: auto; border: 1px dashed #AAA; text-align: center;">
 	<?php if(sizeOf($outcomes) > 0):?>
 		<canvas id="outcomesChart" width="1250" height="400" style=""/>
 	<?php endif;?>

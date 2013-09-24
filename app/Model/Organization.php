@@ -2,7 +2,7 @@
 
 class Organization extends AppModel {
 
-	var $hasMany = array('Program', 'OrganizationUserGroup');
+	var $hasMany = array('Program', 'OrganizationAdvisoryGroup');
 }
 
 ?>

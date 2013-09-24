@@ -17,17 +17,28 @@ class OutcomesController extends AppController {
 	
 	public function add($programId = null, $parentOutcomeId = null) {
 		$user = $this->getLoggedInUser();
+		
+		$outcomes = $this->Outcome->find(
+			'all',
+			array(
+				'conditions' => array(
+					'Outcome.id' => $this->Outcome->ProgramOutcome->Program->getOutcomeIds($programId),
+					'NOT' => array (
+						'Outcome.id' => $parentOutcomeId,
+					)
+				)
+			)
+		);
+		
 		$this->set('programId', $programId);
-	
+		$this->set('outcomes', $outcomes);
+		$this->set('parentOutcomeId', $parentOutcomeId);
+		
 		if (!empty($this->data)) {
 			if ($this->Outcome->save($this->data)) {
-				// if a parent id was passed, link this outcome to the parent
+				// if a program id was passed, link this outcome to the program and parent
 				if($programId != null) {
-					$this->Outcome->linkToProgram($this->Outcome->id, $programId);
-				}
-				// if a parent id was passed, link this outcome to the parent
-				if($parentOutcomeId != null) {
-					$this->Outcome->linkToParentOutcome($this->Outcome->id, $parentOutcomeId);
+					$this->Outcome->linkToProgram($this->Outcome->id, $programId, $parentOutcomeId);
 				}
 				$this->Session->setFlash('Your outcome has been saved.');
 				$this->redirect('/programs/impactmodel/' . $programId);
@@ -35,11 +46,17 @@ class OutcomesController extends AppController {
 		}
 	}
 	
+	public function linkToProgram($outcomeId, $programId, $parentOutcomeId) {
+		$this->Outcome->linkToProgram($outcomeId, $programId, $parentOutcomeId);
+		$this->redirect('/programs/impactmodel/' . $programId);
+	}
+	
 	public function delete($id) {
 		$outcome = $this->Outcome->findById($id);
+		$projectId = $outcome['Outcome']['project_id'];
 		$this->Outcome->delete($id);
 		$this->Session->setFlash('The outcome with id: '.$id.' has been deleted.');
-		$this->redirect('/projects/impactmodel/' . $outcome['Outcome']['project_id']);
+		$this->redirect('/projects/impactmodel/' . $projectId);
 	}
 	
 	public function edit($id = null) {

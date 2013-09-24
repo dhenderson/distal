@@ -1,9 +1,9 @@
 <!-- File: /app/View/Users/home.ctp -->
 
-<?php foreach($userGroups as $userGroup):?>
-	<h1><?php echo $userGroup['UserGroup']['name']?></h1>
+<?php foreach($advisoryGroups as $advisoryGroup):?>
+	<h1><?php echo $advisoryGroup['AdvisoryGroup']['name']?></h1>
 	<div>
-		<?php echo $this->html->link('Add an organization for ' . $userGroup['UserGroup']['name'], '/organizations/add/' . $userGroup['UserGroup']['id']);?>
+		<?php echo $this->html->link('Add an organization for ' . $advisoryGroup['AdvisoryGroup']['name'], '/organizations/add/' . $advisoryGroup['AdvisoryGroup']['id']);?>
 	</div>
 	<h2>Organizations in this group</h2>
 	<ul>
