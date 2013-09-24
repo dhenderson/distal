@@ -1,9 +1,6 @@
 <h1><?php echo $program['Program']['name'];?></h1>
 <?php $programId = $program['Program']['id'];?>
 <div>
-	<?php echo $this->html->link('Add a target', '/targets/add/' . $program['Program']['id']);?>
-</div>
-<div>
 	<?php echo $this->html->link('Add an outcome', '/outcomes/add/' . $program['Program']['id']);?>
 </div>
 		
