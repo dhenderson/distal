@@ -20,8 +20,11 @@ class OrganizationsController extends AppController {
 		$this->set('userGroupId', $userGroupId);
 	
 		if (!empty($this->data)) {
+		
 			if ($this->Organization->save($this->data)) {
-				$this->Session->setFlash('Your organization has been saved.');
+				// link this user's user group to the organization
+				$this->Organization->OrganizationUserGroup->addUserGroupToOrganization($this->Organization->id, $userGroupId);
+				$this->Session->setFlash('Your organization has been saved');
 				$this->redirect(array('action' => 'index'));
 			}
 		}

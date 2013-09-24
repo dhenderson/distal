@@ -2,18 +2,18 @@
 
 class Outcome extends AppModel {
 
-	var $belongsTo = array(
-		'ParentOutcome' => array(
-			'className' => 'ParentOutcome',
-			'foreignKey' => 'id'),
-		'Program'
+	public $hasAndBelongsToMany = array(
+		'Parent' => array(
+			'className' => 'Outcome',
+			'joinTable' => 'parent_outcomes',
+			'foreignKey' => 'outcome_id',
+			'associationForeignKey' => 'parent_outcome_id', 
+			'unique' => true
+		)
 	);
-	var $hasMany = array(
-		'ParentOutcome' => array(
-			'className' => 'ParentOutcome',
-			'foreignKey' => 'outcome_id'),
-		'Indicator', 'Intervention'
-	);
+
+	var $belongsTo = array('Program');
+	var $hasMany = array('Indicator', 'Intervention');
 	
 	/**
 	* Gets the parent outcomes for the specified outcome ID

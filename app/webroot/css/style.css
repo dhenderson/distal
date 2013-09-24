@@ -1,0 +1,15 @@
+body {font-family: 'Verdana', 'Arial'; margin: 0px;}
+
+header, h1, h2, h3 {font-family: 'Raleway', sans-serif;}
+
+a {color: #445500;}
+a:hover {color: #668800;}
+
+header{font-size: 2em; color: #777; background-color: #EEE; padding: 10px;}
+nav {}
+
+#container{}
+#content{padding: 10px;}
+
+.button{background-color: #00aa00; color: #FFF; text-align: center; padding: 5px; font-weight: bold;}
+.button a{color: #FFF; text-decoration: none;}

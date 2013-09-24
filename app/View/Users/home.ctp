@@ -7,8 +7,8 @@
 	</div>
 	<h2>Organizations in this group</h2>
 	<ul>
-	<?php foreach($userGroup['Organization'] as $organization):?>
-		<li><?php echo $this->html->link($organization['name'], '/organizations/about/' . $organization['id']);?></li>
+	<?php foreach($organizations as $organization):?>
+		<li><?php echo $this->html->link($organization['Organization']['name'], '/organizations/about/' . $organization['Organization']['id']);?></li>
 	<?php endforeach;?>
 	</ul>
 <?php endforeach;?>

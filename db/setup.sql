@@ -45,11 +45,20 @@ CREATE TABLE organizations(
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
 	active BOOLEAN DEFAULT TRUE,
-	user_group_id INT NOT NULL,
 	FULLTEXT (name, description),
+	PRIMARY KEY (id)
+)ENGINE = MYISAM;
+
+CREATE TABLE organization_user_groups(
+	id INT NOT NULL AUTO_INCREMENT,
+	user_group_id INT NOT NULL,
+	organization_id INT NOT NULL,
+	can_edit BOOLEAN DEFAULT TRUE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_group_id)
-		REFERENCES user_groups(id)
+		REFERENCES user_groups(id),
+	FOREIGN KEY (organization_id)
+		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE programs(

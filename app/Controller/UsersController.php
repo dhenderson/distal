@@ -13,9 +13,15 @@ class UsersController extends AppController {
 			'all',
 			array('conditions' => array('UserGroup.id' => $this->User->getUserGroupIds($user['User']['id'])))
 		);
+		
+		$organizations = $this->User->UserUserGroup->UserGroup->OrganizationUserGroup->find(
+			'all',
+			array('conditions' => array('OrganizationUserGroup.user_group_id' => $this->User->getUserGroupIds($user['User']['id'])))
+		);
 
 		$this->set('user', $user);
 		$this->set('userGroups', $userGroups);
+		$this->set('organizations', $organizations);
 	}
 	
 	public function add($userGroupId = null) {

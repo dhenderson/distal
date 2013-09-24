@@ -1,0 +1,37 @@
+<html>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script src="springy.js"></script>
+<script src="springyui.js"></script>
+<script>
+var graph = new Springy.Graph();
+/**
+var dennis = graph.newNode({
+  label: 'Dennis',
+  ondoubleclick: function() { console.log("Hello!"); }
+});
+**/
+var outcome_1 = graph.newNode({label: 'Productive members of her or his community', background: '#FF0000'});
+var outcome_2 = graph.newNode({label: 'English not a barrier to work'});
+var outcome_3 = graph.newNode({label: 'Speaks English <br />when necessary'});
+var outcome_4 = graph.newNode({label: 'Able to speak English'});
+var outcome_5 = graph.newNode({label: 'Graduated from MEND ESL program'});
+
+graph.newEdge(outcome_2, outcome_1);
+graph.newEdge(outcome_3, outcome_1);
+graph.newEdge(outcome_4, outcome_3);
+graph.newEdge(outcome_5, outcome_4);
+
+jQuery(function(){
+  var springy = window.springy = jQuery('#springydemo').springy({
+    graph: graph,
+    nodeSelected: function(node){
+      console.log('Node selected: ' + JSON.stringify(node.data));
+    }
+  });
+});
+</script>
+
+<canvas id="springydemo" width="940" height="480"/>
+</body>
+</html>
