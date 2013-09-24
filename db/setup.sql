@@ -154,3 +154,14 @@ CREATE TABLE interventions(
 	FOREIGN KEY (outcome_id)
 		REFERENCES outcomes(id)
 )ENGINE = MYISAM;
+
+CREATE TABLE outcome_interventions(
+	id INT NOT NULL AUTO_INCREMENT,
+	outcome_id INT NOT NULL,
+	intervention_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (outcome_id)
+		REFERENCES outcomes(id),
+	FOREIGN KEY (intervention_id)
+		REFERENCES interventions(id)
+)ENGINE = MYISAM;

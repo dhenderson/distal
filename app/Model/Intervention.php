@@ -1,7 +1,7 @@
 <?php
 
 class Intervention extends AppModel {
-	var $belongsTo = array('Outcome');
+	var $hasMany = array('OutcomeIntervention');
 }
 
 ?>

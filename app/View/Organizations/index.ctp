@@ -1,5 +1,5 @@
 <!-- File: /app/View/UserGroups/index.ctp -->
-<table cellpadding="0" cellspacing="0">
+<table class="table">
 	<tr>
 		<th>Organization</th>
 		<th>Active</th>

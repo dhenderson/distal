@@ -1,11 +1,19 @@
-<h1><?php echo $organization['Organization']['name'];?></h1>
-<div>
-	<?php echo $this->html->link('Add a program', '/programs/add/' . $organization['Organization']['id']);?>
-</div>
+<h1><?php echo $outcome['Outcome']['name'];?></h1>
+
+<h2>Program</h2>
+<?php echo $outcome['Program']['name'];?>
+
+<h2>Parent outcomes</h2>
 <ul>
-	<?php foreach($organization['Program'] as $program):?>
-		<li>
-			<?php echo $this->html->link($program['name'], '/programs/about/' . $program['id']);?>
-		</li>
-	<?php endforeach; ?>
+	<?php foreach($outcome['Parent'] as $parent):?>
+		<li><?php echo $parent['name'];?></li>
+	<?php endforeach;?>
+</ul>
+
+
+<h2>Child outcomes</h2>
+<ul>
+	<?php foreach($outcome['Child'] as $child):?>
+		<li><?php echo $child['name'];?></li>
+	<?php endforeach;?>
 </ul>
