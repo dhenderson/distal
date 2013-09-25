@@ -1,4 +1,4 @@
-body {font-family: 'Verdana', 'Arial'; margin: 0px;}
+body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 10px solid #EEE;}
 
 header, nav, h1, h2, h3{font-family: 'Raleway', sans-serif;}
 h1 {font-size: 1.7em;}
