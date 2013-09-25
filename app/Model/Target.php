@@ -2,7 +2,7 @@
 
 class Target extends AppModel {
 
-	var $belongsTo = array('Program');
+	var $belongsTo = array('Outcome');
 }
 
 ?>

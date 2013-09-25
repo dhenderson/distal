@@ -16,7 +16,7 @@
 			echo $this->form->create('Outcome');
 			echo $this->form->input('name');
 			echo $this->form->input('description');
-			echo $this->form->input('program_id', array('type'=>'hidden', 'value'=>$programId));
+			echo $this->form->input('organization_id', array('type'=>'hidden', 'value'=>$organizationId));
 			
 			echo $this->form->end('Save outcome');
 		?>

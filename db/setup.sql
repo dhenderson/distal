@@ -74,19 +74,22 @@ CREATE TABLE programs(
 
 CREATE TABLE targets(
 	id INT NOT NULL AUTO_INCREMENT,
+	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
 	description TEXT,
-	program_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (program_id)
-		REFERENCES programs(id)
+	FOREIGN KEY (organization_id)
+		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
+	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
 	description TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (organization_id)
+		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE program_outcomes(
@@ -106,6 +109,7 @@ CREATE TABLE program_outcomes(
 
 CREATE TABLE indicators(
 	id INT NOT NULL AUTO_INCREMENT,
+	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
 	data_type_id INT NOT NULL,
 	answer_option_type_id INT NOT NULL,
@@ -115,7 +119,9 @@ CREATE TABLE indicators(
 	FOREIGN KEY (data_type_id)
 		REFERENCES data_types(id),
 	FOREIGN KEY (answer_option_type_id)
-		REFERENCES answer_option_types(id)
+		REFERENCES answer_option_types(id),
+	FOREIGN KEY (organization_id)
+		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE indicator_outcomes(
@@ -149,9 +155,12 @@ CREATE TABLE answer_option_types(
 
 CREATE TABLE interventions(
 	id INT NOT NULL AUTO_INCREMENT,
+	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
-	description TEXT
-	PRIMARY KEY (id)
+	description TEXT,
+	PRIMARY KEY (id),
+	FOREIGN KEY (organization_id)
+		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE intervention_outcomes(

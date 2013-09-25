@@ -15,7 +15,7 @@ class OutcomesController extends AppController {
 		$this->set('outcome', $outcome);
 	}
 	
-	public function add($programId = null, $parentOutcomeId = null) {
+	public function add($organizationId, $programId = null, $parentOutcomeId = null) {
 		$user = $this->getLoggedInUser();
 		
 		$outcomes = $this->Outcome->find(
@@ -32,6 +32,7 @@ class OutcomesController extends AppController {
 		
 		$this->set('programId', $programId);
 		$this->set('outcomes', $outcomes);
+		$this->set('organizationId', $organizationId);
 		$this->set('parentOutcomeId', $parentOutcomeId);
 		
 		if (!empty($this->data)) {

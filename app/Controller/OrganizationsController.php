@@ -6,6 +6,48 @@ class OrganizationsController extends AppController {
         $this->set('organizations', $this->Organization->find('all'));
     }
 	
+	public function outcomes($organizationId) {
+		$organization = $this->Organization->findById($organizationId);
+		
+		$outcomes = $this->Organization->Outcome->find('all', array('conditions' => array('Outcome.organization_id' => $organizationId)));
+		$this->set('outcomes', $outcomes);
+		$this->set('organization', $organization);
+		
+		$this->set('title_for_layout', $organization['Organization']['name'] . ' outcomes');
+		
+		$navOptions['Back to organization'] = '/organizations/about/' . $organization['Organization']['id'];
+		$navOptions['Add a new outcome'] = '/outcomes/add/' . $organization['Organization']['id'];
+		$this->set('navOptions', $navOptions);
+	}
+	
+	public function indicators($organizationId) {
+		$organization = $this->Organization->findById($organizationId);
+		
+		$indicators = $this->Organization->Indicator->find('all', array('conditions' => array('Indicator.organization_id' => $organizationId)));
+		$this->set('indicators', $indicators);
+		$this->set('organization', $organization);
+		
+		$this->set('title_for_layout', $organization['Organization']['name'] . ' indicators');
+		
+		$navOptions['Back to organization'] = '/organizations/about/' . $organization['Organization']['id'];
+		$navOptions['Add a new indicator'] = '/indicators/add/' . $organization['Organization']['id'];
+		$this->set('navOptions', $navOptions);
+	}
+	
+	public function interventions($organizationId) {
+		$organization = $this->Organization->findById($organizationId);
+		
+		$interventions = $this->Organization->Intervention->find('all', array('conditions' => array('Intervention.organization_id' => $organizationId)));
+		$this->set('interventions', $interventions);
+		$this->set('organization', $organization);
+		
+		$this->set('title_for_layout', $organization['Organization']['name'] . ' interventions');
+		
+		$navOptions['Back to organization'] = '/organizations/about/' . $organization['Organization']['id'];
+		$navOptions['Add a new intervention'] = '/interventions/add/' . $organization['Organization']['id'];
+		$this->set('navOptions', $navOptions);
+	}
+	
 	public function about($organizationId){
 		$organization = $this->Organization->findById($organizationId);
 		$this->set('organization', $organization);
@@ -13,6 +55,9 @@ class OrganizationsController extends AppController {
 		$this->set('title_for_layout', $organization['Organization']['name']);
 		
 		$navOptions['Add a new program'] = '/programs/add/' . $organization['Organization']['id'];
+		$navOptions['Outcomes'] = '/organizations/outcomes/' . $organization['Organization']['id'];
+		$navOptions['Interventions'] = '/organizations/interventions/' . $organization['Organization']['id'];
+		$navOptions['Indicators'] = '/organizations/indicators/' . $organization['Organization']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	

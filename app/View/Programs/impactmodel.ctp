@@ -1,4 +1,5 @@
 <?php $programId = $program['Program']['id'];?>
+<?php $organizationId = $program['Program']['organization_id'];?>
 		
 <?php if(sizeOf($outcomes) > 0):?>
 	<script type="text/javascript">
@@ -60,11 +61,12 @@
 				this.document.getElementById("outcomeDetailsContainer").style.backgroundColor = "#FFFFFF";
 				// set the outcomesDetailMinmized boolean to false, as we maximized
 				this.outcomeDetailsMinimized = false;
+				
 			}
 			// otherwise, let's minimize
 			else{
 				this.document.getElementById("outcomeDetailsContainer").style.height = "15px";
-				this.document.getElementById("outcomeDetailsContainer").style.backgroundColor = "#ffe680";
+				this.document.getElementById("outcomeDetailsContainer").style.backgroundColor = "#CCC";
 				// set the outcomesDetailMinmized boolean to true, as we minmimized
 				this.outcomeDetailsMinimized = true;
 			}
@@ -89,7 +91,7 @@
 	<?php endif;?>
 	<?php if(sizeOf($outcomes) == 0):?>
 		<div style="text-align: center; font-size: 1.3em; width: 300px; margin: auto; line-height: 1.5em; padding: 20px;">
-			<?php echo $this->html->link('Get started by adding an outcome that is the ultimate goal for this program', '/outcomes/add/' . $program['Program']['id']);?>
+			<?php echo $this->html->link('Get started by adding an outcome that is the ultimate goal for this program', "/outcomes/add/$organizationId/" . $program['Program']['id']);?>
 		</div>
 	<?php endif;?>
 </div>
@@ -97,13 +99,15 @@
 
 <?php if(sizeOf($outcomes) > 0):?>
 	<!-- outcome detail -->
-	<div id="outcomeDetailsContainer" style="width: 500px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
-		box-shadow: 1px 5px 5px #888888;">
+	<div id="outcomeDetailsContainer" style="width: 500px; height: 300px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
+		box-shadow: 1px 5px 5px #888888; overflow:auto;">
 		<?php foreach ($outcomes as $outcome): ?>
 			<?php $outcomeId = $outcome['Outcome']['id'];?>
 			<?php $outcomeName = $outcome['Outcome']['name'];?>
 			<div style="display: none" id="outcome<?php echo $outcomeId;?>">
-				<h1 style="margin-bottom: 0px; margin-top: 0px; cursor: pointer;" onclick="minMaxOutcomeDetails();"><?php echo $outcomeName;?></h1>
+				<h1 style="margin-bottom: 0px; margin-top: 0px; cursor: pointer;" onclick="minMaxOutcomeDetails();">
+					<?php echo $outcomeName;?>
+				</h1>
 				<div style="font-size: 8pt; font-weight: normal; margin-bottom: 10px;">
 					<?php echo $this->html->link('Edit', "/outcomes/edit/$outcomeId");?>	| 
 					<?php echo $this->html->link('Delete', "/outcomes/delete/$outcomeId", null, 'Are you sure?' );?>
@@ -129,7 +133,7 @@
 					<div class="tab-content">
 						<div id="outcome-options-<?php echo $outcomeId;?>-children" class="tab-pane active">
 							<div class="button">
-								<?php echo $this->html->link('Add child outcome', "/outcomes/add/$programId/$outcomeId");?>
+								<?php echo $this->html->link('Add child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
 							</div>
 							<?php if(sizeOf($outcome['Outcome']['Child']) > 0):?>
 								<table class="table">
@@ -150,7 +154,7 @@
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
 							<div class="button">
-								<?php echo $this->html->link("Add indicator", "/indicators/add/$outcomeId/$programId");?>
+								<?php echo $this->html->link("Add indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
 							</div>
 							<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
 								<table class="table">
@@ -176,7 +180,7 @@
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
 							<div class="button">
-								<?php echo $this->html->link("Add intervention", "/interventions/add/$outcomeId");?>
+								<?php echo $this->html->link("Add intervention", "/interventions/add/$organizationId/$outcomeId");?>
 							</div>
 							<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>
 								<table class="table">

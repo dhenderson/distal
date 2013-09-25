@@ -3,7 +3,7 @@
 class Program extends AppModel {
 
 	var $belongsTo = array('Organization');
-	var $hasMany = array('ProgramOutcome', 'Target', 'IndicatorOutcome', 'InterventionOutcome');
+	var $hasMany = array('ProgramOutcome', 'IndicatorOutcome', 'InterventionOutcome');
 	
 	/**
 	* Returns an array of outcome IDs attached to this program
