@@ -3,7 +3,7 @@
 class Program extends AppModel {
 
 	var $belongsTo = array('Organization');
-	var $hasMany = array('ProgramOutcome', 'Target');
+	var $hasMany = array('ProgramOutcome', 'Target', 'IndicatorOutcome', 'InterventionOutcome');
 	
 	/**
 	* Returns an array of outcome IDs attached to this program
@@ -28,6 +28,46 @@ class Program extends AppModel {
 		}
 		
 		return $outcomeIds;
+	}
+	
+	function getIndicatorIds($programId){
+		
+		$indicatorIds = array();
+	
+		$indicatorOutcomes = $this->IndicatorOutcome->find(
+			'all', 
+			array(
+				'conditions' => array('IndicatorOutcome.program_id' => $programId),
+				'fields' => array('DISTINCT IndicatorOutcome.indicator_id')
+				
+			)
+		);
+		
+		foreach ($indicatorOutcomes as $indicatorOutcome) {
+			$indicatorIds[] = $indicatorOutcome['IndicatorOutcome']['indicator_id'];
+		}
+		
+		return $indicatorIds;
+	}
+	
+	function getIndterventionIds($programId){
+		
+		$interventionIds = array();
+	
+		$interventionOutcomes = $this->InterventionOutcome->find(
+			'all', 
+			array(
+				'conditions' => array('InterventionOutcome.program_id' => $programId),
+				'fields' => array('DISTINCT InterventionOutcome.intervention_id')
+				
+			)
+		);
+		
+		foreach ($interventionOutcomes as $interventionOutcome) {
+			$interventionIds[] = $interventionOutcome['InterventionOutcome']['intervention_id'];
+		}
+		
+		return $interventionIds;
 	}
 }
 

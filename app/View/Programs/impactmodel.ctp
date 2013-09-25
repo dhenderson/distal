@@ -136,13 +136,13 @@
 									<tr>
 										<th>Child outcome</th>
 										<th>Edit</th>
-										<th>Remove as child</th>
+										<th>Delink child</th>
 									</tr>
 									<?php foreach($outcome['Outcome']['Child'] as $childOutcome):?>
 										<tr>
 											<td><?php echo $this->html->link($childOutcome['name'], "/outcomes/about/" . $childOutcome['id']);?></td>
 											<td><?php echo $this->html->link('Edit', "/outcomes/edit/" . $childOutcome['id']);?></td>
-											<td>Remove as child</td>
+											<td><?php echo $this->html->link('Delink child', "/outcomes/removeFromParentOutcome/" . $childOutcome['id'] . '/' .  $programId . '/' . $outcomeId);?></td>
 										</tr>
 									<?php endforeach;?>
 								</table>
@@ -150,7 +150,7 @@
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
 							<div class="button">
-								<?php echo $this->html->link("Add indicator", "/indicators/add/$outcomeId");?>
+								<?php echo $this->html->link("Add indicator", "/indicators/add/$outcomeId/$programId");?>
 							</div>
 							<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
 								<table class="table">

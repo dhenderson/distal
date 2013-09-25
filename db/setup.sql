@@ -111,14 +111,11 @@ CREATE TABLE indicators(
 	answer_option_type_id INT NOT NULL,
 	description TEXT,
 	answer_options TEXT,
-	outcome_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (data_type_id)
 		REFERENCES data_types(id),
 	FOREIGN KEY (answer_option_type_id)
-		REFERENCES answer_option_types(id),
-	FOREIGN KEY (outcome_id)
-		REFERENCES outcomes(id)
+		REFERENCES answer_option_types(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE indicator_outcomes(
@@ -153,11 +150,8 @@ CREATE TABLE answer_option_types(
 CREATE TABLE interventions(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
-	description TEXT,
-	outcome_id INT NOT NULL,
-	PRIMARY KEY (id),
-	FOREIGN KEY (outcome_id)
-		REFERENCES outcomes(id)
+	description TEXT
+	PRIMARY KEY (id)
 )ENGINE = MYISAM;
 
 CREATE TABLE intervention_outcomes(

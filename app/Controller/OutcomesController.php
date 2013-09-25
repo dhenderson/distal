@@ -13,7 +13,6 @@ class OutcomesController extends AppController {
 	public function about($outcomeId){
 		$outcome = $this->Outcome->findById($outcomeId);
 		$this->set('outcome', $outcome);
-		
 	}
 	
 	public function add($programId = null, $parentOutcomeId = null) {
@@ -84,6 +83,16 @@ class OutcomesController extends AppController {
 		if (!$this->request->data) {
 			$this->request->data = $outcome;
 		}
+	}
+	
+	public function removeFromProgram($outcomeId, $programId, $parentOutcomeId = null){
+		$this->Outcome->removeFromProgram($outcomeId, $programId, $parentOutcomeId);
+		$this->redirect('/programs/impactmodel/' . $programId);
+	}
+	
+	public function removeFromParentOutcome($outcomeId, $programId, $parentOutcomeId){
+		$this->Outcome->removeFromParentOutcome($outcomeId, $programId, $parentOutcomeId);
+		$this->redirect('/programs/impactmodel/' . $programId);
 	}
 }
 ?>

@@ -7,13 +7,29 @@ class IndicatorsController extends AppController {
 		$this->set('indicator', $indicator);
 	}
 	
-	public function add($outcomeId) {
+	public function add($outcomeId = null, $programId = null) {
 		$this->set('outcomeId', $outcomeId);
+		$this->set('programId', $programId);
+		
+		$indicators = $this->Indicator->find(
+			'all',
+			array(
+				'conditions' => array(
+					'Indicator.id' => $this->Indicator->IndicatorOutcome->Program->getIndicatorIds($programId)
+				)
+			)
+		);
 	
 		if (!empty($this->data)) {
 			if ($this->Indicator->save($this->data)) {
+			
+				if($outcomeId != null AND $programId != null) {
+					// link to outcome
+					$this->Indicator->linkToOutcome($this->Indicator->id, $outcomeId, $programId);
+				}
+				
 				$this->Session->setFlash('Your indicator has been saved.');
-				$this->redirect('/indicators/about/' . $this->Indicator->id);
+				$this->redirect('/programs/impactmodel/' . $programId);
 			}
 		}
 	}

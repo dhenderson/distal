@@ -39,6 +39,32 @@ class Outcome extends AppModel {
 			
 		$this->query($sql);
 	}
+	
+	public function removeFromParentOutcome($outcomeId, $programId, $parentOutcomeId){
+		$sql = "UPDATE program_outcomes 
+			SET parent_outcome_id = NULL
+			WHERE outcome_id = $outcomeId AND 
+			program_id = $programId AND 
+			parent_outcome_id = $parentOutcomeId";
+			
+		$this->query($sql);
+	}
+	
+	public function removeFromProgram($outcomeId, $programId, $parentOutcomeId = null){
+		if($parentOutcomeId) {
+			$sql = "DELETE FROM program_outcomes 
+				WHERE outcome_id = $outcomeId AND 
+				program_id = $programId AND 
+				parent_outcome_id = $parentOutcomeId";
+		}
+		else {
+			$sql = "DELETE FROM program_outcomes 
+				WHERE outcome_id = $outcomeId AND 
+				program_id = $programId";
+		}
+			
+		$this->query($sql);
+	}
 }
 
 ?>
