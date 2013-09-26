@@ -50,7 +50,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <body>
 	<div id="container">
 		<header>
-			<span id="app-name">
+			<img src="<?php echo $this->webroot; ?>img/distal-25.png"/>
+			<span id="app-name"> 
 				<?php echo $this->html->link('Distal', '/users/home'); ?>
 			</span> 
 			<?php echo $title_for_layout; ?>
@@ -71,8 +72,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
+			<div id="footer">
+				<a href="https://github.com/dhenderson/distal">Powered by Distal</a> 
+				<img src="<?php echo $this->webroot; ?>img/distal-15-grey.png"/ style="vertical-align: top; margin-left: 15px;">
+			</div>
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>

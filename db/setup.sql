@@ -82,6 +82,18 @@ CREATE TABLE targets(
 		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
+CREATE TABLE program_targets(
+	id INT NOT NULL AUTO_INCREMENT,
+	target_id INT NOT NULL,
+	program_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (target_id)
+		REFERENCES targets(id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id),
+	UNIQUE INDEX (target_id, program_id)
+)ENGINE = MYISAM;
+
 CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
 	organization_id INT NOT NULL,

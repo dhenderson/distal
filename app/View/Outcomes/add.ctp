@@ -1,5 +1,6 @@
 <!-- File: /app/View/Outcome/add.ctp -->	
 
+<?php if(isset($programId)):?>
 <div class="tabbable">
 	<ul class="nav nav-pills">
 		<li class="active">
@@ -10,6 +11,7 @@
 		</li>
 	</ul>
 </div>
+<?php endif;?>
 <div class="tab-content">
 	<div id="new-outcome" class="tab-pane active">
 		<?php
@@ -21,6 +23,7 @@
 			echo $this->form->end('Save outcome');
 		?>
 	</div>
+	<?php if(isset($programId)):?>
 	<div id="existing-outcome" class="tab-pane">
 		<table class="table">
 			<tr>
@@ -38,4 +41,5 @@
 		<?php endforeach;?>
 		</table>
 	</div>
+	<?php endif;?>
 </div>

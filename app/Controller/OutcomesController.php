@@ -22,9 +22,9 @@ class OutcomesController extends AppController {
 			'all',
 			array(
 				'conditions' => array(
-					'Outcome.id' => $this->Outcome->ProgramOutcome->Program->getOutcomeIds($programId),
+					'Outcome.organization_id' => $organizationId,
 					'NOT' => array (
-						'Outcome.id' => $parentOutcomeId,
+						'Outcome.id' => $this->Outcome->ProgramOutcome->Program->getOutcomeIds($programId),
 					)
 				)
 			)

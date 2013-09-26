@@ -1,8 +1,9 @@
-<!-- File: /app/View/UserGroups/edit.ctp -->
+<!-- File: /app/View/Program/edit.ctp -->
 <?php
-	echo $this->form->create('UserGroup');
+	echo $this->form->create('Program');
 	echo $this->form->input('name');
+	echo $this->form->input('description');
 	echo $this->form->input('active');
 	echo $this->form->input('id', array('type'=>'hidden'));
-	echo $this->form->end('Save group');
+	echo $this->form->end('Save program');
 ?>

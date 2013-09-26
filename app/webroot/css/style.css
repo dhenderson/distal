@@ -1,4 +1,4 @@
-body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 10px solid #EEE;}
+body {font-family: 'Verdana', 'Arial'; margin: 0px;}
 
 header, nav, h1, h2, h3{font-family: 'Raleway', sans-serif;}
 h1 {font-size: 1.7em;}
@@ -8,18 +8,23 @@ h3 {font-size: 1.1em;}
 a {color: #0066ff;}
 a:hover {color: #33AA00; text-decoration: none;}
 
-header{font-size: 1.9em; color: #000; background-color: #FFF; padding: 20px 20px; vertical-align:top; margin-bottom: 10px;}
-header #app-name{font-size: 1.3em; color: #CCC; font-weight: bold; margin-right: 10px;}
+header{font-size: 1.9em; color: #000; background-color: #FFF; padding: 20px 20px; margin-bottom: 10px;}
+header img{vertical-align: bottom;}
+header #app-name{font-size: 1.3em; color: #CCC; font-weight: bold; margin-right: 20px; }
 header #app-name a{color: #BBB;}
 header #app-name a:hover{color: #33AA00; text-decoration: none;}
 nav {margin: 0px; background-color: #FFF; font-size: 1.3em; margin-bottom: 20px; margin-left: 10px;}
 nav ul {margin: 0px; list-style-type: none;}
 nav ul li {margin-right: 20px; display: inline;}
 nav a{background-color: #FFF; padding: 10px;}
-nav a:hover{background-color: #DDD;}
+nav a:hover{background-color: #FAFAFA;}
 
 #container{}
 #content{padding: 20px;}
 
 .button{background-color: #00aa00; color: #FFF; text-align: center; padding: 5px; font-weight: bold;}
 .button a{color: #FFF; text-decoration: none;}
+
+#footer{font-weight: normal; margin-top: 40px;}
+#footer a{color: #BBB;}
+#footer a:hover{color: #33AA00;}
