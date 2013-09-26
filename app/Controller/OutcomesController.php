@@ -24,7 +24,7 @@ class OutcomesController extends AppController {
 				'conditions' => array(
 					'Outcome.organization_id' => $organizationId,
 					'NOT' => array (
-						'Outcome.id' => $this->Outcome->ProgramOutcome->Program->getOutcomeIds($programId),
+						'Outcome.id' => $this->Outcome->Organization->Program->getOutcomeIds($programId),
 					)
 				)
 			)
@@ -34,6 +34,19 @@ class OutcomesController extends AppController {
 		$this->set('outcomes', $outcomes);
 		$this->set('organizationId', $organizationId);
 		$this->set('parentOutcomeId', $parentOutcomeId);
+		
+		if($programId == null) {
+			$organization = $this->Outcome->Organization->findById($organizationId);
+			$this->set('title_for_layout', $organization['Organization']['name'] . ' > Add outcome' );
+			$navOptions['Back to organization'] = '/organizations/about/' . $organization['Organization']['id'];
+		}
+		else {
+			$program = $this->Outcome->Organization->Program->findById($programId);
+			$this->set('title_for_layout', $program['Organization']['name'] . ' > ' . $program['Program']['name'] . ' > Add outcome' );
+			$navOptions['Back to program impact model'] = '/programs/impactmodel/' . $program['Program']['id'];
+		}
+		
+		$this->set('navOptions', $navOptions);
 		
 		if (!empty($this->data)) {
 			if ($this->Outcome->save($this->data)) {

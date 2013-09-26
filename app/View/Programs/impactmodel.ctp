@@ -99,7 +99,7 @@
 
 <?php if(sizeOf($outcomes) > 0):?>
 	<!-- outcome detail -->
-	<div id="outcomeDetailsContainer" style="width: 500px; height: 300px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
+	<div id="outcomeDetailsContainer" style="width: 500px; max-height: 500px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
 		box-shadow: 1px 5px 5px #888888; overflow:auto;">
 		<?php foreach ($outcomes as $outcome): ?>
 			<?php $outcomeId = $outcome['Outcome']['id'];?>
@@ -163,15 +163,16 @@
 										<th>Edit</th>
 										<th>Delete</th>
 									</tr>
+									
 									<?php foreach($outcome['Outcome']['Indicator'] as $indicator):?>
 										<?php $indicatorName = $indicator['name'];?>
 										<?php $indicatorId = $indicator['id'];?>
 										<tr>
 											<td valign="top">
-												<?php echo $this->html->link($interventionName, "/indicators/about/$indicatorId");?>
+												<?php echo $this->html->link($indicatorName, "/indicators/about/$indicatorId");?>
 											</td> 
 											<td valign="top">
-												<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
+												<?php echo $this->html->link("Delete", "/indicators/delete/$indicatorId/$programId");?>
 											</td>
 										</tr>
 									<?php endforeach; ?>
@@ -180,7 +181,7 @@
 						</div>
 						<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
 							<div class="button">
-								<?php echo $this->html->link("Add intervention", "/interventions/add/$organizationId/$outcomeId");?>
+								<?php echo $this->html->link("Add intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
 							</div>
 							<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>
 								<table class="table">
@@ -200,7 +201,7 @@
 												<?php echo $this->html->link('Edit', "/interventions/edit/$interventionId");?>
 											</td>
 											<td valign="top">
-												<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId");?>
+												<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId/$programId");?>
 											</td>
 										</tr>
 									<?php endforeach; ?>

@@ -17,6 +17,7 @@
 			echo $this->form->input('name');
 			echo $this->form->input('description');
 			echo $this->form->input('answer_options');
+			echo $this->form->input('organization_id', array('type'=>'hidden', 'value'=>$organizationId));
 			echo $this->form->end('Save indicator');
 		?>
 	</div>

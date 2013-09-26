@@ -5,9 +5,12 @@ class IndicatorsController extends AppController {
 	public function about($indicatorId){
 		$indicator = $this->Indicator->findById($indicatorId);
 		$this->set('indicator', $indicator);
+		$this->set('title_for_layout', $indicator['Organization']['name'] . ' > ' . $indicator['Indicator']['name']);
 	}
 	
-	public function add($outcomeId = null, $programId = null) {
+	public function add($organizationId, $outcomeId = null, $programId = null) {
+	
+		$this->set('organizationId', $organizationId);	
 		$this->set('outcomeId', $outcomeId);
 		$this->set('programId', $programId);
 		
@@ -15,10 +18,12 @@ class IndicatorsController extends AppController {
 			'all',
 			array(
 				'conditions' => array(
-					'Indicator.id' => $this->Indicator->IndicatorOutcome->Program->getIndicatorIds($programId)
+					'Indicator.id' => $this->Indicator->Organization->Program->getIndicatorIds($programId)
 				)
 			)
 		);
+		
+		$this->set('indicators', $indicators);
 	
 		if (!empty($this->data)) {
 			if ($this->Indicator->save($this->data)) {
@@ -34,11 +39,18 @@ class IndicatorsController extends AppController {
 		}
 	}
 	
-	public function delete($id) {
+	public function delete($id, $programId = null) {
 		$indicator = $this->Indicator->findById($id);
+		$organizationId = $indicator['Indicator']['organization_id'];
 		$this->Indicator->delete($id);
 		$this->Session->setFlash('The indicator with id: '.$id.' has been deleted.');
-		$this->redirect('/projects/about/' . $indicator['Outcome']['project_id']);
+		
+		if($programId != null){
+			$this->redirect('/programs/impactmodel/' . $programId);
+		}
+		else{
+			$this->redirect('/organizations/about/' . $organizationId);
+		}
 	}
 	
 	public function edit($id = null) {

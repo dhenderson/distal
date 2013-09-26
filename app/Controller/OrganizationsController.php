@@ -13,7 +13,7 @@ class OrganizationsController extends AppController {
 		$this->set('outcomes', $outcomes);
 		$this->set('organization', $organization);
 		
-		$this->set('title_for_layout', $organization['Organization']['name'] . ' outcomes');
+		$this->set('title_for_layout', $organization['Organization']['name'] . ' > Outcomes');
 		
 		$navOptions['Back to organization'] = '/organizations/about/' . $organization['Organization']['id'];
 		$navOptions['Add a new outcome'] = '/outcomes/add/' . $organization['Organization']['id'];

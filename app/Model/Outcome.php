@@ -16,10 +16,22 @@ class Outcome extends AppModel {
 			'foreignKey' => 'parent_outcome_id',
 			'associationForeignKey' => 'outcome_id', 
 			'unique' => true
+		), 
+			'Indicator' => array(
+			'className' => 'Indicator',
+			'joinTable' => 'indicator_outcomes',
+			'foreignKey' => 'outcome_id',
+			'associationForeignKey' => 'id', 
+			'unique' => true
 		),
+			'Intervention' => array(
+			'className' => 'Intervention',
+			'joinTable' => 'intervention_outcomes',
+			'foreignKey' => 'outcome_id',
+			'associationForeignKey' => 'id', 
+			'unique' => true
+		)
 	);
-
-	var $hasMany = array('IndicatorOutcome', 'InterventionOutcome', 'ProgramOutcome');
 	
 	var $belongsTo = array('Organization');
 	
