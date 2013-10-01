@@ -19,7 +19,6 @@ class Program extends AppModel {
 			array(
 				'conditions' => array('ProgramOutcome.program_id' => $programId),
 				'fields' => array('DISTINCT ProgramOutcome.outcome_id')
-				
 			)
 		);
 		
@@ -39,7 +38,6 @@ class Program extends AppModel {
 			array(
 				'conditions' => array('IndicatorOutcome.program_id' => $programId),
 				'fields' => array('DISTINCT IndicatorOutcome.indicator_id')
-				
 			)
 		);
 		
@@ -50,7 +48,7 @@ class Program extends AppModel {
 		return $indicatorIds;
 	}
 	
-	function getIndterventionIds($programId){
+	function getInterventionIds($programId){
 		
 		$interventionIds = array();
 	
@@ -59,7 +57,6 @@ class Program extends AppModel {
 			array(
 				'conditions' => array('InterventionOutcome.program_id' => $programId),
 				'fields' => array('DISTINCT InterventionOutcome.intervention_id')
-				
 			)
 		);
 		
