@@ -32,11 +32,7 @@
 				<td><?php echo $intervention['Intervention']['name'];?></td>
 				<td>
 					<?php echo $this->html->link('Link "' . $intervention['Intervention']['name'] . '" to this program','/interventions/linkToProgram/' . 
-<<<<<<< HEAD
 						$intervention['Intervention']['id'] . '/' . $programId . '/' . $parentInterventionId);?>
-=======
-						$intervention['Intervention']['id'] . '/' . $programId . '/' . $parentOutcomeId);?>
->>>>>>> 6bbddb3079cbc162eea69b61cca56076da5c0b7e
 				</td>
 			</tr>
 		<?php endforeach;?>
