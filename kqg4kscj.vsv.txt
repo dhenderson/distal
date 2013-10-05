@@ -1,0 +1,27 @@
+﻿fdsfds
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# HEAD detached at 6bbddb3
+# You are currently rebasing branch 'master' on '6bbddb3'.
+#   (all conflicts fixed: run "git rebase --continue")
+#
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   app/Controller/InterventionsController.php
+#	modified:   app/Controller/OrganizationsController.php
+#	modified:   app/Controller/ProgramsController.php
+#	modified:   app/View/Interventions/add.ctp
+#	modified:   app/View/Interventions/index.ctp
+#	modified:   app/View/Organizations/about.ctp
+#	modified:   app/View/Programs/about.ctp
+#	modified:   app/webroot/css/style.css
+#	new file:   app/webroot/img/distal.svg
+#	new file:   app/webroot/img/impactmodel.png
+#	new file:   app/webroot/img/target.png
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	xtrpm2s3.ze3.txt
+

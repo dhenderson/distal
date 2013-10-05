@@ -12,7 +12,11 @@ class InterventionsController extends AppController {
 	}
 	
 	public function add($organizationId, $outcomeId = null, $programId = null) {
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 6bbddb3079cbc162eea69b61cca56076da5c0b7e
 		$this->set('organizationId', $organizationId);	
 		$this->set('outcomeId', $outcomeId);
 		$this->set('programId', $programId);
@@ -35,7 +39,10 @@ class InterventionsController extends AppController {
 					// link to outcome
 					$this->Intervention->linkToOutcome($this->Intervention->id, $outcomeId, $programId);
 				}
+<<<<<<< HEAD
 				
+=======
+>>>>>>> 6bbddb3079cbc162eea69b61cca56076da5c0b7e
 				$this->Session->setFlash('Your intervention has been saved.');
 				$this->redirect('/programs/impactmodel/' . $programId);
 			}
