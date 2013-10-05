@@ -50,7 +50,7 @@ class Program extends AppModel {
 		return $indicatorIds;
 	}
 	
-	function getIndterventionIds($programId){
+	function getInterventionIds($programId){
 		
 		$interventionIds = array();
 	

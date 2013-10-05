@@ -10,10 +10,35 @@ class ProgramsController extends AppController {
 		$program = $this->Program->findById($programId);
 		$this->set('program', $program);
 		
+		$outcomes = $this->Program->ProgramOutcome->find('all', 
+			array(
+					'conditions' => array('ProgramOutcome.program_id'=>$programId),
+					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
+				)
+			);
+		$this->set('outcomes', $outcomes);
+		
+		$indicators = $this->Program->IndicatorOutcome->find('all', 
+			array(
+					'conditions' => array('IndicatorOutcome.program_id'=>$programId),
+					'fields' => array('DISTINCT IndicatorOutcome.indicator_id')
+				)
+			);
+		$this->set('indicators', $indicators);
+		
+		$interventions = $this->Program->InterventionOutcome->find('all', 
+			array(
+					'conditions' => array('InterventionOutcome.program_id'=>$programId),
+					'fields' => array('DISTINCT InterventionOutcome.intervention_id')
+				)
+			);
+		$this->set('interventions', $interventions);
+		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
 		$navOptions['Add a target'] = '/targets/add/' . $programId;
-		$navOptions['View impact model'] = '/programs/impactmodel/' . $programId;
+		$navOptions['Impact model'] = '/programs/impactmodel/' . $programId;
+		$navOptions['Edit'] = '/programs/edit/' . $programId;
 		$this->set('navOptions', $navOptions);
 		
 		// title
@@ -53,7 +78,7 @@ class ProgramsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Program->save($this->data)) {
 				$this->Session->setFlash('Your program has been saved.');
-				$this->redirect(array('action' => 'index'));
+				$this->redirect('/organizations/about/' . $organizationId);
 			}
 		}
 	}
@@ -84,9 +109,11 @@ class ProgramsController extends AppController {
 
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->Program->id = $id;
+			
+			$program = $this->Program->findById($id); 
 			if ($this->Program->save($this->request->data)) {
 				$this->Session->setFlash(__('Your program has been updated.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect('/programs/about/' . $program['Program']['id']);
 			}
 			$this->Session->setFlash(__('Unable to update your program.'));
 		}

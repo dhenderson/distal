@@ -1,38 +1,38 @@
-<!-- File: /app/View/Outcome/add.ctp -->	
+<!-- File: /app/View/Intervention/add.ctp -->	
 
 <div class="tabbable">
 	<ul class="nav nav-pills">
 		<li class="active">
-			<a href="#new-outcome" data-toggle="tab">Create a new outcome</a>
+			<a href="#new-intervention" data-toggle="tab">Create a new intervention</a>
 		</li>
 		<li>
-			<a href="#existing-outcome" data-toggle="tab">Or select an existing outcome</a>
+			<a href="#existing-intervention" data-toggle="tab">Or select an existing intervention</a>
 		</li>
 	</ul>
 </div>
 <div class="tab-content">
-	<div id="new-outcome" class="tab-pane active">
+	<div id="new-intervention" class="tab-pane active">
 		<?php
-			echo $this->form->create('Outcome');
+			echo $this->form->create('Intervention');
 			echo $this->form->input('name');
 			echo $this->form->input('description');
 			echo $this->form->input('program_id', array('type'=>'hidden', 'value'=>$programId));
 			
-			echo $this->form->end('Save outcome');
+			echo $this->form->end('Save intervention');
 		?>
 	</div>
-	<div id="existing-outcome" class="tab-pane">
+	<div id="existing-intervention" class="tab-pane">
 		<table class="table">
 			<tr>
-				<th>Outcome</th>
+				<th>Intervention</th>
 				<th>Link to this program</th>
 			</tr>
-		<?php foreach($outcomes as $outcome):?>
+		<?php foreach($interventions as $intervention):?>
 			<tr>
-				<td><?php echo $outcome['Outcome']['name'];?></td>
+				<td><?php echo $intervention['Intervention']['name'];?></td>
 				<td>
-					<?php echo $this->html->link('Link "' . $outcome['Outcome']['name'] . '" to this program','/outcomes/linkToProgram/' . 
-						$outcome['Outcome']['id'] . '/' . $programId . '/' . $parentOutcomeId);?>
+					<?php echo $this->html->link('Link "' . $intervention['Intervention']['name'] . '" to this program','/interventions/linkToProgram/' . 
+						$intervention['Intervention']['id'] . '/' . $programId . '/' . $parentInterventionId);?>
 				</td>
 			</tr>
 		<?php endforeach;?>

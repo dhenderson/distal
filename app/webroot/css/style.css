@@ -1,4 +1,4 @@
-body {font-family: 'Verdana', 'Arial'; margin: 0px;}
+body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 5px solid #aaccff;}
 
 header, nav, h1, h2, h3{font-family: 'Raleway', sans-serif;}
 h1, h2, h3 {color: #777; font-weight: normal;}
@@ -29,3 +29,9 @@ nav a:hover{}
 #footer{font-weight: normal; margin-top: 40px;}
 #footer a{color: #BBB;}
 #footer a:hover{color: #33AA00;}
+
+.left-box{float: left; display: inline; padding: 20px; border: 1px dashed #AAA; margin: 0px 20px 20px 0px; cursor: pointer;}
+.left-box:hover{background-color: #CCFFCC;}
+.left-box img{border: none;}
+.left-box img{border: none;}
+.left-box div {margin-top: 20px}

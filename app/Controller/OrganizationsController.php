@@ -52,12 +52,19 @@ class OrganizationsController extends AppController {
 		$organization = $this->Organization->findById($organizationId);
 		$this->set('organization', $organization);
 		
+		$outcomes = $this->Organization->Outcome->find('all', array('conditions' => array('Outcome.organization_id'=>$organizationId)));
+		$indicators = $this->Organization->Indicator->find('all', array('conditions' => array('Indicator.organization_id'=>$organizationId)));
+		$interventions = $this->Organization->Intervention->find('all', array('conditions' => array('Intervention.organization_id'=>$organizationId)));
+		$this->set('outcomes', $outcomes);
+		$this->set('indicators', $indicators);
+		$this->set('interventions', $interventions);
+		
+		
 		$this->set('title_for_layout', $organization['Organization']['name']);
 		
+		$navOptions['Back home'] = '/users/home/';
 		$navOptions['Add a new program'] = '/programs/add/' . $organization['Organization']['id'];
-		$navOptions['Outcomes'] = '/organizations/outcomes/' . $organization['Organization']['id'];
-		$navOptions['Interventions'] = '/organizations/interventions/' . $organization['Organization']['id'];
-		$navOptions['Indicators'] = '/organizations/indicators/' . $organization['Organization']['id'];
+		$navOptions['Edit'] = '/organizations/edit/' . $organization['Organization']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	

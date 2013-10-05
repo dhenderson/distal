@@ -2,18 +2,42 @@
 class InterventionsController extends AppController {
     public $helpers = array('Html', 'Form');
 	
+	public function index(){
+		$this->set('interventions', $this->Intervention->find('all'));
+	}
+	
 	public function about($interventionId){
 		$intervention = $this->Intervention->findById($interventionId);
 		$this->set('intervention', $intervention);
 	}
 	
-	public function add($outcomeId) {
+	public function add($organizationId, $outcomeId = null, $programId = null) {
+
+		$this->set('organizationId', $organizationId);	
 		$this->set('outcomeId', $outcomeId);
+		$this->set('programId', $programId);
+	
+		$interventions = $this->Intervention->find(
+			'all',
+			array(
+				'conditions' => array(
+					'Intervention.id' => $this->Intervention->Organization->Program->getInterventionIds($programId)
+				)
+			)
+		);
+		
+		$this->set('interventions', $interventions);
 	
 		if (!empty($this->data)) {
 			if ($this->Intervention->save($this->data)) {
+			
+				if($outcomeId != null AND $programId != null) {
+					// link to outcome
+					$this->Intervention->linkToOutcome($this->Intervention->id, $outcomeId, $programId);
+				}
+				
 				$this->Session->setFlash('Your intervention has been saved.');
-				$this->redirect('/interventions/about/' . $this->Intervention->id);
+				$this->redirect('/programs/impactmodel/' . $programId);
 			}
 		}
 	}
