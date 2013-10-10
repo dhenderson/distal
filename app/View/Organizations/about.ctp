@@ -7,7 +7,6 @@
 <div class="tab-content">
 	<div id="programs" class="tab-pane active">
 		<h1>Programs</h1>
-		<?php echo $this->html->link('Add a new program', '/programs/add/' . $organization['Organization']['id']);?>
 		<?php if(sizeOf($organization['Program']) > 0):?>
 			<table class="table">
 				<tr>

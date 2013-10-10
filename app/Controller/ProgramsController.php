@@ -37,7 +37,6 @@ class ProgramsController extends AppController {
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
 		$navOptions['Add a target'] = '/targets/add/' . $programId;
-		$navOptions['Impact model'] = '/programs/impactmodel/' . $programId;
 		$navOptions['Edit'] = '/programs/edit/' . $programId;
 		$this->set('navOptions', $navOptions);
 		
@@ -45,26 +44,6 @@ class ProgramsController extends AppController {
 		$this->set('title_for_layout', 
 			$program['Organization']['name'] . ' > ' . 
 			$program['Program']['name']);
-	}
-	
-	public function impactModel($programId){
-		$program = $this->Program->findById($programId);
-		
-		$outcomes = $this->Program->ProgramOutcome->find('all', 
-			array(
-					'conditions' => array('ProgramOutcome.program_id'=>$programId),
-					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
-				)
-			);
-			
-		$this->set('program', $program);
-		$this->set('outcomes', $outcomes);
-		$this->set('title_for_layout', $program['Organization']['name'] . ' > ' . $program['Program']['name'] . ' > Impact model');
-		
-		// menu options
-		$navOptions['Back to program'] = '/programs/about/' . $programId;
-		$this->set('navOptions', $navOptions);
-		
 	}
 	
 	public function add($organizationId) {

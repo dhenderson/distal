@@ -36,7 +36,7 @@ class InterventionsController extends AppController {
 					$this->Intervention->linkToOutcome($this->Intervention->id, $outcomeId, $programId);
 				}
 				$this->Session->setFlash('Your intervention has been saved.');
-				$this->redirect('/programs/impactmodel/' . $programId);
+				$this->redirect('/programs/about/' . $programId);
 			}
 		}
 	}
