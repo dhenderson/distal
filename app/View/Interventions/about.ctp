@@ -2,8 +2,8 @@
 
 <table class="table">
 	<tr>
-		<th>Outcome</th>
-		<th>Indicators</th>
+		<th>Outcomes affected by this intervention</th>
+		<th>Indicators used to measure this outcome</th>
 	</tr>
 	<?php foreach($outcomes as $outcome):?>
 		<tr>
@@ -11,7 +11,7 @@
 			<td>
 				<ul>
 				<?php foreach($outcome['Outcome']['Indicator'] as $indicator):?>
-					<li><?php echo $indicator['name'];?></li>
+					<li><?php echo $this->html->link($indicator['name'],'/indicators/about/' . $indicator['id']);?></li>
 				<?php endforeach;?>
 				</ul>
 			</td>
