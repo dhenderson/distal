@@ -59,16 +59,16 @@
 			function minMaxOutcomeDetails(){
 				// the container is minimized, so let's maximize it
 				if(this.chatBoxMinimized){
-					this.document.getElementById("outcomeDetailsContainer").style.height = "";
-					this.document.getElementById("outcomeDetailsContainer").style.backgroundColor = "#FFFFFF";
+					this.document.getElementById("chat-box").style.height = "";
+					this.document.getElementById("chat-box").style.backgroundColor = "#FFFFFF";
 					// set the outcomesDetailMinmized boolean to false, as we maximized
 					this.chatBoxMinimized = false;
 					
 				}
 				// otherwise, let's minimize
 				else{
-					this.document.getElementById("outcomeDetailsContainer").style.height = "15px";
-					this.document.getElementById("outcomeDetailsContainer").style.backgroundColor = "#CCC";
+					this.document.getElementById("chat-box").style.height = "15px";
+					this.document.getElementById("chat-box").style.backgroundColor = "#CCC";
 					// set the outcomesDetailMinmized boolean to true, as we minmimized
 					this.chatBoxMinimized = true;
 				}

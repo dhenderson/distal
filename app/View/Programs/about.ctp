@@ -31,7 +31,7 @@
 			</tr>
 			<?php foreach ($interventions as $intervention): ?>
 				<tr>
-					<td><?php echo $this->html->link($intervention['Intervention']['name'], 'about/' . $intervention['Intervention']['id']);?></td>
+					<td><?php echo $this->html->link($intervention['Intervention']['name'], '/interventions/about/' . $intervention['Intervention']['id']);?></td>
 					<td><?php echo $this->html->link('Edit', '/interventions/edit/' . $intervention['Intervention']['id']);?></td>
 					<td><?php echo $this->html->link('Delete', array('/interventions/delete/' . $intervention['Intervention']['id']), null, 'Are you sure?' )?></td>
 				</tr>
@@ -47,7 +47,7 @@
 			</tr>
 			<?php foreach ($indicators as $indicator): ?>
 				<tr>
-					<td><?php echo $this->html->link($indicator['Indicator']['name'], 'about/' . $indicator['Indicator']['id']);?></td>
+					<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
 					<td><?php echo $this->html->link('Edit', '/indicators/edit/' . $indicator['Indicator']['id']);?></td>
 					<td><?php echo $this->html->link('Delete', array('/indicators/delete/' . $indicator['Indicator']['id']), null, 'Are you sure?' )?></td>
 				</tr>

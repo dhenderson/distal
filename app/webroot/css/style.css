@@ -1,8 +1,8 @@
 body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 5px solid #38abc8	;}
 
-header, nav, h1, h2, h3{font-family: 'Raleway', sans-serif;}
+header, nav, h1, h2, h3{font-family: 'Verdana', sans-serif;}
 h1, h2, h3 {color: #777; font-weight: normal;}
-h1 {font-size: 1.7em;}
+h1 {font-size: 1.5em;}
 h2 {font-size: 1.3em;}
 h3 {font-size: 1.1em;}
 
@@ -19,12 +19,12 @@ a:hover {color: #33AA00; text-decoration: none;}
 .delete{font-size: 0.8em; font-weight: normal; color: #EE0000; margin-top: 20px; text-align: right;}
 .delete a{color: #EE0000;}
 
-header{font-size: 1.9em; font-weight: bold; color: #000; margin-bottom: 20px;}
+header{font-size: 1.7em; font-weight: normal; color: #000; margin-bottom: 20px;}
 header img{vertical-align: middle; position: relative; top: -5px; margin-right: 5px;}
 header #app-name{color: #CCC; font-weight: normal; margin-right: 20px; }
 header #app-name a{color: #BBB;}
 header #app-name a:hover{color: #33AA00; text-decoration: none;}
-nav {margin: 0px; font-size: 1.3em; margin-bottom: 40px;}
+nav {margin: 0px; font-size: 1.1em; margin-bottom: 40px;}
 nav ul {margin: 0px; list-style-type: none;}
 nav ul li {margin-right: 20px; display: inline;}
 nav a{}

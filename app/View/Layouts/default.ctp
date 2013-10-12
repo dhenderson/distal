@@ -47,14 +47,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<script type="text/javascript" src="<?php echo $this->webroot;?>js/libs/canvas2image/base64.js"></script>
 		
 		<script type="text/javascript" src="<?php echo $this->webroot;?>js/libs/bootstrap/bootstrap.min.js"></script>
-		<link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-		
-		<link href='<?php echo $this->webroot;?>css/jumly/jumly.min.css' rel='stylesheet'/>
-		<link href='<?php echo $this->webroot;?>css/jumly/skin.simple.css' rel='stylesheet'/>
-		<script src='<?php echo $this->webroot;?>js/libs/coffee-script/coffee-script.js'></script>
-		<script src='<?php echo $this->webroot;?>js/libs/jumly/jumly.min.js'></script>
 
-		
 </head>
 <body>
 	<div id="container">

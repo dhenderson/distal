@@ -5,7 +5,7 @@ class Indicator extends AppModel {
 	var $belongsTo = array('Organization');
 	
 	public function linkToOutcome($indicatorId, $outcomeId, $programId){
-		$sql = "INSERT INTO intervention_outcomes (indicator_id, outcome_id, program_id) 
+		$sql = "INSERT INTO indicator_outcomes (indicator_id, outcome_id, program_id) 
 			VALUES ($indicatorId, $outcomeId, $programId)";
 			
 		$this->query($sql);

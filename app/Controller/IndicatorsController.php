@@ -4,6 +4,11 @@ class IndicatorsController extends AppController {
 	
 	public function about($indicatorId){
 		$indicator = $this->Indicator->findById($indicatorId);
+		$outcomes = $this->Indicator->IndicatorOutcome->find('all',
+			array('conditions' => array('IndicatorOutcome.indicator_id' => $indicatorId))
+		);
+		$this->set('outcomes', $outcomes);
+		
 		$this->set('indicator', $indicator);
 		$this->set('title_for_layout', $indicator['Organization']['name'] . ' > ' . $indicator['Indicator']['name']);
 	}

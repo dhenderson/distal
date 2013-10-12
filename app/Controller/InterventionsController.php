@@ -9,6 +9,10 @@ class InterventionsController extends AppController {
 	public function about($interventionId){
 		$intervention = $this->Intervention->findById($interventionId);
 		$this->set('intervention', $intervention);
+		$outcomes = $this->Intervention->InterventionOutcome->find('all',
+			array('conditions' => array('InterventionOutcome.intervention_id' => $interventionId))
+		);
+		$this->set('outcomes', $outcomes);
 	}
 	
 	public function add($organizationId, $outcomeId = null, $programId = null) {
