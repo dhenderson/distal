@@ -6,8 +6,6 @@
 	echo $form->input('email');
 	echo $form->input('password');
 	
-	echo $this->form->input('user_group_id', array('type'=>'hidden','value'=>$userGroupId));	
-	
 	echo $form->input('active');
 	if($isSystemAdmin){
 		echo $form->input('system_admin');

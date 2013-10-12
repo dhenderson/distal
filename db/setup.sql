@@ -17,59 +17,32 @@ CREATE TABLE `users`(
 	system_admin BOOLEAN default false,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	active BOOLEAN DEFAULT TRUE,
+	active BOOLEAN default TRUE,
 	email varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
-)ENGINE = MYISAM;
-
-CREATE TABLE user_advisory_groups(
-	id INT NOT NULL AUTO_INCREMENT,
-	user_id INT NOT NULL,
-	advisory_group_id INT NOT NULL,
-	group_admin BOOLEAN DEFAULT FALSE,
-	view_only BOOLEAN DEFAULT FALSE,
-	PRIMARY KEY (id),
-	FOREIGN KEY (user_id)
-		REFERENCES users(id),
-	FOREIGN KEY (advisory_group_id)
-		REFERENCES advisory_groups(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE organizations(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
-	description TEXT,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	active BOOLEAN DEFAULT TRUE,
-	FULLTEXT (name, description),
+	FULLTEXT (name),
 	PRIMARY KEY (id)
-)ENGINE = MYISAM;
-
-CREATE TABLE organization_advisory_groups(
-	id INT NOT NULL AUTO_INCREMENT,
-	advisory_group_id INT NOT NULL,
-	organization_id INT NOT NULL,
-	can_edit BOOLEAN DEFAULT TRUE,
-	PRIMARY KEY (id),
-	FOREIGN KEY (advisory_group_id)
-		REFERENCES advisory_groups(id),
-	FOREIGN KEY (organization_id)
-		REFERENCES organizations(id)
 )ENGINE = MYISAM;
 
 CREATE TABLE programs(
 	id INT NOT NULL AUTO_INCREMENT,
 	organization_id INT NOT NULL,
-	description TEXT,
 	name varchar(255) NOT NULL,
-	active BOOLEAN default true,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	FULLTEXT (name, description),
+	FULLTEXT (name),
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 )ENGINE = MYISAM;
 
 CREATE TABLE targets(
@@ -80,6 +53,8 @@ CREATE TABLE targets(
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 )ENGINE = MYISAM;
 
 CREATE TABLE program_targets(
@@ -88,9 +63,13 @@ CREATE TABLE program_targets(
 	program_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (target_id)
-		REFERENCES targets(id),
+		REFERENCES targets(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (program_id)
-		REFERENCES programs(id),
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	UNIQUE INDEX (target_id, program_id)
 )ENGINE = MYISAM;
 
@@ -98,7 +77,6 @@ CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
 	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
-	description TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
@@ -111,11 +89,17 @@ CREATE TABLE program_outcomes(
 	program_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (outcome_id)
-		REFERENCES outcomes(id),
+		REFERENCES outcomes(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (parent_outcome_id)
-		REFERENCES outcomes(id),
+		REFERENCES outcomes(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (program_id)
-		REFERENCES programs(id),
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, parent_outcome_id, program_id)
 )ENGINE = MYISAM;
 
@@ -125,7 +109,6 @@ CREATE TABLE indicators(
 	name varchar(255) NOT NULL,
 	data_type_id INT NOT NULL,
 	answer_option_type_id INT NOT NULL,
-	description TEXT,
 	answer_options TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (data_type_id)
@@ -134,6 +117,8 @@ CREATE TABLE indicators(
 		REFERENCES answer_option_types(id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 )ENGINE = MYISAM;
 
 CREATE TABLE indicator_outcomes(
@@ -143,11 +128,17 @@ CREATE TABLE indicator_outcomes(
 	program_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (outcome_id)
-		REFERENCES outcomes(id),
+		REFERENCES outcomes(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (indicator_id)
-		REFERENCES indicators(id),
+		REFERENCES indicators(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (program_id)
-		REFERENCES programs(id),
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, indicator_id, program_id)
 )ENGINE = MYISAM;
 
@@ -169,10 +160,11 @@ CREATE TABLE interventions(
 	id INT NOT NULL AUTO_INCREMENT,
 	organization_id INT NOT NULL,
 	name varchar(255) NOT NULL,
-	description TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
 )ENGINE = MYISAM;
 
 CREATE TABLE intervention_outcomes(
@@ -182,20 +174,38 @@ CREATE TABLE intervention_outcomes(
 	program_id INT NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (outcome_id)
-		REFERENCES outcomes(id),
+		REFERENCES outcomes(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (intervention_id)
-		REFERENCES interventions(id),
+		REFERENCES interventions(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	FOREIGN KEY (program_id)
-		REFERENCES programs(id),
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, intervention_id, program_id)
+)ENGINE = MYISAM;
+
+CREATE TABLE steps(
+	id INT NOT NULL AUTO_INCREMENT,
+	program_id INT NOT NULL,
+	parent_step_id INT,
+	name varchar(255) NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(program_id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (parent_step_id)
+		REFERENCES steps(parent_step_id)
 )ENGINE = MYISAM;
 
 /** DEFAULT SETTINGS **/
 
 /** user defaults **/
-INSERT INTO advisory_groups (name) VALUES("My advisory group");
 INSERT INTO users (email, system_admin, password) VALUES("root", TRUE, '1234');
-INSERT INTO user_advisory_groups (user_id, advisory_group_id) VALUES(1, 1);
 
 /** data type defaults **/
 INSERT INTO data_types (data_type, description) VALUES ('int', 'Integer');

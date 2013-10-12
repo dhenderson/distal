@@ -1,6 +1,7 @@
 <?php
 class UsersController extends AppController {
     public $helpers = array('Html', 'Form');
+	public $uses = array('User', 'Organization');
 	
     public function index() {
         $this->set('users', $this->User->find('all'));
@@ -8,32 +9,26 @@ class UsersController extends AppController {
 	
 	public function home(){
 		$user = $this->getLoggedInUser();
-
-		$advisoryGroups = $this->User->UserAdvisoryGroup->AdvisoryGroup->find(
-			'all',
-			array('conditions' => array('AdvisoryGroup.id' => $this->User->getAdvisoryGroupIds($user['User']['id'])))
-		);
 		
-		$organizations = $this->User->UserAdvisoryGroup->AdvisoryGroup->OrganizationAdvisoryGroup->find(
-			'all',
-			array('conditions' => array('OrganizationAdvisoryGroup.advisory_group_id' => $this->User->getAdvisoryGroupIds($user['User']['id'])))
-		);
+		$organizations = $this->Organization->find('all');
 
 		$this->set('user', $user);
-		$this->set('advisoryGroups', $advisoryGroups);
 		$this->set('organizations', $organizations);
+		
+		$navOptions['New organization'] = '/organizations/add';
+		$navOptions['Logout'] = '/users/logout';
+		$this->set('navOptions', $navOptions);
+		
 		
 		$this->set('title_for_layout', 'Welcome home ' . $user['User']['first_name']);
 	}
 	
-	public function add($advisoryGroupId = null) {
+	public function add() {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
 		
 		$user = $this->getLoggedInUser();
-		
-		$this->set('advisoryGroupId', $advisoryGroupId);
 	
 		if (!empty($this->data)) {
 			if ($this->User->save($this->data)) {

@@ -3,7 +3,7 @@
 	echo $this->form->create('Outcome');
 	echo $this->form->input('name');
 	echo $this->form->input('id', array('type'=>'hidden'));
-	echo $this->form->input('organization_id', array('type'=>'hidden', 'value'=>$organization_id));
+	echo $this->form->input('organization_id', array('type'=>'hidden'));
 	echo $this->form->end('Save outcome');
 ?>
 <div>

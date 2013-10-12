@@ -59,30 +59,26 @@ class OrganizationsController extends AppController {
 		$this->set('indicators', $indicators);
 		$this->set('interventions', $interventions);
 		
-		
 		$this->set('title_for_layout', $organization['Organization']['name']);
 		
 		$navOptions['Back home'] = '/users/home/';
-		$navOptions['Add a new program'] = '/programs/add/' . $organization['Organization']['id'];
+		$navOptions['New program'] = '/programs/add/' . $organization['Organization']['id'];
 		$navOptions['Edit'] = '/organizations/edit/' . $organization['Organization']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	
-	public function add($advisoryGroupId = null) {
+	public function add() {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
 		}
 		
 		$user = $this->getLoggedInUser();
-		$this->set('advisoryGroupId', $advisoryGroupId);
 	
 		if (!empty($this->data)) {
 		
 			if ($this->Organization->save($this->data)) {
-				// link this user's user group to the organization
-				$this->Organization->OrganizationAdvisoryGroup->addAdvisoryGroupToOrganization($this->Organization->id, $advisoryGroupId);
-				$this->Session->setFlash('Your organization has been saved');
-				$this->redirect(array('action' => 'index'));
+				$this->Session->setFlash('Saved! Now add a program to get started');
+				$this->redirect('/organizations/about/' . $this->Organization->getLastInsertId());
 			}
 		}
 	}
@@ -107,6 +103,7 @@ class OrganizationsController extends AppController {
 		}
 
 		$organization = $this->Organization->findById($id);
+		$this->set('organization', $organization);
 		if (!$organization) {
 			throw new NotFoundException(__('Invalid organization'));
 		}
@@ -114,7 +111,7 @@ class OrganizationsController extends AppController {
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->Organization->id = $id;
 			if ($this->Organization->save($this->request->data)) {
-				$this->Session->setFlash(__('Your organization has been updated.'));
+				$this->Session->setFlash(__('Your organization has been updated'));
 				return $this->redirect(array('action' => 'index'));
 			}
 			$this->Session->setFlash(__('Unable to update your organization.'));

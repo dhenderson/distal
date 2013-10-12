@@ -36,6 +36,7 @@ class ProgramsController extends AppController {
 		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
+		$navOptions['Impact model'] = '/programs/impactmodel/' . $program['Program']['id'];
 		$navOptions['Add a target'] = '/targets/add/' . $programId;
 		$navOptions['Edit'] = '/programs/edit/' . $programId;
 		$this->set('navOptions', $navOptions);
@@ -44,6 +45,28 @@ class ProgramsController extends AppController {
 		$this->set('title_for_layout', 
 			$program['Organization']['name'] . ' > ' . 
 			$program['Program']['name']);
+	}
+	
+	public function impactmodel($programId){
+		$program = $this->Program->findById($programId);
+		$this->set('program', $program);
+		
+		$outcomes = $this->Program->ProgramOutcome->find('all', 
+			array(
+					'conditions' => array('ProgramOutcome.program_id'=>$programId),
+					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
+				)
+			);
+		$this->set('outcomes', $outcomes);
+		
+		// menu options
+		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
+		$this->set('navOptions', $navOptions);
+		
+		// title
+		$this->set('title_for_layout', 
+			$program['Organization']['name'] . ' > ' . 
+			$program['Program']['name'] . ' > ' . 'Impact model');
 	}
 	
 	public function add($organizationId) {
@@ -57,7 +80,7 @@ class ProgramsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Program->save($this->data)) {
 				$this->Session->setFlash('Your program has been saved.');
-				$this->redirect('/organizations/about/' . $organizationId);
+				$this->redirect('/programs/about/' . $this->Program->getLastInsertId());
 			}
 		}
 	}

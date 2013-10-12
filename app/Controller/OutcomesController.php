@@ -22,10 +22,7 @@ class OutcomesController extends AppController {
 			'all',
 			array(
 				'conditions' => array(
-					'Outcome.organization_id' => $organizationId,
-					'NOT' => array (
-						'Outcome.id' => $this->Outcome->Organization->Program->getOutcomeIds($programId),
-					)
+					'Outcome.organization_id' => $organizationId
 				)
 			)
 		);
@@ -55,14 +52,14 @@ class OutcomesController extends AppController {
 					$this->Outcome->linkToProgram($this->Outcome->id, $programId, $parentOutcomeId);
 				}
 				$this->Session->setFlash('Your outcome has been saved.');
-				$this->redirect('/programs/about/' . $programId);
+				$this->redirect('/programs/impactmodel/' . $programId);
 			}
 		}
 	}
 	
 	public function linkToProgram($outcomeId, $programId, $parentOutcomeId) {
 		$this->Outcome->linkToProgram($outcomeId, $programId, $parentOutcomeId);
-		$this->redirect('/programs/about/' . $programId);
+		$this->redirect('/programs/impactmodel/' . $programId);
 	}
 	
 	public function delete($id) {
@@ -70,7 +67,7 @@ class OutcomesController extends AppController {
 		$projectId = $outcome['Outcome']['project_id'];
 		$this->Outcome->delete($id);
 		$this->Session->setFlash('The outcome with id: '.$id.' has been deleted.');
-		$this->redirect('/projects/about/' . $projectId);
+		$this->redirect('/projects/impactmodel/' . $projectId);
 	}
 	
 	public function edit($id = null) {
@@ -89,7 +86,7 @@ class OutcomesController extends AppController {
 			$this->Outcome->id = $id;
 			if ($this->Outcome->save($this->request->data)) {
 				$this->Session->setFlash(__('Your outcome has been updated.'));
-				return $this->redirect('/programs/about/' . $outcome['Outcome']['program_id']);
+				return $this->redirect('/programs/impactmodel/' . $outcome['Outcome']['program_id']);
 			}
 			$this->Session->setFlash(__('Unable to update your outcome.'));
 		}

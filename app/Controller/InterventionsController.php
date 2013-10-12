@@ -36,7 +36,7 @@ class InterventionsController extends AppController {
 					$this->Intervention->linkToOutcome($this->Intervention->id, $outcomeId, $programId);
 				}
 				$this->Session->setFlash('Your intervention has been saved.');
-				$this->redirect('/programs/about/' . $programId);
+				$this->redirect('/programs/impactmodel/' . $programId);
 			}
 		}
 	}
@@ -45,7 +45,7 @@ class InterventionsController extends AppController {
 		$intervention = $this->Intervention->findById($id);
 		$this->Intervention->delete($id);
 		$this->Session->setFlash('The intervention with id: '.$id.' has been deleted.');
-		$this->redirect('/projects/about/' . $intervention['Outcome']['project_id']);
+		$this->redirect('/projects/impactmodel/' . $intervention['Outcome']['project_id']);
 	}
 	
 	public function edit($id = null) {

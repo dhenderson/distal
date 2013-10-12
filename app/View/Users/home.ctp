@@ -1,14 +1,14 @@
 <!-- File: /app/View/Users/home.ctp -->
 
-<?php foreach($advisoryGroups as $advisoryGroup):?>
-	<h1><?php echo $advisoryGroup['AdvisoryGroup']['name']?></h1>
-	<div>
-		<?php echo $this->html->link('Add an organization for ' . $advisoryGroup['AdvisoryGroup']['name'], '/organizations/add/' . $advisoryGroup['AdvisoryGroup']['id']);?>
-	</div>
-	<h2>Organizations in this group</h2>
-	<ul>
+<table class="table">
+	<tr>
+		<th>Organization</th>
+	</tr>
 	<?php foreach($organizations as $organization):?>
-		<li><?php echo $this->html->link($organization['Organization']['name'], '/organizations/about/' . $organization['Organization']['id']);?></li>
+		<tr>
+			<td>
+				<?php echo $this->html->link($organization['Organization']['name'], '/organizations/about/' . $organization['Organization']['id']);?></li>
+			</td>
+		</tr>
 	<?php endforeach;?>
-	</ul>
-<?php endforeach;?>
+</table>

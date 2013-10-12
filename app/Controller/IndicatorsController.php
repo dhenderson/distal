@@ -34,7 +34,7 @@ class IndicatorsController extends AppController {
 				}
 				
 				$this->Session->setFlash('Your indicator has been saved.');
-				$this->redirect('/programs/about/' . $programId);
+				$this->redirect('/programs/impactmodel/' . $programId);
 			}
 		}
 	}
@@ -46,10 +46,10 @@ class IndicatorsController extends AppController {
 		$this->Session->setFlash('The indicator with id: '.$id.' has been deleted.');
 		
 		if($programId != null){
-			$this->redirect('/programs/about/' . $programId);
+			$this->redirect('/programs/impactmodel/' . $programId);
 		}
 		else{
-			$this->redirect('/organizations/about/' . $organizationId);
+			$this->redirect('/organizations/impactmodel/' . $organizationId);
 		}
 	}
 	

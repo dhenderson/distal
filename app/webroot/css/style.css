@@ -1,4 +1,4 @@
-body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 5px solid #aaccff;}
+body {font-family: 'Verdana', 'Arial'; margin: 0px; border-top: 5px solid #38abc8	;}
 
 header, nav, h1, h2, h3{font-family: 'Raleway', sans-serif;}
 h1, h2, h3 {color: #777; font-weight: normal;}
@@ -6,15 +6,25 @@ h1 {font-size: 1.7em;}
 h2 {font-size: 1.3em;}
 h3 {font-size: 1.1em;}
 
-a {color: #0066ff;}
+input[type=text]:focus, input[type=password]:focus{
+      border-color:#38abc8;
+      -moz-box-shadow: 0px 0px 6px #38abc8;
+      -webkit-box-shadow: 0px 0px 6px #38abc8;
+      box-shadow: 0px 0px 6px #38abc8;
+}
+
+a {color: #0088aa;}
 a:hover {color: #33AA00; text-decoration: none;}
 
-header{font-size: 1.9em; font-weight: bold; color: #000; background-color: #FFF; margin-bottom: 20px;}
+.delete{font-size: 0.8em; font-weight: normal; color: #EE0000; margin-top: 20px; text-align: right;}
+.delete a{color: #EE0000;}
+
+header{font-size: 1.9em; font-weight: bold; color: #000; margin-bottom: 20px;}
 header img{vertical-align: middle; position: relative; top: -5px; margin-right: 5px;}
 header #app-name{color: #CCC; font-weight: normal; margin-right: 20px; }
 header #app-name a{color: #BBB;}
 header #app-name a:hover{color: #33AA00; text-decoration: none;}
-nav {margin: 0px; background-color: #FFF; font-size: 1.3em; margin-bottom: 40px;}
+nav {margin: 0px; font-size: 1.3em; margin-bottom: 40px;}
 nav ul {margin: 0px; list-style-type: none;}
 nav ul li {margin-right: 20px; display: inline;}
 nav a{}
@@ -35,3 +45,11 @@ nav a:hover{}
 .left-box img{border: none;}
 .left-box img{border: none;}
 .left-box div {margin-top: 20px}
+
+.message{padding: 5px; background-color: #EEE; color: #777; margin-bottom: 10px; text-align: center; border-radius: 25px;}
+
+#chat-box{
+	width: 500px; max-height: 500px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
+	box-shadow: 1px 5px 5px #888888; overflow:auto;
+}
+#di-graph-container{margin-left: auto; margin-right: auto; border: 1px dashed #AAA; text-align: center; border-radius: 10px;}

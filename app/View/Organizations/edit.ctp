@@ -2,8 +2,9 @@
 <?php
 	echo $this->form->create('Organization');
 	echo $this->form->input('name');
-	echo $this->form->input('description');
-	echo $this->form->input('active');
 	echo $this->form->input('id', array('type'=>'hidden'));
 	echo $this->form->end('Save organization');
 ?>
+<div class="delete">
+	<?php echo $this->html->link('Delete this organization', array('action' => 'delete', $organization['Organization']['id']), null, 'Are you sure?' )?>
+</div>
