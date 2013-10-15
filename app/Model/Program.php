@@ -7,7 +7,9 @@ class Program extends AppModel {
 		'ProgramOutcome', 
 		'IndicatorOutcome', 
 		'InterventionOutcome',
-		'ProgramTarget'
+		'IndicatorStep',
+		'ProgramTarget',
+		'Step'
 	);
 	
 	/**

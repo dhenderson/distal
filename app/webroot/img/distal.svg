@@ -51,19 +51,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="295.38271"
-     inkscape:cy="1028.5704"
+     inkscape:zoom="2.0000001"
+     inkscape:cx="188.87427"
+     inkscape:cy="751.52998"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1680"
-     inkscape:window-height="998"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-width="708"
+     inkscape:window-height="425"
+     inkscape:window-x="301"
+     inkscape:window-y="93"
+     inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -424,5 +424,44 @@
            height="91.75148"
            x="72.831993"
            y="846.59412" /></flowRegion><flowPara
-         id="flowPara3007-1-6">Impact model</flowPara></flowRoot>  </g>
+         id="flowPara3007-1-6">Impact model</flowPara></flowRoot>    <g
+       id="g3033"
+       style="fill:#cccccc;fill-opacity:1"
+       inkscape:export-filename="C:\wamp\www\distal\app\webroot\img\service_util_arrow.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\wamp\www\distal\app\webroot\img\service_util_arrow.png"
+         ry="1.1019564"
+         rx="1.1019564"
+         y="294.4942"
+         x="201.12294"
+         height="20.25922"
+         width="10.12961"
+         id="rect3029"
+         style="fill:#cccccc;fill-opacity:1;stroke:none" />
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="C:\wamp\www\distal\app\webroot\img\service_util_arrow.png"
+         transform="matrix(0.48545977,0,0,0.48545977,101.14655,155.42178)"
+         inkscape:transform-center-y="3.6084438"
+         d="m 216.37467,367.2094 -12.8744,-22.2991 -12.87439,-22.2991 25.74878,0 25.74879,-10e-6 -12.87439,22.29911 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="false"
+         sodipodi:arg2="2.6179939"
+         sodipodi:arg1="1.5707963"
+         sodipodi:r2="14.866068"
+         sodipodi:r1="29.732138"
+         sodipodi:cy="337.47726"
+         sodipodi:cx="216.37466"
+         sodipodi:sides="3"
+         id="path3031"
+         style="fill:#cccccc;fill-opacity:1;stroke:none"
+         sodipodi:type="star" />
+    </g>
+  </g>
 </svg>

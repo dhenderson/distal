@@ -1,7 +1,7 @@
 <?php
 
 class Indicator extends AppModel {
-	var $hasMany = array('IndicatorOutcome');
+	var $hasMany = array('IndicatorOutcome', 'IndicatorStep');
 	var $belongsTo = array('Organization');
 	
 	public function linkToOutcome($indicatorId, $outcomeId, $programId){
