@@ -54,8 +54,10 @@ nav a:hover{}
 }
 #di-graph-container{margin-left: auto; margin-right: auto; border: 1px dashed #AAA; text-align: center; border-radius: 10px;}
 
-.step{margin-bottom: 20px; width: 350px; margin: 0px auto; text-align: center;}
+.step{width: 350px; text-align: center;}
 .step h1{font-size: 1.3em; margin: 0px; padding: 0px; font-weight: bold;}
 .step h2{font-size: 1em;}
-.step-box{border: 1px solid #CCC; padding: 20px; border: 1px solid #AAA; border-radius: 10px; background-color: #FAFAFA;}
-.step-arrow img{margin-top: 20px;}
+.step-box{border: 1px solid #CCC; padding: 20px; border: 1px solid #AAA; border-radius: 10px; background-color: #FAFAFA; margin-bottom: 10px;}
+.step-arrow img{margin-bottom: 10px;}
+#step-edit-box{position:fixed; left: 425px; padding-left: 10px; border-left: 1px solid #AAA; width: 450px;}
+#step-edit-box h1{margin-top: 0px;}

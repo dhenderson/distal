@@ -18,17 +18,7 @@ class OutcomesController extends AppController {
 	public function add($organizationId, $programId = null, $parentOutcomeId = null) {
 		$user = $this->getLoggedInUser();
 		
-		$outcomes = $this->Outcome->find(
-			'all',
-			array(
-				'conditions' => array(
-					'Outcome.organization_id' => $organizationId
-				)
-			)
-		);
-		
 		$this->set('programId', $programId);
-		$this->set('outcomes', $outcomes);
 		$this->set('organizationId', $organizationId);
 		$this->set('parentOutcomeId', $parentOutcomeId);
 		

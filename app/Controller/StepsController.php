@@ -4,7 +4,7 @@ class StepsController extends AppController {
 	
 	public function about($stepId){
 		$step = $this->Step->findById($stepId);
-		$navOptions['Back to program'] = '/programs/about/' . $step['Step']['id'];
+		$navOptions['Back to program'] = '/programs/about/' . $step['Step']['program_id'];
 		$navOptions['Edit'] = '/steps/edit/' . $step['Step']['id'];
 		$this->set('navOptions', $navOptions);
 		$this->set('step', $step);

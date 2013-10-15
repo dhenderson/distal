@@ -3,6 +3,7 @@
 		<li class="active"><a href="#outcomes" data-toggle="tab">Outcomes (<?php echo sizeof($outcomes);?>)</a></li>
 		<li><a href="#indicators" data-toggle="tab">Indicators (<?php echo sizeof($indicators);?>)</a></li>
 		<li><a href="#interventions" data-toggle="tab">Interventions (<?php echo sizeof($interventions);?>)</a></li>
+		<li><a href="#steps" data-toggle="tab">Service utilization steps (<?php echo sizeof($steps);?>)</a></li>
 	</ul>
 </div>
 <div class="tab-content">
@@ -50,6 +51,22 @@
 					<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
 					<td><?php echo $this->html->link('Edit', '/indicators/edit/' . $indicator['Indicator']['id']);?></td>
 					<td><?php echo $this->html->link('Delete', array('/indicators/delete/' . $indicator['Indicator']['id']), null, 'Are you sure?' )?></td>
+				</tr>
+			<?php endforeach; ?>
+		</table>
+	</div>
+	<div id="steps" class="tab-pane">
+		<table class="table">
+			<tr>
+				<th>Service utilization step</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+			<?php foreach ($steps as $step): ?>
+				<tr>
+					<td><?php echo $this->html->link($step['Step']['name'], '/steps/about/' . $step['Step']['id']);?></td>
+					<td><?php echo $this->html->link('Edit', '/steps/edit/' . $step['Step']['id']);?></td>
+					<td><?php echo $this->html->link('Delete', array('/steps/delete/' . $step['Step']['id']), null, 'Are you sure?' )?></td>
 				</tr>
 			<?php endforeach; ?>
 		</table>

@@ -34,6 +34,13 @@ class ProgramsController extends AppController {
 			);
 		$this->set('interventions', $interventions);
 		
+		$steps = $this->Program->Step->find('all', 
+			array(
+					'conditions' => array('Step.program_id'=>$programId)
+				)
+			);
+		$this->set('steps', $steps);
+		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
 		$navOptions['Impact model'] = '/programs/impactmodel/' . $program['Program']['id'];
