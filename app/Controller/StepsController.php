@@ -13,8 +13,11 @@ class StepsController extends AppController {
 	public function add($programId) {
 		$this->set('programId', $programId);
 		
-		$navOptions['Back to program'] = '/programs/about/' . $programId;
+		$navOptions['Back to service utilization'] = '/programs/serviceutilization/' . $programId;
 		$this->set('navOptions', $navOptions);
+		
+		$position = $this->Step->getNextStepPosition($programId);
+		$this->set('position', $position);
 		
 		if (!empty($this->data)) {
 			if ($this->Step->save($this->data)) {

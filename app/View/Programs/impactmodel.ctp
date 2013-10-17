@@ -92,7 +92,7 @@
 			<canvas id="outcomesChart" width="1250" height="400" style=""/>
 		<?php endif;?>
 		<?php if(sizeOf($outcomes) == 0):?>
-			<div style="text-align: center; font-size: 1.3em; width: 300px; margin: auto; line-height: 1.5em; padding: 20px;">
+			<div class="get-started">
 				<?php echo $this->html->link('Get started by adding an outcome that is the ultimate goal for this program', "/outcomes/add/$organizationId/" . $program['Program']['id']);?>
 			</div>
 		<?php endif;?>

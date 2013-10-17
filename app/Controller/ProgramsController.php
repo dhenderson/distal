@@ -80,6 +80,7 @@ class ProgramsController extends AppController {
 	
 		$steps = $this->Program->Step->find('all', array('conditions'=>array('Step.program_id'=>$programId)));
 		$this->set('steps', $steps);
+		$this->set('programId', $programId);
 		
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
