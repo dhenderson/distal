@@ -1,3 +1,31 @@
+
+<a href="<?php echo $this->webroot;?>/programs/impactmodel/<?php echo $program['Program']['id'];?>">
+	<div class="left-box <?php if(sizeOf($outcomes) == 0) {echo "grey";} ?>">
+		<?php $impactModelImage = "impactmodel.png"?>
+		<?php if(sizeOf($outcomes) == 0):?>
+			<?php $impactModelImage = "impactmodel_grey.png"?>
+		<?php endif?>
+		<img src="<?php echo $this->webroot; ?>img/<?php echo $impactModelImage;?>"/>
+		<div>Impact model</div>
+	</div>
+</a>
+<a href="<?php echo $this->webroot;?>/programs/serviceutilization/<?php echo $program['Program']['id'];?>">
+	<div class="left-box <?php if(sizeOf($steps) == 0) {echo "grey";} ?>">
+		<?php $serviceUtilizationImage = "serviceutilization.png"?>
+		<?php if(sizeOf($steps) == 0):?>
+			<?php $serviceUtilizationImage = "serviceutilization_grey.png"?>
+		<?php endif?>
+		<img src="<?php echo $this->webroot; ?>img/<?php echo $serviceUtilizationImage;?>"/>
+		<div>Service utilization</div>
+	</div>
+</a>
+<a href="<?php echo $this->webroot;?>/programs/targets/<?php echo $program['Program']['id'];?>">
+	<div class="left-box grey">
+		<img src="<?php echo $this->webroot; ?>img/target_grey.png"/>
+		<div>Program target</div>
+	</div>
+</a>
+<div style="clear:both;"><div>
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		
 		<li class="active"><a href="#outcomes" data-toggle="tab">Outcomes (<?php echo sizeof($outcomes);?>)</a></li>
@@ -16,9 +44,9 @@
 			</tr>
 			<?php foreach ($outcomes as $outcome): ?>
 				<tr>
-					<td><?php echo $this->html->link($outcome['Outcome']['name'], 'about/' . $outcome['Outcome']['id']);?></td>
-					<td><?php echo $this->html->link('Edit', array('action'=>'edit', $outcome['Outcome']['id']));?></td>
-					<td><?php echo $this->html->link('Delete', array('action' => 'delete', $outcome['Outcome']['id']), null, 'Are you sure?' )?></td>
+					<td><?php echo $this->html->link($outcome['Outcome']['name'], '/outcomes/about/' . $outcome['Outcome']['id']);?></td>
+					<td><?php echo $this->html->link('Edit', '/outcomes/edit/' . $outcome['Outcome']['id']);?></td>
+					<td><?php echo $this->html->link('Delete', array('/outcomes/delete/' . $outcome['Outcome']['id']), null, 'Are you sure?' )?></td>
 				</tr>
 			<?php endforeach; ?>
 		</table>

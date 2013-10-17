@@ -1,5 +1,4 @@
 <h1><?php echo $intervention['Intervention']['name'];?></h1>
-
 <table class="table">
 	<tr>
 		<th>Outcomes affected by this intervention</th>
