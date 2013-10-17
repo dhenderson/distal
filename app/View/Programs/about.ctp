@@ -1,3 +1,20 @@
+<a href="<?php echo $this->webroot;?>/programs/targets/<?php echo $program['Program']['id'];?>">
+	<div class="left-box grey">
+		<img src="<?php echo $this->webroot; ?>img/target_grey.png"/>
+		<div>Program target</div>
+	</div>
+</a>
+
+<a href="<?php echo $this->webroot;?>/programs/serviceutilization/<?php echo $program['Program']['id'];?>">
+	<div class="left-box <?php if(sizeOf($steps) == 0) {echo "grey";} ?>">
+		<?php $serviceUtilizationImage = "serviceutilization.png"?>
+		<?php if(sizeOf($steps) == 0):?>
+			<?php $serviceUtilizationImage = "serviceutilization_grey.png"?>
+		<?php endif?>
+		<img src="<?php echo $this->webroot; ?>img/<?php echo $serviceUtilizationImage;?>"/>
+		<div>Service utilization</div>
+	</div>
+</a>
 
 <a href="<?php echo $this->webroot;?>/programs/impactmodel/<?php echo $program['Program']['id'];?>">
 	<div class="left-box <?php if(sizeOf($outcomes) == 0) {echo "grey";} ?>">
@@ -9,22 +26,7 @@
 		<div>Impact model</div>
 	</div>
 </a>
-<a href="<?php echo $this->webroot;?>/programs/serviceutilization/<?php echo $program['Program']['id'];?>">
-	<div class="left-box <?php if(sizeOf($steps) == 0) {echo "grey";} ?>">
-		<?php $serviceUtilizationImage = "serviceutilization.png"?>
-		<?php if(sizeOf($steps) == 0):?>
-			<?php $serviceUtilizationImage = "serviceutilization_grey.png"?>
-		<?php endif?>
-		<img src="<?php echo $this->webroot; ?>img/<?php echo $serviceUtilizationImage;?>"/>
-		<div>Service utilization</div>
-	</div>
-</a>
-<a href="<?php echo $this->webroot;?>/programs/targets/<?php echo $program['Program']['id'];?>">
-	<div class="left-box grey">
-		<img src="<?php echo $this->webroot; ?>img/target_grey.png"/>
-		<div>Program target</div>
-	</div>
-</a>
+
 <div style="clear:both;"><div>
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		

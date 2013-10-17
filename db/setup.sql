@@ -191,14 +191,15 @@ CREATE TABLE intervention_outcomes(
 CREATE TABLE steps(
 	id INT NOT NULL AUTO_INCREMENT,
 	program_id INT NOT NULL,
-	position INT UNIQUE,
+	position INT NOT NULL,
 	name varchar(255) NOT NULL,
 	description TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (program_id)
 		REFERENCES programs(id)
 			ON DELETE CASCADE
-			ON UPDATE CASCADE
+			ON UPDATE CASCADE,
+	UNIQUE INDEX (position, program_id)
 )ENGINE = MYISAM;
 
 CREATE TABLE indicator_steps(

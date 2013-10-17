@@ -43,8 +43,6 @@ class ProgramsController extends AppController {
 		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
-		$navOptions['Impact model'] = '/programs/impactmodel/' . $program['Program']['id'];
-		$navOptions['Service utilization'] = '/programs/serviceutilization/' . $program['Program']['id'];
 		$navOptions['Add a target'] = '/targets/add/' . $programId;
 		$navOptions['Edit'] = '/programs/edit/' . $programId;
 		$this->set('navOptions', $navOptions);

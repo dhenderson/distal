@@ -40,11 +40,13 @@ nav a:hover{}
 #footer a{color: #BBB;}
 #footer a:hover{color: #33AA00;}
 
-.left-box{float: left; display: inline; padding: 20px; border: 1px dashed #AAA; margin: 0px 20px 20px 0px; cursor: pointer;}
+.left-box{float: left; display: inline; padding: 20px; border: 1px dashed #AAA; margin: 0px 20px 20px 0px; cursor: pointer; text-align: center;}
 .left-box:hover{background-color: #CCFFCC;}
 .left-box img{border: none;}
 .left-box img{border: none;}
 .left-box div {margin-top: 20px}
+.grey{background-color: #FAFAFA;}
+a .grey{color: #999;}
 
 .message{padding: 5px; background-color: #EEE; color: #777; margin-bottom: 10px; text-align: center; border-radius: 25px;}
 
@@ -57,7 +59,7 @@ nav a:hover{}
 .step{width: 350px; text-align: center;}
 .step h1{font-size: 1.3em; margin: 0px; padding: 0px; font-weight: bold;}
 .step h2{font-size: 1em;}
-.step-box{border: 1px solid #CCC; padding: 20px; border: 1px solid #AAA; border-radius: 10px; background-color: #FAFAFA; margin-bottom: 10px;}
+.step-box{border: 1px solid #CCC; padding: 20px; border: 1px solid #777; border-radius: 10px; margin-bottom: 10px;}
 .step-arrow img{margin-bottom: 10px;}
 #step-edit-box{position:fixed; left: 425px; padding-left: 10px; border-left: 1px solid #AAA; width: 450px;}
 #step-edit-box h1{margin-top: 0px;}
