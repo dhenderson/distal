@@ -20,15 +20,6 @@ class InterventionsController extends AppController {
 		$this->set('organizationId', $organizationId);	
 		$this->set('outcomeId', $outcomeId);
 		$this->set('programId', $programId);
-	
-		$interventions = $this->Intervention->find(
-			'all',
-			array(
-				'conditions' => array(
-					'Intervention.id' => $this->Intervention->Organization->Program->getInterventionIds($programId)
-				)
-			)
-		);
 		
 		$this->set('interventions', $interventions);
 	

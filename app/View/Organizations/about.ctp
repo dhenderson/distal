@@ -10,7 +10,7 @@
 		<tr>
 			<td><?php echo $this->html->link($program['name'], '/programs/about/' . $program['id']);?> </td>
 			<td style="text-align: center;">
-				<a href="<?php echo $this->webroot;?>/programs/targets/<?php echo $program['id'];?>">
+				<a href="<?php echo $this->webroot;?>programs/targets/<?php echo $program['id'];?>">
 					<?php $targetImage = "target_30.png"?>
 					<?php if(sizeOf($program['ProgramTarget']) == 0):?>
 						<?php $targetImage = "target_grey_30.png"?>
@@ -19,7 +19,7 @@
 				</a>
 			</td>
 			<td style="text-align: center;">
-				<a href="<?php echo $this->webroot;?>/programs/serviceutilization/<?php echo $program['id'];?>">
+				<a href="<?php echo $this->webroot;?>programs/serviceutilization/<?php echo $program['id'];?>">
 					<?php $serviceUtilizationImage = "serviceutilization_30.png"?>
 					<?php if(sizeOf($program['Step']) == 0):?>
 						<?php $serviceUtilizationImage = "serviceutilization_grey_30.png"?>
@@ -28,7 +28,7 @@
 				</a>
 			</td>
 			<td style="text-align: center;">
-				<a href="<?php echo $this->webroot;?>/programs/impactmodel/<?php echo $program['id'];?>">
+				<a href="<?php echo $this->webroot;?>programs/impactmodel/<?php echo $program['id'];?>">
 					<?php $impactModelImage = "impactmodel_30.png"?>
 					<?php if(sizeOf($program['ProgramOutcome']) == 0):?>
 						<?php $impactModelImage = "impactmodel_grey_30.png"?>

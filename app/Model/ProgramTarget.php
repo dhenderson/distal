@@ -1,7 +1,8 @@
 <?php
 
 class ProgramTarget extends AppModel {
-	var $hasMany = array('Target', 'Program');
+	var $belongsTo = array('Target', 'Program');
+	var $recursive = 2;
 }
 
 ?>

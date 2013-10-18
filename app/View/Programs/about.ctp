@@ -1,4 +1,4 @@
-<a href="<?php echo $this->webroot;?>/programs/targets/<?php echo $program['Program']['id'];?>">
+<a href="<?php echo $this->webroot;?>programs/targets/<?php echo $program['Program']['id'];?>">
 	<div class="left-box grey">
 		<?php $targetImage = "target.png"?>
 		<?php if(sizeOf($program['ProgramTarget']) == 0):?>
@@ -9,7 +9,7 @@
 	</div>
 </a>
 
-<a href="<?php echo $this->webroot;?>/programs/serviceutilization/<?php echo $program['Program']['id'];?>">
+<a href="<?php echo $this->webroot;?>programs/serviceutilization/<?php echo $program['Program']['id'];?>">
 	<div class="left-box <?php if(sizeOf($steps) == 0) {echo "grey";} ?>">
 		<?php $serviceUtilizationImage = "serviceutilization.png"?>
 		<?php if(sizeOf($steps) == 0):?>
@@ -20,7 +20,7 @@
 	</div>
 </a>
 
-<a href="<?php echo $this->webroot;?>/programs/impactmodel/<?php echo $program['Program']['id'];?>">
+<a href="<?php echo $this->webroot;?>programs/impactmodel/<?php echo $program['Program']['id'];?>">
 	<div class="left-box <?php if(sizeOf($outcomes) == 0) {echo "grey";} ?>">
 		<?php $impactModelImage = "impactmodel.png"?>
 		<?php if(sizeOf($outcomes) == 0):?>

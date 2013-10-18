@@ -2,10 +2,6 @@
 class ProgramsController extends AppController {
     public $helpers = array('Html', 'Form');
 	
-    public function index() {
-        $this->set('programs', $this->Program->find('all'));
-    }
-	
 	public function about($programId){
 		$program = $this->Program->findById($programId);
 		$this->set('program', $program);
@@ -85,6 +81,23 @@ class ProgramsController extends AppController {
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
 		$navOptions['Add a step'] = '/steps/add/' . $program['Program']['id'];
+		$this->set('navOptions', $navOptions);
+	}
+	
+	public function targets($programId){
+		$program = $this->Program->findById($programId);
+	
+		$targets = $this->Program->ProgramTarget->find('all', 
+			array(
+					'conditions' => array('ProgramTarget.program_id'=>$programId),
+					'fields' => array('DISTINCT ProgramTarget.target_id')
+				)
+			);
+		$this->set('targets', $targets);
+		
+		// menu options
+		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
+		$navOptions['Add a target'] = '/targets/add/' . $program['Organization']['id'] . '/' . $program['Program']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	
