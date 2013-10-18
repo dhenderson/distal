@@ -9,6 +9,7 @@ class Organization extends AppModel {
 		'Intervention' => array('order' => 'Intervention.name ASC'), 
 		'Target' => array('order' => 'Target.name ASC')
 		);
+	var $recursive = 2;
 }
 
 ?>
