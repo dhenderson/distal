@@ -112,7 +112,7 @@ class OrganizationsController extends AppController {
 			$this->Organization->id = $id;
 			if ($this->Organization->save($this->request->data)) {
 				$this->Session->setFlash(__('Your organization has been updated'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect('/organizations/about/' . $id);
 			}
 			$this->Session->setFlash(__('Unable to update your organization.'));
 		}
