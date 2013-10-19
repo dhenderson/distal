@@ -1,5 +1,5 @@
 <a href="<?php echo $this->webroot;?>programs/targets/<?php echo $program['Program']['id'];?>">
-	<div class="left-box grey">
+	<div class="left-box <?php if(sizeOf($program['ProgramTarget']) == 0) {echo "grey";} ?>">
 		<?php $targetImage = "target.png"?>
 		<?php if(sizeOf($program['ProgramTarget']) == 0):?>
 			<?php $targetImage = "target_grey.png"?>
