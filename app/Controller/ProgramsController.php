@@ -52,7 +52,6 @@ class ProgramsController extends AppController {
 	public function impactmodel($programId){
 		$program = $this->Program->findById($programId);
 		$this->set('program', $program);
-		$organizationId = $program['Program']['organization_id'];
 		
 		$outcomes = $this->Program->ProgramOutcome->find('all', 
 			array(
@@ -61,34 +60,6 @@ class ProgramsController extends AppController {
 				)
 			);
 		$this->set('outcomes', $outcomes);
-		
-		$outcomesById = array();
-		foreach($outcomes as $outcome){
-			$outcomesById[$outcome['Outcome']['id']] = $outcome;
-		}
-		$this->set('outcomesById', $outcomesById);
-		
-		$interventions = $this->Program->Organization->Intervention->find('all', 
-			array(
-					'conditions' => array('Intervention.organization_id'=>$organizationId)
-				)
-			);
-		$interventionsById = array();
-		foreach($interventions as $intervention){
-			$interventionsById[$intervention['Intervention']['id']] = $intervention;
-		}
-		$this->set('interventionsById', $interventionsById);
-		
-		$indicators = $this->Program->Organization->Indicator->find('all', 
-			array(
-					'conditions' => array('Indicator.organization_id'=>$organizationId)
-				)
-			);
-		$indicatorsById = array();
-		foreach($indicators as $indicator){
-			$indicatorsById[$indicator['Indicator']['id']] = $indicator;
-		}
-		$this->set('indicatorsById', $indicatorsById);
 		
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];

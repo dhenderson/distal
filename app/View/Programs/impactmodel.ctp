@@ -134,34 +134,28 @@
 						<div class="tab-content">
 							<div id="outcome-options-<?php echo $outcomeId;?>-children" class="tab-pane active">
 								<div class="button">
-									<?php echo $this->html->link('New child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
+									<?php echo $this->html->link('Add child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
 								</div>
-								<table class="table">
-									<tr>
-										<th>Child outcome</th>
-									</tr>
-									<?php $thisChildOutcomesById = $outcomesById; ?>
-									<?php foreach($outcome['Outcome']['Child'] as $childOutcome):?>
+								<?php if(sizeOf($outcome['Outcome']['Child']) > 0):?>
+									<table class="table">
 										<tr>
-											<td>
-												<input type="checkbox" selected="selected" />
-												<?php echo $this->html->link($childOutcome['name'], "/outcomes/edit/" . $childOutcome['id']);?>
-											</td>
+											<th>Child outcome</th>
+											<th>Edit</th>
+											<th>Delink child</th>
 										</tr>
-									<?php endforeach;?>
-									<?php foreach($thisChildOutcomesById as $childOutcome):?>
-										<tr>
-											<td>
-												<input type="checkbox"/> 
-												<?php echo $this->html->link($childOutcome['Outcome']['name'], "/outcomes/edit/" . $childOutcome['Outcome']['id']);?>
-											</td>
-										</tr>
-									<?php endforeach;?>
-								</table>
+										<?php foreach($outcome['Outcome']['Child'] as $childOutcome):?>
+											<tr>
+												<td><?php echo $this->html->link($childOutcome['name'], "/outcomes/about/" . $childOutcome['id']);?></td>
+												<td><?php echo $this->html->link('Edit', "/outcomes/edit/" . $childOutcome['id']);?></td>
+												<td><?php echo $this->html->link('Delink child', "/outcomes/removeFromParentOutcome/" . $childOutcome['id'] . '/' .  $programId . '/' . $outcomeId);?></td>
+											</tr>
+										<?php endforeach;?>
+									</table>
+								<?php endif;?>
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
 								<div class="button">
-									<?php echo $this->html->link("New indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
+									<?php echo $this->html->link("Add indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
 								</div>
 								<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
 									<table class="table">
@@ -170,7 +164,7 @@
 											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
-										<?php $thisIndicatorsById = $indicatorsById; ?>
+										
 										<?php foreach($outcome['Outcome']['Indicator'] as $indicator):?>
 											<?php $indicatorName = $indicator['name'];?>
 											<?php $indicatorId = $indicator['id'];?>
@@ -188,7 +182,7 @@
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
 								<div class="button">
-									<?php echo $this->html->link("New intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
+									<?php echo $this->html->link("Add intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
 								</div>
 								<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>
 									<table class="table">
@@ -197,7 +191,6 @@
 											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
-										<?php $thisInterventionsById = $interventionsById; ?>
 										<?php foreach($outcome['Outcome']['Intervention'] as $intervention):?>
 											<?php $interventionName = $intervention['name'];?>
 											<?php $interventionId = $intervention['id'];?>
