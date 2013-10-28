@@ -50,27 +50,27 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 </head>
 <body>
+	<header>
+		<a href="<?php echo $this->webroot;?>users/home">
+			<img src="<?php echo $this->webroot; ?>img/distal-40.png"/>
+		</a>
+		<span id="app-name"> 
+			<?php echo $this->html->link('Distal', '/users/home'); ?>
+		</span> 
+		<?php echo $title_for_layout; ?>
+	</header>
+	<?php if(isset($navOptions)):?>
+		<nav>
+			<ul>
+				<?php foreach($navOptions as $displayValue => $linkValue):?>
+					<li>
+						<?php echo $this->html->link($displayValue, $linkValue);?>
+					</li>
+				<?php endforeach;?>
+			</ul>
+		</nav>
+	<?php endif;?>
 	<div id="container">
-		<header>
-			<a href="<?php echo $this->webroot;?>users/home">
-				<img src="<?php echo $this->webroot; ?>img/distal-40.png"/>
-			</a>
-			<span id="app-name"> 
-				<?php echo $this->html->link('Distal', '/users/home'); ?>
-			</span> 
-			<?php echo $title_for_layout; ?>
-		</header>
-		<?php if(isset($navOptions)):?>
-			<nav>
-				<ul>
-					<?php foreach($navOptions as $displayValue => $linkValue):?>
-						<li>
-							<?php echo $this->html->link($displayValue, $linkValue);?>
-						</li>
-					<?php endforeach;?>
-				</ul>
-			</nav>
-		<?php endif;?>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>

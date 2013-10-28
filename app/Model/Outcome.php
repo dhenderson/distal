@@ -34,6 +34,7 @@ class Outcome extends AppModel {
 	);
 	
 	var $belongsTo = array('Organization');
+	var $hasMany = array('ProgramOutcome');
 	
 	/**
 	* Links a given outcome to the specified program and optionally a parent outcome

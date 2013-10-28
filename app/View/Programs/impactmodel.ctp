@@ -9,7 +9,7 @@
 			
 			<?php foreach ($outcomes as $outcome): ?>
 				var outcome<?php echo $outcome['Outcome']['id'];?> = graph.newNode({outcomeId: <?php echo $outcome['Outcome']['id'];?>, 
-					label: "<?php echo $outcome['Outcome']['name'];?>"
+					label: "<?php echo $outcome['Outcome']['name'];?> (<?php echo sizeOf($outcome['Outcome']['Indicator']);?>-<?php echo sizeOf($outcome['Outcome']['Intervention']);?>)"
 					<?php if(sizeof($outcome['Outcome']['Parent']) == 0):?>
 						, color: "#FF2222"
 					<?php endif;?>
@@ -133,9 +133,13 @@
 						</ul>
 						<div class="tab-content">
 							<div id="outcome-options-<?php echo $outcomeId;?>-children" class="tab-pane active">
-								<div class="button">
-									<?php echo $this->html->link('Add child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
+								<div class="button" style="float: left; width: 46%;">
+									<?php echo $this->html->link('New child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
 								</div>
+								<div class="button" style="float: right; width: 46%;">
+									<?php echo $this->html->link('Link an existing outcome', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+								</div>
+								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Child']) > 0):?>
 									<table class="table">
 										<tr>
@@ -154,14 +158,17 @@
 								<?php endif;?>
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
-								<div class="button">
-									<?php echo $this->html->link("Add indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
+								<div class="button" style="float: left; width: 46%;">
+									<?php echo $this->html->link("New indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
 								</div>
+								<div class="button" style="float: right; width: 46%;">
+									<?php echo $this->html->link('Link an existing indicator', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+								</div>
+								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
 									<table class="table">
 										<tr>
 											<th>Indicator</th>
-											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
 										
@@ -181,14 +188,17 @@
 								<?php endif;?>
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
-								<div class="button">
-									<?php echo $this->html->link("Add intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
+								<div class="button" style="float: left; width: 46%;">
+									<?php echo $this->html->link("New intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
 								</div>
+								<div class="button" style="float: right; width: 46%;">
+									<?php echo $this->html->link('Link an existing intervention', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+								</div>
+								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>
 									<table class="table">
 										<tr>
 											<th>Intervention</th>
-											<th>Edit</th>
 											<th>Delete</th>
 										</tr>
 										<?php foreach($outcome['Outcome']['Intervention'] as $intervention):?>
@@ -197,9 +207,6 @@
 											<tr>
 												<td>
 													<?php echo $this->html->link($interventionName, "/interventions/about/$interventionId");?>
-												</td>
-												<td valign="top">
-													<?php echo $this->html->link('Edit', "/interventions/edit/$interventionId");?>
 												</td>
 												<td valign="top">
 													<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId/$programId");?>

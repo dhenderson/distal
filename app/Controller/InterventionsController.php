@@ -20,8 +20,6 @@ class InterventionsController extends AppController {
 		$this->set('organizationId', $organizationId);	
 		$this->set('outcomeId', $outcomeId);
 		$this->set('programId', $programId);
-		
-		$this->set('interventions', $interventions);
 	
 		if (!empty($this->data)) {
 			if ($this->Intervention->save($this->data)) {

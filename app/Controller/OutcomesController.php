@@ -47,6 +47,25 @@ class OutcomesController extends AppController {
 		}
 	}
 	
+	public function linkChildToOutcome($parentOutcomeId, $programId){
+		$parentOutcome = $this->Outcome->findById($parentOutcomeId);
+		$outcomes = $this->Outcome->ProgramOutcome->find('all', 
+			array(
+				'conditions'=> array
+					(
+						'ProgramOutcome.outcome_id !=' => $parentOutcomeId,
+						'ProgramOutcome.program_id' => $programId
+					)
+				)
+			);
+
+		$this->set('outcomes',$outcomes);
+		$this->set('parentOutcome',$parentOutcome);
+		$this->set('programId',$programId);
+		
+		
+	}
+	
 	public function linkToProgram($outcomeId, $programId, $parentOutcomeId) {
 		$this->Outcome->linkToProgram($outcomeId, $programId, $parentOutcomeId);
 		$this->redirect('/programs/impactmodel/' . $programId);
