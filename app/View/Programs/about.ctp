@@ -5,7 +5,7 @@
 			<?php $targetImage = "target_grey.png"?>
 		<?php endif;?>
 		<img src="<?php echo $this->webroot; ?>img/<?php echo $targetImage;?>"/>
-		<div>Program target</div>
+		<div>Program targets</div>
 	</div>
 </a>
 
@@ -43,11 +43,13 @@
 <div class="tab-content">
 	<div id="outcomes" class="tab-pane active">
 		<table class="table">
-			<tr>
-				<th>Outcome</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>Outcome</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
 			<?php foreach ($outcomes as $outcome): ?>
 				<tr>
 					<td><?php echo $this->html->link($outcome['Outcome']['name'], '/outcomes/about/' . $outcome['Outcome']['id']);?></td>
@@ -75,11 +77,13 @@
 	</div>
 	<div id="indicators" class="tab-pane">
 		<table class="table">
-			<tr>
-				<th>Indicator</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>Indicator</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
 			<?php foreach ($indicators as $indicator): ?>
 				<tr>
 					<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
@@ -91,11 +95,13 @@
 	</div>
 	<div id="steps" class="tab-pane">
 		<table class="table">
-			<tr>
-				<th>Service utilization step</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
+			<thead>
+				<tr>
+					<th>Service utilization step</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
 			<?php foreach ($steps as $step): ?>
 				<tr>
 					<td><?php echo $this->html->link($step['Step']['name'], '/steps/about/' . $step['Step']['id']);?></td>

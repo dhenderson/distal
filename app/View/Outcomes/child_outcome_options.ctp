@@ -1,8 +1,10 @@
 <table class="table">
-	<tr>
-		<th>Child outcome</th>
-		<th>Link to </th>
-	</tr>
+	<thead>
+		<tr>
+			<th>Child outcome</th>
+			<th>Link to </th>
+		</tr>
+	</thead>
 	<?php foreach($outcomes as $outcome):?>
 		<tr>
 			<td><?php echo $outcome['Outcome']['name'];?></td>

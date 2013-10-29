@@ -19,9 +19,9 @@ a:hover {color: #33AA00; text-decoration: none;}
 .delete{font-size: 0.8em; font-weight: normal; color: #EE0000; margin-top: 20px; text-align: right;}
 .delete a{color: #EE0000;}
 
-header{font-size: 1.7em; font-weight: normal; color: #000; padding: 20px 20px 0px 20px; border-bottom: 0px solid #CCC;}
+header{font-size: 1.3em; font-weight: normal; color: #777; padding: 20px 20px 0px 20px; border-bottom: 0px solid #CCC;}
 header img{vertical-align: middle; position: relative; top: -5px; margin-right: 5px;}
-header #app-name{color: #AAA; font-weight: normal; margin-right: 20px; }
+header #app-name{color: #AAA; font-weight: normal; margin-right: 20px; font-size: 1.5em;}
 header #app-name a{color: #BBB;}
 header #app-name a:hover{color: #33AA00; text-decoration: none;}
 nav {padding: 10px 20px 0px 20px; font-weight: normal; font-size: 1.1em; border-bottom: 0px solid #CCC; background-color: #FFF;}
@@ -43,7 +43,7 @@ nav a:hover{}
 #footer a:hover{color: #33AA00;}
 
 .left-box{float: left; display: inline; padding: 20px; border: 1px dashed #AAA; margin: 0px 20px 20px 0px; cursor: pointer; text-align: center;}
-.left-box:hover{background-color: #CCFFCC;}
+.left-box:hover{background-color: #d7eef4;}
 .left-box img{border: none;}
 .left-box img{border: none;}
 .left-box div {margin-top: 20px}
@@ -66,5 +66,3 @@ a .grey{color: #999;}
 .step h2{font-size: 1em;}
 .step-box{border: 1px solid #CCC; padding: 20px; border: 1px solid #777; border-radius: 10px; margin-bottom: 10px;}
 .step-arrow img{margin-bottom: 10px;}
-#step-edit-box{position:fixed; left: 425px; padding-left: 10px; border-left: 1px solid #AAA; width: 450px;}
-#step-edit-box h1{margin-top: 0px;}

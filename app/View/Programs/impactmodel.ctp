@@ -137,16 +137,18 @@
 									<?php echo $this->html->link('New child outcome', "/outcomes/add/$organizationId/$programId/$outcomeId");?>
 								</div>
 								<div class="button" style="float: right; width: 46%;">
-									<?php echo $this->html->link('Link an existing outcome', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+									<?php echo $this->html->link('Existing outcome', "/outcomes/childOutcomeOptions/$outcomeId/$programId");?>
 								</div>
 								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Child']) > 0):?>
 									<table class="table">
-										<tr>
-											<th>Child outcome</th>
-											<th>Edit</th>
-											<th>Delink child</th>
-										</tr>
+										<thead>
+											<tr>
+												<th>Child outcome</th>
+												<th>Edit</th>
+												<th>Delink child</th>
+											</tr>
+										</thead>
 										<?php foreach($outcome['Outcome']['Child'] as $childOutcome):?>
 											<tr>
 												<td><?php echo $this->html->link($childOutcome['name'], "/outcomes/about/" . $childOutcome['id']);?></td>
@@ -162,7 +164,7 @@
 									<?php echo $this->html->link("New indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
 								</div>
 								<div class="button" style="float: right; width: 46%;">
-									<?php echo $this->html->link('Link an existing indicator', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+									<?php echo $this->html->link('Existing indicator', "/outcomes/indicatorOptions/$outcomeId/$programId");?>
 								</div>
 								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Indicator']) > 0):?>
@@ -192,7 +194,7 @@
 									<?php echo $this->html->link("New intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
 								</div>
 								<div class="button" style="float: right; width: 46%;">
-									<?php echo $this->html->link('Link an existing intervention', "/outcomes/linkChildToOutcome/$outcomeId/$programId");?>
+									<?php echo $this->html->link('Existing intervention', "/outcomes/interventionOptions/$outcomeId/$programId");?>
 								</div>
 								<div style="clear:both"></div>
 								<?php if(sizeOf($outcome['Outcome']['Intervention']) > 0):?>

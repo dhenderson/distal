@@ -47,7 +47,7 @@ class OutcomesController extends AppController {
 		}
 	}
 	
-	public function linkChildToOutcome($parentOutcomeId, $programId){
+	public function childOutcomeOptions($parentOutcomeId, $programId){
 		$parentOutcome = $this->Outcome->findById($parentOutcomeId);
 		$outcomes = $this->Outcome->ProgramOutcome->find('all', 
 			array(
@@ -62,8 +62,25 @@ class OutcomesController extends AppController {
 		$this->set('outcomes',$outcomes);
 		$this->set('parentOutcome',$parentOutcome);
 		$this->set('programId',$programId);
+	}
+	
+	public function indicatorOptions($outcomeId, $programId){
+		$outcome = $this->Outcome->findById($outcomeId);
+		$this->set('outcome',$outcome);
+		$this->set('programId',$programId);
 		
+		$indicators = $this->Outcome->Indicator->find('all', array('conditions'=>array('Indicator.organization_id'=>$outcome['Outcome']['organization_id'])));
+		$this->set('indicators',$indicators);
+	}
+	
+	
+	public function interventionOptions($outcomeId, $programId){
+		$outcome = $this->Outcome->findById($outcomeId);
+		$this->set('outcome',$outcome);
+		$this->set('programId',$programId);
 		
+		$interventions = $this->Outcome->Intervention->find('all', array('conditions'=>array('Intervention.organization_id'=>$outcome['Outcome']['organization_id'])));
+		$this->set('interventions',$interventions);
 	}
 	
 	public function linkToProgram($outcomeId, $programId, $parentOutcomeId) {
