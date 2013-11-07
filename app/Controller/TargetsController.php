@@ -6,9 +6,26 @@ class TargetsController extends AppController {
 		$this->set('targets', $this->Target->find('all'));
 	}
 	
-	public function about($targetId){
+	public function about($targetId, $programId = null){
 		$target = $this->Target->findById($targetId);
 		$this->set('target', $target);
+		
+		if($programId){
+			$program = $this->Target->Organization->Program->findById($programId);
+			$this->set('program', $program);
+			$navOptions['Back to program targets'] = '/programs/targets/' . $program['Program']['id'];
+		}
+		
+		// title
+		$this->set('title_for_layout', 
+			$target['Target']['name']
+			);
+		
+		// menu options
+		
+		
+		$navOptions['Edit'] = '/targets/edit/' . $target['Target']['id'];
+		$this->set('navOptions', $navOptions);
 	}
 	
 	public function add($organizationId, $programId = null) {

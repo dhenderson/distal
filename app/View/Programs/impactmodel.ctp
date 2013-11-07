@@ -161,7 +161,7 @@
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-indicators" class="tab-pane">
 								<div class="button" style="float: left; width: 46%;">
-									<?php echo $this->html->link("New indicator", "/indicators/add/$organizationId/$outcomeId/$programId");?>
+									<?php echo $this->html->link("New indicator", "/indicators/add/$organizationId/$programId?outcomeId=$outcomeId");?>
 								</div>
 								<div class="button" style="float: right; width: 46%;">
 									<?php echo $this->html->link('Existing indicator', "/outcomes/indicatorOptions/$outcomeId/$programId");?>

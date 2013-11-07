@@ -94,6 +94,7 @@ class ProgramsController extends AppController {
 				)
 			);
 		$this->set('targets', $targets);
+		$this->set('program', $program);
 		
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];

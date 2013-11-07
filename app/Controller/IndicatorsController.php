@@ -13,10 +13,17 @@ class IndicatorsController extends AppController {
 		$this->set('title_for_layout', $indicator['Organization']['name'] . ' > ' . $indicator['Indicator']['name']);
 	}
 	
-	public function add($organizationId, $outcomeId = null, $programId = null) {
+	public function add($organizationId, $programId = null) {
 	
 		$this->set('organizationId', $organizationId);	
-		$this->set('outcomeId', $outcomeId);
+		
+		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
+		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
+		
+		if(isset($this->params['url']['outcomeId'])) {
+			$outcomeId = $this->params['url']['outcomeId'];
+			$this->set('outcomeId', $outcomeId);
+		}
 		$this->set('programId', $programId);
 		
 		$indicators = $this->Indicator->find(

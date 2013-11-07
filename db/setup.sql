@@ -20,16 +20,15 @@ CREATE TABLE `users`(
 	active BOOLEAN default TRUE,
 	email varchar(255) NOT NULL UNIQUE,
 	PRIMARY KEY (id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE organizations(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	FULLTEXT (name),
 	PRIMARY KEY (id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE programs(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -37,13 +36,12 @@ CREATE TABLE programs(
 	name varchar(255) NOT NULL,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
-	FULLTEXT (name),
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE targets(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -55,7 +53,7 @@ CREATE TABLE targets(
 		REFERENCES organizations(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE program_targets(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -71,7 +69,7 @@ CREATE TABLE program_targets(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (target_id, program_id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -80,7 +78,7 @@ CREATE TABLE outcomes(
 	PRIMARY KEY (id),
 	FOREIGN KEY (organization_id)
 		REFERENCES organizations(id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE program_outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -101,7 +99,21 @@ CREATE TABLE program_outcomes(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, parent_outcome_id, program_id)
-)ENGINE = MYISAM;
+);
+
+CREATE TABLE data_types(
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(100) NOT NULL,
+	data_type varchar(10) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE answer_option_types(
+	id INT NOT NULL AUTO_INCREMENT,
+	answer_option_type varchar(20) NOT NULL,
+	name varchar(100) NOT NULL,
+	PRIMARY KEY (id)
+);
 
 CREATE TABLE indicators(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -119,7 +131,7 @@ CREATE TABLE indicators(
 		REFERENCES organizations(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE indicator_outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -140,21 +152,7 @@ CREATE TABLE indicator_outcomes(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, indicator_id, program_id)
-)ENGINE = MYISAM;
-
-CREATE TABLE data_types(
-	id INT NOT NULL AUTO_INCREMENT,
-	data_type varchar(10) NOT NULL,
-	description varchar(100) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE = MYISAM;
-
-CREATE TABLE answer_option_types(
-	id INT NOT NULL AUTO_INCREMENT,
-	answer_option_type varchar(20) NOT NULL,
-	description varchar(100) NOT NULL,
-	PRIMARY KEY (id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE interventions(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -165,7 +163,7 @@ CREATE TABLE interventions(
 		REFERENCES organizations(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE intervention_outcomes(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -186,7 +184,7 @@ CREATE TABLE intervention_outcomes(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (outcome_id, intervention_id, program_id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE steps(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -200,7 +198,7 @@ CREATE TABLE steps(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (position, program_id)
-)ENGINE = MYISAM;
+);
 
 CREATE TABLE indicator_steps(
 	id INT NOT NULL AUTO_INCREMENT,
@@ -221,7 +219,28 @@ CREATE TABLE indicator_steps(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (step_id, indicator_id, program_id)
-)ENGINE = MYISAM;
+);
+
+CREATE TABLE indicator_targets(
+	id INT NOT NULL AUTO_INCREMENT,
+	target_id INT NOT NULL,
+	indicator_id INT NOT NULL,
+	program_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (target_id)
+		REFERENCES targets(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (indicator_id)
+		REFERENCES indicators(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	UNIQUE INDEX (target_id, indicator_id, program_id)
+);
 
 /** DEFAULT SETTINGS **/
 
@@ -229,13 +248,13 @@ CREATE TABLE indicator_steps(
 INSERT INTO users (email, system_admin, password) VALUES("root", TRUE, '1234');
 
 /** data type defaults **/
-INSERT INTO data_types (data_type, description) VALUES ('int', 'Integer');
-INSERT INTO data_types (data_type, description) VALUES ('boolean', 'Boolean');
-INSERT INTO data_types (data_type, description) VALUES ('float', 'Float');
-INSERT INTO data_types (data_type, description) VALUES ('string', 'Text');
-INSERT INTO data_types (data_type, description) VALUES ('date', 'Date');
+INSERT INTO data_types (data_type, name) VALUES ('int', 'Integer');
+INSERT INTO data_types (data_type, name) VALUES ('boolean', 'Boolean');
+INSERT INTO data_types (data_type, name) VALUES ('float', 'Float');
+INSERT INTO data_types (data_type, name) VALUES ('string', 'Text');
+INSERT INTO data_types (data_type, name) VALUES ('date', 'Date');
 
 /** answer option type defaults **/
-INSERT INTO answer_option_types (answer_option_type, description) VALUES ('choose_one', 'Choose one');
-INSERT INTO answer_option_types (answer_option_type, description) VALUES ('choose_many', 'Choose all that apply');
-INSERT INTO answer_option_types (answer_option_type, description) VALUES ('fill_in', 'Fill in');
+INSERT INTO answer_option_types (answer_option_type, name) VALUES ('choose_one', 'Choose one');
+INSERT INTO answer_option_types (answer_option_type, name) VALUES ('choose_many', 'Choose all that apply');
+INSERT INTO answer_option_types (answer_option_type, name) VALUES ('fill_in', 'Fill in');
