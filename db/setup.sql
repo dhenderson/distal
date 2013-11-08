@@ -242,6 +242,47 @@ CREATE TABLE indicator_targets(
 	UNIQUE INDEX (target_id, indicator_id, program_id)
 );
 
+CREATE TABLE surveys(
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	program_id INT NOT NULL,
+	`created` datetime NOT NULL,
+	`modified` datetime NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+);
+
+CREATE TABLE survey_sections(
+	id INT NOT NULL AUTO_INCREMENT,
+	name varchar(255) NOT NULL,
+	survey_id INT NOT NULL,
+	position INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (survey_id)
+		REFERENCES surveys(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE
+);
+
+CREATE TABLE indicator_survey_sections(
+	id INT NOT NULL AUTO_INCREMENT,
+	indicator_id INT NOT NULL,
+	survey_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (survey_id)
+		REFERENCES surveys(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (indicator_id)
+		REFERENCES indicators(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	UNIQUE INDEX (indicator_id, survey_id)
+);
+
 /** DEFAULT SETTINGS **/
 
 /** user defaults **/

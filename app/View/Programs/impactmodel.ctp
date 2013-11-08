@@ -45,6 +45,8 @@
 				// display the outcome details of the selected outcome
 				var outcomeDetails = this.document.getElementById("outcome" + selectedOutcomeId);
 				outcomeDetails.style.display="inline";
+				
+				this.document.getElementById('chat-box').style.display="inline";
 			}
 			
 			/**
@@ -74,7 +76,7 @@
 
 	<?php if(sizeOf($outcomes) > 0):?>
 		<!-- outcome detail -->
-		<div id="chat-box">
+		<div id="chat-box" style="display: none">
 			<?php foreach ($outcomes as $outcome): ?>
 				<?php $outcomeId = $outcome['Outcome']['id'];?>
 				<?php $outcomeName = $outcome['Outcome']['name'];?>

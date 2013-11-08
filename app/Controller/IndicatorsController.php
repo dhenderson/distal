@@ -25,6 +25,9 @@ class IndicatorsController extends AppController {
 		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
 		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
 		
+		$outcomeId = null;
+		$targetId = null;
+		
 		// outcomeId
 		if(isset($this->params['url']['outcomeId'])) {
 			$outcomeId = $this->params['url']['outcomeId'];

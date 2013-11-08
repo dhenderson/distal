@@ -2,9 +2,10 @@
 <table class="table">
 	<tr>
 		<th>Program</th>
-		<th style="text-align: center;">Target</th>
+		<th style="text-align: center;">Targets</th>
 		<th style="text-align: center;">Service utilization</th>
 		<th style="text-align: center;">Impact model</th>
+		<th style="text-align: center;">Surveys</th>
 	</tr>
 	<?php foreach($organization['Program'] as $program):?>
 		<tr>
@@ -34,6 +35,15 @@
 						<?php $impactModelImage = "impactmodel_grey_30.png"?>
 					<?php endif?>
 					<img src="<?php echo $this->webroot; ?>img/<?php echo $impactModelImage;?>"/>
+				</a>
+			</td>
+			<td style="text-align: center;">
+				<a href="<?php echo $this->webroot;?>programs/surveys/<?php echo $program['id'];?>">
+					<?php $surveyImage = "survey_30.png"?>
+					<?php if(sizeOf($program['Survey']) == 0):?>
+						<?php $surveyImage = "survey_grey_30.png"?>
+					<?php endif?>
+					<img src="<?php echo $this->webroot; ?>img/<?php echo $surveyImage;?>"/>
 				</a>
 			</td>
 		</tr>

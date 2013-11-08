@@ -45,6 +45,13 @@ class ProgramsController extends AppController {
 			);
 		$this->set('steps', $steps);
 		
+		$surveys = $this->Program->Survey->find('all', 
+			array(
+					'conditions' => array('Survey.program_id'=>$programId)
+				)
+			);
+		$this->set('surveys', $surveys);
+		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
 		$navOptions['Add a target'] = '/targets/add/' . $programId;
@@ -107,6 +114,23 @@ class ProgramsController extends AppController {
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
 		$navOptions['Add a target'] = '/targets/add/' . $program['Organization']['id'] . '/' . $program['Program']['id'];
+		$this->set('navOptions', $navOptions);
+	}
+	
+	public function surveys($programId){
+		$program = $this->Program->findById($programId);
+		
+		$surveys = $this->Program->Survey->find('all',
+			array(
+					'conditions' => array('Survey.program_id'=>$programId)
+				)
+			);
+		$this->set('surveys', $surveys);
+		$this->set('program', $program);
+
+		// menu options
+		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
+		$navOptions['Add a survey'] = '/surveys/add/' . $program['Program']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	

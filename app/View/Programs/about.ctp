@@ -31,6 +31,17 @@
 	</div>
 </a>
 
+<a href="<?php echo $this->webroot;?>programs/surveys/<?php echo $program['Program']['id'];?>">
+	<div class="left-box <?php if(sizeOf($surveys) == 0) {echo "grey";} ?>">
+		<?php $surveyImage = "survey.png"?>
+		<?php if(sizeOf($surveys) == 0):?>
+			<?php $surveyImage = "survey_grey.png"?>
+		<?php endif?>
+		<img src="<?php echo $this->webroot; ?>img/<?php echo $surveyImage;?>"/>
+		<div>Surveys</div>
+	</div>
+</a>
+
 <div style="clear:both;"><div>
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		
