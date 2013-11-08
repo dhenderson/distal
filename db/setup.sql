@@ -2,13 +2,6 @@ DROP DATABASE IF EXISTS distal;
 CREATE DATABASE distal;
 USE distal;
 
-CREATE TABLE advisory_groups(
-	id INT NOT NULL AUTO_INCREMENT,
-	name varchar(255) NOT NULL,
-	active BOOLEAN default true,
-	PRIMARY KEY (id)
-)ENGINE = MYISAM;
-
 CREATE TABLE `users`(
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`password` varchar(255) NOT NULL DEFAULT '',

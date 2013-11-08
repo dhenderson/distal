@@ -22,6 +22,7 @@ class IndicatorsController extends AppController {
 	
 		$this->set('organizationId', $organizationId);	
 		
+		echo pr($this->Indicator->DataType->find('list'));
 		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
 		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
 		
