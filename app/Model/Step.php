@@ -4,6 +4,7 @@ class Step extends AppModel {
 	var $belongsTo = array('Program');
 	var $hasMany = array('IndicatorStep');
 	var $order = 'Step.position ASC';
+	var $recursive = 2;
 
 	/**
 	* Returns the maximum position value for a given program plus one.

@@ -17,6 +17,14 @@ class Indicator extends AppModel {
 			
 		$this->query($sql);
 	}
+	
+	public function linkToStep($indicatorId, $stepId, $programId){
+		$sql = "INSERT INTO indicator_steps (indicator_id, step_id, program_id) 
+			VALUES ($indicatorId, $stepId, $programId)";
+			
+		$this->query($sql);
+	}
+	
 }
 
 ?>

@@ -27,6 +27,15 @@ class StepsController extends AppController {
 		}
 	}
 	
+	public function indicatorOptions($stepId, $programId){
+		$step = $this->Step->findById($stepId);
+		$this->set('step',$step);
+		$this->set('programId',$programId);
+		
+		$indicators = $this->Step->IndicatorStep->Indicator->find('all', array('conditions'=>array('Indicator.organization_id'=>$step['Program']['organization_id'])));
+		$this->set('indicators',$indicators);
+	}
+	
 	public function delete($id) {
 		$step = $this->Step->findById($id);
 		$projectId = $step['Step']['program_id'];

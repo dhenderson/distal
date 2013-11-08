@@ -45,12 +45,42 @@
 		<?php foreach ($steps as $step): ?>
 			<div id="step<?php echo $step['Step']['id'];?>" style="display: none">
 				<h1><?php echo $step['Step']['name'];?></h1>
-				<div class="button" style="float: left; width: 46%;">
-					<?php echo $this->html->link("New indicator", "/");?>
+				<nav>
+					<ul>
+						<li><?php echo $this->html->link("Edit", "/steps/edit/" . $step['Step']['id']);?></li>
+					</ul>
+				</nav>		
+				<div>
+					<h2>Description</h2>
+					<?php echo $step['Step']['description'];?>
 				</div>
-				<div class="button" style="float: right; width: 46%;">
-					<?php echo $this->html->link('Existing indicator', "/");?>
-				</div>			
+				<div>
+					<h2>Indicators</h2>
+					<div class="button" style="float: left; width: 46%;">
+						<?php echo $this->html->link("New indicator", "/indicators/add/" . $step['Program']['organization_id'] . "/" . $step['Program']['id'] . '?stepId=' . $step['Step']['id']);?>
+					</div>
+					<div class="button" style="float: right; width: 46%;">
+						<?php echo $this->html->link('Existing indicator', "/steps/indicatorOptions/" . $step['Step']['id'] . '/' . $step['Program']['id']);?>
+					</div>
+					<table class="table">
+						<tr>
+							<th>Indicator</th>
+							<th>Delete</th>
+						</tr>
+						<?php foreach($step['IndicatorStep'] as $indicator):?>
+							<?php $indicatorName = $indicator['Indicator']['name'];?>
+							<?php $indicatorId = $indicator['Indicator']['id'];?>
+							<tr>
+								<td>
+									<?php echo $this->html->link($indicatorName, "/indicators/about/$indicatorId");?>
+								</td>
+								<td valign="top">
+									<?php echo $this->html->link("Delete", "/indicators/delete/$indicatorId/$programId");?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</table>
+				</div>
 			</div>
 		<?php endforeach; ?>
 	</div>

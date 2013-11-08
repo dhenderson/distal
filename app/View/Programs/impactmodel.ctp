@@ -68,7 +68,11 @@
 		<?php endif;?>
 		<?php if(sizeOf($outcomes) == 0):?>
 			<div class="get-started">
-				<?php echo $this->html->link('Get started by adding an outcome that is the ultimate goal for this program', "/outcomes/add/$organizationId/" . $program['Program']['id']);?>
+				
+				<h1>Begin by setting the ultimate outcome</h1>
+				<div><?php echo $this->html->link('Create a new outcome', "/outcomes/add/$organizationId/" . $program['Program']['id']);?></div>
+				<div>or</div>
+				<div><?php echo $this->html->link('Use an existing outcome', "/");?></div>
 			</div>
 		<?php endif;?>
 	</div>
@@ -84,10 +88,12 @@
 					<h1>
 						<?php echo $outcomeName;?>
 					</h1>
-					<div style="font-size: 8pt; font-weight: normal; margin-bottom: 10px;">
-						<?php echo $this->html->link('Edit', "/outcomes/edit/$outcomeId");?>	| 
-						<?php echo $this->html->link('Delete', "/outcomes/delete/$outcomeId", null, 'Are you sure?' );?>
-					</div>
+					<nav>
+						<ul>
+						<li><?php echo $this->html->link('Edit', "/outcomes/edit/$outcomeId");?></li>
+						<li><?php echo $this->html->link('Delete', "/outcomes/delete/$outcomeId", null, 'Are you sure?' );?></li>
+						</ul>
+					</nav>
 					<div id="outcome-options-<?php echo $outcomeId;?>" class="tabbable">
 						<ul class="nav nav-tabs">
 							<li class="active">

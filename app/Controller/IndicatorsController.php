@@ -22,7 +22,6 @@ class IndicatorsController extends AppController {
 	
 		$this->set('organizationId', $organizationId);	
 		
-		echo pr($this->Indicator->DataType->find('list'));
 		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
 		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
 		
@@ -38,6 +37,11 @@ class IndicatorsController extends AppController {
 		elseif(isset($this->params['url']['targetId'])) {
 			$targetId = $this->params['url']['targetId'];
 			$this->set('targetId', $targetId);
+		}
+		// stepId
+		elseif(isset($this->params['url']['stepId'])) {
+			$stepId = $this->params['url']['stepId'];
+			$this->set('stepId', $stepId);
 		}
 		
 		$this->set('programId', $programId);
@@ -68,8 +72,18 @@ class IndicatorsController extends AppController {
 					$this->Indicator->linkToTarget($this->Indicator->id, $targetId, $programId);
 					$this->redirect('/targets/about/' . $targetId);
 				}
+				elseif($stepId != null AND $programId != null){
+					// link to step
+					$this->Indicator->linkToStep($this->Indicator->id, $stepId, $programId);
+					$this->redirect('/programs/serviceutilization/' . $programId);
+				}
 			}
 		}
+	}
+	
+	public function linkToStep($indicatorId, $stepId, $programId) {
+		$this->Indicator->linkToStep($indicatorId, $stepId, $programId);
+		$this->redirect('/programs/serviceutilization/' . $programId);
 	}
 	
 	public function delete($id, $programId = null) {
