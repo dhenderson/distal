@@ -16,14 +16,15 @@ class TargetsController extends AppController {
 			$navOptions['Back to program targets'] = '/programs/targets/' . $program['Program']['id'];
 		}
 		
+		$this->set('organizationId', $target['Target']['organization_id']);
+		$this->set('programId', $programId);
+		
 		// title
 		$this->set('title_for_layout', 
 			$target['Target']['name']
 			);
 		
 		// menu options
-		
-		
 		$navOptions['Edit'] = '/targets/edit/' . $target['Target']['id'];
 		$this->set('navOptions', $navOptions);
 	}
@@ -68,7 +69,7 @@ class TargetsController extends AppController {
 			$this->Target->id = $id;
 			if ($this->Target->save($this->request->data)) {
 				$this->Session->setFlash(__('Your target has been updated.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect("/targets/about/" . $id);
 			}
 			$this->Session->setFlash(__('Unable to update your target.'));
 		}

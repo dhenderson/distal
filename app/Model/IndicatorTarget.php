@@ -2,7 +2,7 @@
 
 class IndicatorTarget extends AppModel {
 	var $belongsTo = array('Target', 'Indicator', 'Program');
-	var $recursive =1;
+	var $recursive = 2;
 }
 
 ?>

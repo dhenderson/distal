@@ -35,7 +35,7 @@
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		
 		<li class="active"><a href="#outcomes" data-toggle="tab">Outcomes (<?php echo sizeof($outcomes);?>)</a></li>
-		<li><a href="#indicators" data-toggle="tab">Indicators (<?php echo sizeof($indicators);?>)</a></li>
+		<li><a href="#indicators" data-toggle="tab">Indicators (<?php echo sizeof($indicatorOutcomes);?>)</a></li>
 		<li><a href="#interventions" data-toggle="tab">Interventions (<?php echo sizeof($interventions);?>)</a></li>
 		<li><a href="#steps" data-toggle="tab">Service utilization steps (<?php echo sizeof($steps);?>)</a></li>
 	</ul>
@@ -76,22 +76,50 @@
 		</table>
 	</div>
 	<div id="indicators" class="tab-pane">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Indicator</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<?php foreach ($indicators as $indicator): ?>
-				<tr>
-					<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
-					<td><?php echo $this->html->link('Edit', '/indicators/edit/' . $indicator['Indicator']['id']);?></td>
-					<td><?php echo $this->html->link('Delete', array('/indicators/delete/' . $indicator['Indicator']['id']), null, 'Are you sure?' )?></td>
-				</tr>
-			<?php endforeach; ?>
-		</table>
+		<div class="tabbable" style="margin-top: 20px;">
+			<ul class="nav nav-tabs">		
+				<li class="active"><a href="#indicatorTargets" data-toggle="tab">Target demographic indicators (<?php echo sizeof($indicatorTargets);?>)</a></li>
+				<li><a href="#indicatorOutcomes" data-toggle="tab">Outcomes indicators (<?php echo sizeof($indicatorOutcomes);?>)</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div id="indicatorTargets" class="tab-pane active">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Target demographic indicator</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<?php foreach ($indicatorTargets as $indicator): ?>
+						<tr>
+							<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
+							<td><?php echo $this->html->link('Edit', '/indicators/edit/' . $indicator['Indicator']['id']);?></td>
+							<td><?php echo $this->html->link('Delete', array('/indicators/delete/' . $indicator['Indicator']['id']), null, 'Are you sure?' )?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			</div>
+			<div id="indicatorOutcomes" class="tab-pane">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Outcomes indicator</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<?php foreach ($indicatorOutcomes as $indicator): ?>
+						<tr>
+							<td><?php echo $this->html->link($indicator['Indicator']['name'], '/indicators/about/' . $indicator['Indicator']['id']);?></td>
+							<td><?php echo $this->html->link('Edit', '/indicators/edit/' . $indicator['Indicator']['id']);?></td>
+							<td><?php echo $this->html->link('Delete', array('/indicators/delete/' . $indicator['Indicator']['id']), null, 'Are you sure?' )?></td>
+						</tr>
+					<?php endforeach; ?>
+				</table>
+			</div>
+		</div>
 	</div>
 	<div id="steps" class="tab-pane">
 		<table class="table">

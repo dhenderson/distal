@@ -10,6 +10,13 @@ class Indicator extends AppModel {
 			
 		$this->query($sql);
 	}
+	
+	public function linkToTarget($indicatorId, $targetId, $programId){
+		$sql = "INSERT INTO indicator_targets (indicator_id, target_id, program_id) 
+			VALUES ($indicatorId, $targetId, $programId)";
+			
+		$this->query($sql);
+	}
 }
 
 ?>

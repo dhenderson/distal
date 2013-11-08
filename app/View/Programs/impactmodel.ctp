@@ -36,42 +36,15 @@
 			* a list of related indicators
 			**/
 			
-			function showOutcomeDetails(selectedoutcomeId){
+			function showOutcomeDetails(selectedOutcomeId){
 				// set all the outcome detail containers to hidden
 				<?php foreach ($outcomes as $outcome): ?>
 					this.document.getElementById("outcome<?php echo $outcome['Outcome']['id'];?>").style.display="none";
 				<?php endforeach; ?>
 				
 				// display the outcome details of the selected outcome
-				
-				var outcomeDetails = this.document.getElementById("outcome" + selectedoutcomeId);
+				var outcomeDetails = this.document.getElementById("outcome" + selectedOutcomeId);
 				outcomeDetails.style.display="inline";
-				outcomeDetails.style.height="auto";
-			}
-			
-			// boolean variable that reports if the 
-			// outcome details container is minimized
-			var chatBoxMinimized = false;
-			
-			/**
-			* Resizes the outcome detail container
-			**/
-			function minMaxOutcomeDetails(){
-				// the container is minimized, so let's maximize it
-				if(this.chatBoxMinimized){
-					this.document.getElementById("chat-box").style.height = "";
-					this.document.getElementById("chat-box").style.backgroundColor = "#FFFFFF";
-					// set the outcomesDetailMinmized boolean to false, as we maximized
-					this.chatBoxMinimized = false;
-					
-				}
-				// otherwise, let's minimize
-				else{
-					this.document.getElementById("chat-box").style.height = "15px";
-					this.document.getElementById("chat-box").style.backgroundColor = "#CCC";
-					// set the outcomesDetailMinmized boolean to true, as we minmimized
-					this.chatBoxMinimized = true;
-				}
 			}
 			
 			/**
@@ -89,7 +62,7 @@
 	<!-- impact theory chart -->
 	<div id="di-graph-container">
 		<?php if(sizeOf($outcomes) > 0):?>
-			<canvas id="outcomesChart" width="1250" height="400" style=""/>
+			<canvas id="outcomesChart" width="815" height="450" style=""/>
 		<?php endif;?>
 		<?php if(sizeOf($outcomes) == 0):?>
 			<div class="get-started">
@@ -106,7 +79,7 @@
 				<?php $outcomeId = $outcome['Outcome']['id'];?>
 				<?php $outcomeName = $outcome['Outcome']['name'];?>
 				<div style="display: none" id="outcome<?php echo $outcomeId;?>">
-					<h1 style="margin-bottom: 0px; margin-top: 0px; cursor: pointer;" onclick="minMaxOutcomeDetails();">
+					<h1>
 						<?php echo $outcomeName;?>
 					</h1>
 					<div style="font-size: 8pt; font-weight: normal; margin-bottom: 10px;">

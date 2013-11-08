@@ -1,4 +1,4 @@
-body {font-family: 'Verdana', 'Arial'; margin: 0px; font-size: 10pt; border-top: 3px solid #0088aa;}
+body {font-family: 'Verdana', 'Arial'; margin: 0px; font-size: 10pt; border-top: 3px solid #0088aa; height:100%;}
 
 header, nav, h1, h2, h3{font-family: 'Verdana', sans-serif;}
 h1, h2, h3 {color: #555; font-weight: normal;}
@@ -50,16 +50,21 @@ nav a:hover{}
 .grey{background-color: #FAFAFA;}
 a .grey{color: #999;}
 
-.message{padding: 5px; background-color: #EEE; color: #777; margin-bottom: 10px; text-align: center; border-radius: 25px;}
+.message{padding: 5px; background-color: #DDFADD; color: #777; margin-bottom: 10px; text-align: center; border-radius: 25px; max-width: 400px;}
 
 .table td a{color: #000;}
 .table td a:hover{color: #33AA00;}
 
 #chat-box{
-	width: 500px; max-height: 500px; position: fixed; bottom: 0px; right: 30px; background-color: #FFF; padding: 10px; border: 1px solid #AAA; 
-	box-shadow: 1px 5px 5px #888888; overflow:auto;
+	width: 450px; position: fixed; bottom: 0px; right: 0px; background-color: #FAFAFA; padding: 10px;
+	border-left: 1px solid #999; overflow:auto; height: 100%;
 }
-#di-graph-container{margin-left: auto; margin-right: auto; border: 1px dashed #AAA; text-align: center; border-radius: 10px;}
+#chat-box   .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
+          background-color: #FAFAFA;
+          } 
+#di-graph-container{border: 1px solid #999; text-align: left; border-radius: 10px; width: 825px;}
 
 .step{width: 350px; text-align: center;}
 .step h1{font-size: 1.3em; margin: 0px; padding: 0px; font-weight: bold;}

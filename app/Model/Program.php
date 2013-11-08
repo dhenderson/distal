@@ -6,8 +6,9 @@ class Program extends AppModel {
 	var $hasMany = array(
 		'ProgramOutcome', 
 		'IndicatorOutcome', 
-		'InterventionOutcome',
+		'IndicatorTarget',
 		'IndicatorStep',
+		'InterventionOutcome',
 		'ProgramTarget',
 		'Step'
 	);

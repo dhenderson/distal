@@ -14,13 +14,21 @@ class ProgramsController extends AppController {
 			);
 		$this->set('outcomes', $outcomes);
 		
-		$indicators = $this->Program->IndicatorOutcome->find('all', 
+		$indicatorOutcomes = $this->Program->IndicatorOutcome->find('all', 
 			array(
 					'conditions' => array('IndicatorOutcome.program_id'=>$programId),
 					'fields' => array('DISTINCT IndicatorOutcome.indicator_id')
 				)
 			);
-		$this->set('indicators', $indicators);
+		$this->set('indicatorOutcomes', $indicatorOutcomes);
+		
+		$indicatorTargets = $this->Program->IndicatorTarget->find('all', 
+			array(
+					'conditions' => array('IndicatorTarget.program_id'=>$programId),
+					'fields' => array('DISTINCT IndicatorTarget.indicator_id')
+				)
+			);
+		$this->set('indicatorTargets', $indicatorTargets);
 		
 		$interventions = $this->Program->InterventionOutcome->find('all', 
 			array(

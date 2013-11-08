@@ -1,6 +1,22 @@
 <?php $stepNum = 1;?>
 <?php $numOfSteps = sizeOf($steps);?>
 
+<script type="text/javascript">
+	/**
+	* Detailed information about the selected step
+	**/
+	
+	function showSteDetails(selectedStepId){
+		// set all the step detail containers to hidden
+		<?php foreach ($steps as $step): ?>
+			this.document.getElementById("step<?php echo $step['Step']['id'];?>").style.display="none";
+		<?php endforeach; ?>
+		
+		// display the step details of the selected step
+		var stepDetails = this.document.getElementById("step" + selectedStepId);
+		stepDetails.style.display="inline";
+	}
+</script>
 
 <?php if(sizeOf($steps) == 0):?>
 	<div class="get-started">

@@ -11,6 +11,11 @@ class IndicatorsController extends AppController {
 		
 		$this->set('indicator', $indicator);
 		$this->set('title_for_layout', $indicator['Organization']['name'] . ' > ' . $indicator['Indicator']['name']);
+		
+		// menu options
+		$navOptions['Back to ' . $indicator['Organization']['name']] = '/organizations/about/' . $indicator['Organization']['id'];
+		$navOptions['Edit'] = '/indicators/edit/' . $indicator['Indicator']['id'];
+		$this->set('navOptions', $navOptions);
 	}
 	
 	public function add($organizationId, $programId = null) {
@@ -20,10 +25,17 @@ class IndicatorsController extends AppController {
 		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
 		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
 		
+		// outcomeId
 		if(isset($this->params['url']['outcomeId'])) {
 			$outcomeId = $this->params['url']['outcomeId'];
 			$this->set('outcomeId', $outcomeId);
 		}
+		// targetId
+		elseif(isset($this->params['url']['targetId'])) {
+			$targetId = $this->params['url']['targetId'];
+			$this->set('targetId', $targetId);
+		}
+		
 		$this->set('programId', $programId);
 		
 		$indicators = $this->Indicator->find(
@@ -40,13 +52,18 @@ class IndicatorsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Indicator->save($this->data)) {
 			
+				$this->Session->setFlash('Your indicator has been saved.');
+			
 				if($outcomeId != null AND $programId != null) {
 					// link to outcome
 					$this->Indicator->linkToOutcome($this->Indicator->id, $outcomeId, $programId);
+					$this->redirect('/programs/impactmodel/' . $programId);
 				}
-				
-				$this->Session->setFlash('Your indicator has been saved.');
-				$this->redirect('/programs/impactmodel/' . $programId);
+				elseif($targetId != null AND $programId != null){
+					// link to target
+					$this->Indicator->linkToTarget($this->Indicator->id, $targetId, $programId);
+					$this->redirect('/targets/about/' . $targetId);
+				}
 			}
 		}
 	}
@@ -66,6 +83,9 @@ class IndicatorsController extends AppController {
 	}
 	
 	public function edit($id = null) {
+	
+		$this->set('dataTypes', $this->Indicator->DataType->find('list'));
+		$this->set('answerOptionTypes', $this->Indicator->AnswerOptionType->find('list'));
 		
 		if (!$id) {
 			throw new NotFoundException(__('Invalid indicator'));
@@ -80,7 +100,7 @@ class IndicatorsController extends AppController {
 			$this->Indicator->id = $id;
 			if ($this->Indicator->save($this->request->data)) {
 				$this->Session->setFlash(__('Your indicator has been updated.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect('/indicators/about/' . $id);
 			}
 			$this->Session->setFlash(__('Unable to update your indicator.'));
 		}
