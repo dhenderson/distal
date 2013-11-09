@@ -263,17 +263,17 @@ CREATE TABLE survey_sections(
 CREATE TABLE indicator_survey_sections(
 	id INT NOT NULL AUTO_INCREMENT,
 	indicator_id INT NOT NULL,
-	survey_id INT NOT NULL,
+	survey_section_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (survey_id)
-		REFERENCES surveys(id)
+	FOREIGN KEY (survey_section_id)
+		REFERENCES survey_sections(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	FOREIGN KEY (indicator_id)
 		REFERENCES indicators(id)
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
-	UNIQUE INDEX (indicator_id, survey_id)
+	UNIQUE INDEX (indicator_id, survey_section_id)
 );
 
 /** DEFAULT SETTINGS **/

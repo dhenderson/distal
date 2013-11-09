@@ -32,6 +32,20 @@ class SurveySectionsController extends AppController {
 		$this->redirect('/surveys/about/' . $surveyId);
 	}
 	
+	public function indicatorOptions($surveySectionId){
+	
+		$surveySection = $this->SurveySection->findById($surveySectionId);
+		$programId = $surveySection['Survey']['program_id'];
+		$program = $this->SurveySection->Survey->Program->findById($programId);
+		$outcomeId = $program['Organization']['id'];
+		
+		$this->set('surveySection', $surveySection);
+		$this->set('programId', $programId);
+		
+		$indicators = $this->SurveySection->IndicatorSurveySection->Indicator->find('all', array('conditions'=>array('Indicator.organization_id'=>$outcomeId)));
+		$this->set('indicators',$indicators);
+	}
+	
 	public function edit($id = null) {
 		
 		if (!$id) {
