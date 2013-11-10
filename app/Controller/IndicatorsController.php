@@ -27,6 +27,7 @@ class IndicatorsController extends AppController {
 		
 		$outcomeId = null;
 		$targetId = null;
+		$stepId = null;
 		
 		// outcomeId
 		if(isset($this->params['url']['outcomeId'])) {

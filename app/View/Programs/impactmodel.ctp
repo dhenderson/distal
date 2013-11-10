@@ -172,7 +172,7 @@
 							</div>
 							<div id="outcome-options-<?php echo $outcomeId;?>-interventions" class="tab-pane">
 								<div class="button" style="float: left; width: 46%;">
-									<?php echo $this->html->link("New intervention", "/interventions/add/$organizationId/$outcomeId/$programId");?>
+									<?php echo $this->html->link("New intervention", "/interventions/add/$organizationId/$programId?outcomeId=$outcomeId");?>
 								</div>
 								<div class="button" style="float: right; width: 46%;">
 									<?php echo $this->html->link('Existing intervention', "/outcomes/interventionOptions/$outcomeId/$programId");?>

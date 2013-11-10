@@ -15,10 +15,23 @@ class InterventionsController extends AppController {
 		$this->set('outcomes', $outcomes);
 	}
 	
-	public function add($organizationId, $outcomeId = null, $programId = null) {
-
+	public function add($organizationId, $programId = null) {
+		
+		$outcomeId = null;
+		$stepId = null;
+		
+		// outcomeId
+		if(isset($this->params['url']['outcomeId'])) {
+			$outcomeId = $this->params['url']['outcomeId'];
+			$this->set('outcomeId', $outcomeId);
+		}
+		// stepId
+		elseif(isset($this->params['url']['stepId'])) {
+			$stepId = $this->params['url']['stepId'];
+			$this->set('stepId', $stepId);
+		}
+		
 		$this->set('organizationId', $organizationId);	
-		$this->set('outcomeId', $outcomeId);
 		$this->set('programId', $programId);
 	
 		if (!empty($this->data)) {
