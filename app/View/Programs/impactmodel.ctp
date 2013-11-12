@@ -67,13 +67,13 @@
 	<!-- impact theory chart -->
 	<div class="graph-key" style="margin-bottom: 10px; font-size: 0.8em;">
 		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square graph-green" style="background-color: #0000DD; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Most proximal outcome
+			<div class="graph-square graph-green" style="background-color: #0000DD; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Most proximal outcome
 		</div>
 		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square graph-black" style="background-color: #000; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Intermediate outcome
+			<div class="graph-square graph-black" style="background-color: #000; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Intermediate outcome
 		</div>
 		<div style="float: left">
-			<div class="graph-square graph-red" style="background-color: #DD0000; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Most distal outcome
+			<div class="graph-square graph-red" style="background-color: #DD0000; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Most distal outcome
 		</div>
 		<div style="clear:both"></div>
 	</div>
