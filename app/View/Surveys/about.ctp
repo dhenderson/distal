@@ -33,9 +33,16 @@
 	<?php foreach($survey['SurveySection'] as $surveySection):?>
 		<div id="section<?php echo $surveySection['id']?>" style="display: none">
 			<h1><?php echo $surveySection['name']?></h1>
-			<div class="button" style="">
-				<?php echo $this->html->link('Add question', "/surveySections/indicatorOptions/" . $surveySection['id']);?>
+			<div class="button" style="float: left; width: 28%; margin-right: 5px;">
+				<?php echo $this->html->link('Demographic', "/surveySections/indicatorOptions/" . $surveySection['id'] . '?target=true');?>
 			</div>
+			<div class="button" style="float: left; width: 30%; margin-right: 5px;">
+				<?php echo $this->html->link('Service utilization', "/surveySections/indicatorOptions/" . $surveySection['id'] . '?step=true');?>
+			</div>
+			<div class="button" style="float: left; width: 28%;">
+				<?php echo $this->html->link('Outcome', "/surveySections/indicatorOptions/" . $surveySection['id'] . '?outcome=true');?>
+			</div>
+			<div style="clear:both"></div>
 			<div>There is a bunch of stuff there</div>
 		</div>
 	<?php endforeach;?>
