@@ -68,7 +68,6 @@
 		<?php endif;?>
 		<?php if(sizeOf($outcomes) == 0):?>
 			<div class="get-started">
-				
 				<h1>Begin by setting the ultimate outcome</h1>
 				<div><?php echo $this->html->link('Create a new outcome', "/outcomes/add/$organizationId/" . $program['Program']['id']);?></div>
 				<div>or</div>

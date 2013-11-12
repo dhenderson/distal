@@ -2,7 +2,7 @@
 
 class Step extends AppModel {
 	var $belongsTo = array('Program');
-	var $hasMany = array('IndicatorStep');
+	var $hasMany = array('IndicatorStep', 'InterventionStep');
 	var $order = 'Step.position ASC';
 	var $recursive = 2;
 

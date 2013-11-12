@@ -1,7 +1,7 @@
 <?php
 
 class Intervention extends AppModel {
-	var $hasMany = array('InterventionOutcome');
+	var $hasMany = array('InterventionOutcome', 'InterventionStep');
 	var $belongsTo = array('Organization');
 	
 	public function linkToOutcome($interventionId, $outcomeId, $programId){

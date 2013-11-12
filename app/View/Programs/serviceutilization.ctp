@@ -28,10 +28,17 @@
 	</div>
 <?php endif; ?>
 <?php if(sizeOf($steps) > 0):?>
+	<?php $stepNum = 1;?>
 	<?php foreach ($steps as $step): ?>
 		<div class="step" onclick="showStepDetails(<?php echo $step['Step']['id']?>)">
-			<div class="step-box" id="stepBox<?php echo $step['Step']['id'];?>">	
-				<?php echo $step['Step']['name'];?>
+			<div>
+				<div class="step-number">
+					<?php echo $stepNum;?>
+				</div>
+				<div class="step-box" id="stepBox<?php echo $step['Step']['id'];?>">	
+					<?php echo $step['Step']['name'];?>
+					<div>(<?php echo sizeOf($step['IndicatorStep']); ?>-<?php echo sizeOf($step['IndicatorStep']); ?>)</div>
+				</div>
 			</div>
 			<?php if($stepNum < $numOfSteps): ?>
 				<div class="step-arrow">
@@ -50,36 +57,73 @@
 						<li><?php echo $this->html->link("Edit", "/steps/edit/" . $step['Step']['id']);?></li>
 					</ul>
 				</nav>		
-				<div>
-					<h2>Description</h2>
-					<?php echo $step['Step']['description'];?>
-				</div>
-				<div>
-					<h2>Indicators</h2>
-					<div class="button" style="float: left; width: 46%;">
-						<?php echo $this->html->link("New indicator", "/indicators/add/" . $step['Program']['organization_id'] . "/" . $step['Program']['id'] . '?stepId=' . $step['Step']['id']);?>
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a href="#indicators-<?php echo $step['Step']['id'];?>" data-toggle="tab">
+								Indicators (<?php echo sizeof($step['IndicatorStep']);?>)
+							</a>
+						</li>
+						<li>
+							<a href="#interventions-<?php echo $step['Step']['id'];?>" data-toggle="tab">
+								Interventions (<?php echo sizeof($step['InterventionStep']);?>)
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div id="indicators-<?php echo $step['Step']['id'];?>" class="tab-pane active">
+							<div class="button" style="float: left; width: 46%;">
+								<?php echo $this->html->link("New indicator", "/indicators/add/" . $step['Program']['organization_id'] . "/" . $step['Program']['id'] . '?stepId=' . $step['Step']['id']);?>
+							</div>
+							<div class="button" style="float: right; width: 46%;">
+								<?php echo $this->html->link('Existing indicator', "/steps/indicatorOptions/" . $step['Step']['id'] . '/' . $step['Program']['id']);?>
+							</div>
+							<table class="table">
+								<tr>
+									<th>Indicator</th>
+									<th>Delete</th>
+								</tr>
+								<?php foreach($step['IndicatorStep'] as $indicator):?>
+									<?php $indicatorName = $indicator['Indicator']['name'];?>
+									<?php $indicatorId = $indicator['Indicator']['id'];?>
+									<tr>
+										<td>
+											<?php echo $this->html->link($indicatorName, "/indicators/about/$indicatorId");?>
+										</td>
+										<td valign="top">
+											<?php echo $this->html->link("Delete", "/indicators/delete/$indicatorId/$programId");?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</table>
+						</div>
+						<div id="interventions-<?php echo $step['Step']['id'];?>" class="tab-pane">
+							<div class="button" style="float: left; width: 46%;">
+								<?php echo $this->html->link("New intervention", "/interventions/add/" . $step['Program']['organization_id'] . "/" . $step['Program']['id'] . '?stepId=' . $step['Step']['id']);?>
+							</div>
+							<div class="button" style="float: right; width: 46%;">
+								<?php echo $this->html->link('Existing intervention', "/steps/interventionOptions/" . $step['Step']['id'] . '/' . $step['Program']['id']);?>
+							</div>
+							<table class="table">
+								<tr>
+									<th>Intervention</th>
+									<th>Delete</th>
+								</tr>
+								<?php foreach($step['InterventionStep'] as $intervention):?>
+									<?php $interventionName = $intervention['Intervention']['name'];?>
+									<?php $interventionId = $intervention['Intervention']['id'];?>
+									<tr>
+										<td>
+											<?php echo $this->html->link($interventionName, "/interventions/about/$interventionId");?>
+										</td>
+										<td valign="top">
+											<?php echo $this->html->link("Delete", "/interventions/delete/$interventionId/$programId");?>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</table>
+						</div>
 					</div>
-					<div class="button" style="float: right; width: 46%;">
-						<?php echo $this->html->link('Existing indicator', "/steps/indicatorOptions/" . $step['Step']['id'] . '/' . $step['Program']['id']);?>
-					</div>
-					<table class="table">
-						<tr>
-							<th>Indicator</th>
-							<th>Delete</th>
-						</tr>
-						<?php foreach($step['IndicatorStep'] as $indicator):?>
-							<?php $indicatorName = $indicator['Indicator']['name'];?>
-							<?php $indicatorId = $indicator['Indicator']['id'];?>
-							<tr>
-								<td>
-									<?php echo $this->html->link($indicatorName, "/indicators/about/$indicatorId");?>
-								</td>
-								<td valign="top">
-									<?php echo $this->html->link("Delete", "/indicators/delete/$indicatorId/$programId");?>
-								</td>
-							</tr>
-						<?php endforeach; ?>
-					</table>
 				</div>
 			</div>
 		<?php endforeach; ?>

@@ -184,7 +184,6 @@ CREATE TABLE steps(
 	program_id INT NOT NULL,
 	position INT NOT NULL,
 	name varchar(255) NOT NULL,
-	description TEXT,
 	PRIMARY KEY (id),
 	FOREIGN KEY (program_id)
 		REFERENCES programs(id)
@@ -212,6 +211,27 @@ CREATE TABLE indicator_steps(
 			ON DELETE CASCADE
 			ON UPDATE CASCADE,
 	UNIQUE INDEX (step_id, indicator_id, program_id)
+);
+
+CREATE TABLE intervention_steps(
+	id INT NOT NULL AUTO_INCREMENT,
+	step_id INT NOT NULL,
+	intervention_id INT NOT NULL,
+	program_id INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (step_id)
+		REFERENCES steps(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (intervention_id)
+		REFERENCES interventions(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	FOREIGN KEY (program_id)
+		REFERENCES programs(id)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
+	UNIQUE INDEX (step_id, intervention_id, program_id)
 );
 
 CREATE TABLE indicator_targets(

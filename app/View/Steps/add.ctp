@@ -2,7 +2,6 @@
 <?php
 	echo $this->form->create('Step');
 	echo $this->form->input('name');
-	echo $this->form->input('description');
 	echo $this->form->input('position', array('type'=>'hidden', 'value'=>$position));
 	echo $this->form->input('program_id', array('type'=>'hidden', 'value'=>$programId));
 	echo $this->form->end('Save');
