@@ -10,8 +10,11 @@
 			<?php foreach ($outcomes as $outcome): ?>
 				var outcome<?php echo $outcome['Outcome']['id'];?> = graph.newNode({outcomeId: <?php echo $outcome['Outcome']['id'];?>, 
 					label: "<?php echo $outcome['Outcome']['name'];?> (<?php echo sizeOf($outcome['Outcome']['Indicator']);?>-<?php echo sizeOf($outcome['Outcome']['Intervention']);?>)"
-					<?php if(sizeof($outcome['Outcome']['Parent']) == 0):?>
-						, color: "#FF2222"
+					<?php if(sizeof($outcome['Outcome']['Parent']) == 0 || sizeOf($outcomes) == 1):?>
+						, color: "#DD0000"
+					<?php endif;?>
+					<?php if(sizeof($outcome['Outcome']['Child']) == 0 AND sizeOf($outcomes) > 1):?>
+						, color: "#0000DD"
 					<?php endif;?>
 					});
 			<?php endforeach; ?>
@@ -62,6 +65,18 @@
 		</script>
 	<?php endif;?>
 	<!-- impact theory chart -->
+	<div class="graph-key" style="margin-bottom: 10px; font-size: 0.8em;">
+		<div style="float: left; margin-right: 20px;">
+			<div class="graph-square graph-green" style="background-color: #0000DD; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Most proximal outcome
+		</div>
+		<div style="float: left; margin-right: 20px;">
+			<div class="graph-square graph-black" style="background-color: #000; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Intermediate outcome
+		</div>
+		<div style="float: left">
+			<div class="graph-square graph-red" style="background-color: #DD0000; width: 15px; height: 15px; float: left; margin-right: 10px;">&nbsp;</div> Most distal outcome
+		</div>
+		<div style="clear:both"></div>
+	</div>
 	<div id="di-graph-container">
 		<?php if(sizeOf($outcomes) > 0):?>
 			<canvas id="outcomesChart" width="815" height="450" style=""/>
