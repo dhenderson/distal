@@ -8,8 +8,7 @@
 	<?php foreach($indicators as $indicator):?>
 		<tr>
 			<td><?php echo $indicator['Indicator']['name'];?></td>
-			<td><?php echo $this->html->link('Link ' . $indicator['Indicator']['name'] . " to " . $surveySection['SurveySection']['name'], 
-				"/indicators/linkToSurveySection/" . $indicator['Indicator']['id'] . '/' . $surveySection['SurveySection']['id'] . '/' . $programId);?></td>
+			<td></td>
 		</tr>
 	<?php endforeach;?>
 </table>

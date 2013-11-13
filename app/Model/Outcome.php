@@ -21,14 +21,14 @@ class Outcome extends AppModel {
 			'className' => 'Indicator',
 			'joinTable' => 'indicator_outcomes',
 			'foreignKey' => 'outcome_id',
-			'associationForeignKey' => 'id', 
+			'associationForeignKey' => 'indicator_id', 
 			'unique' => true
 		),
 		'Intervention' => array(
 			'className' => 'Intervention',
 			'joinTable' => 'intervention_outcomes',
 			'foreignKey' => 'outcome_id',
-			'associationForeignKey' => 'id', 
+			'associationForeignKey' => 'intervention_id', 
 			'unique' => true
 		)
 	);

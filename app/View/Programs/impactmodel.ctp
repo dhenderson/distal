@@ -168,7 +168,6 @@
 											<th>Indicator</th>
 											<th>Delete</th>
 										</tr>
-										
 										<?php foreach($outcome['Outcome']['Indicator'] as $indicator):?>
 											<?php $indicatorName = $indicator['name'];?>
 											<?php $indicatorId = $indicator['id'];?>

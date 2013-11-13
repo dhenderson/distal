@@ -90,7 +90,7 @@ class OutcomesController extends AppController {
 	
 	public function delete($id) {
 		$outcome = $this->Outcome->findById($id);
-		$programId = $outcome['ProgramOutcome']['program_id'];
+		$programId = $outcome['ProgramOutcome'][0]['program_id'];
 		$this->Outcome->delete($id);
 		$this->Session->setFlash('The outcome with id: '.$id.' has been deleted.');
 		$this->redirect('/programs/impactmodel/' . $programId);

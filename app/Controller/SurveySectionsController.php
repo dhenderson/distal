@@ -1,6 +1,7 @@
 <?php
 class SurveySectionsController extends AppController {
     public $helpers = array('Html', 'Form');
+	public $uses = array('SurveySection', 'IndicatorTarget', 'IndicatorStep', 'IndicatorOutcome');
 	
 	public function about($surveySectionId){
 		$surveySection = $this->SurveySection->findById($surveySectionId);
@@ -33,17 +34,27 @@ class SurveySectionsController extends AppController {
 	}
 	
 	public function indicatorOptions($surveySectionId){
-	
 		$surveySection = $this->SurveySection->findById($surveySectionId);
 		$programId = $surveySection['Survey']['program_id'];
 		$program = $this->SurveySection->Survey->Program->findById($programId);
-		$outcomeId = $program['Organization']['id'];
 		
-		$this->set('surveySection', $surveySection);
-		$this->set('programId', $programId);
-		
-		$indicators = $this->SurveySection->IndicatorSurveySection->Indicator->find('all', array('conditions'=>array('Indicator.organization_id'=>$outcomeId)));
+		// target
+		if(isset($this->params['url']['target'])) {
+			$indicators = $this->IndicatorTarget->find('all', array('conditions'=>array('IndicatorTarget.program_id'=>$programId)));
+		}
+		// step
+		elseif(isset($this->params['url']['step'])) {
+			$indicators = $this->IndicatorStep->find('all', array('conditions'=>array('IndicatorStep.program_id'=>$programId)));
+		}
+		// outcome
+		elseif(isset($this->params['url']['outcome'])) {
+			$indicators = $this->IndicatorOutcome->find('all', array('conditions'=>array('IndicatorOutcome.program_id'=>$programId)));
+		}
 		$this->set('indicators',$indicators);
+		
+
+		$navOptions['Back to survey'] = '/surveys/about/' . $surveySection['Survey']['id'];
+		$this->set('navOptions', $navOptions);
 	}
 	
 	public function edit($id = null) {
