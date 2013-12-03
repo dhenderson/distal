@@ -64,6 +64,10 @@ class OutcomesController extends AppController {
 		$this->set('programId',$programId);
 	}
 	
+	public function addMostDistalOutcome($programId){
+	
+	}
+	
 	public function indicatorOptions($outcomeId, $programId){
 		$outcome = $this->Outcome->findById($outcomeId);
 		$this->set('outcome',$outcome);
@@ -83,7 +87,7 @@ class OutcomesController extends AppController {
 		$this->set('interventions',$interventions);
 	}
 	
-	public function linkToProgram($outcomeId, $programId, $parentOutcomeId) {
+	public function linkToProgram($outcomeId, $programId, $parentOutcomeId = null) {
 		$this->Outcome->linkToProgram($outcomeId, $programId, $parentOutcomeId);
 		$this->redirect('/programs/impactmodel/' . $programId);
 	}
