@@ -1,0 +1,1 @@
+<textarea><?php echo $dot; ?></textarea>
