@@ -6,7 +6,7 @@
 	</thead>
 	<?php foreach($outcomes as $outcome):?>
 		<tr>
-			<td><?php echo $this->html->link($outcome['Outcome']['name'], "/outcomes/linkToProgram/" . $outcome['Outcome']['id'] . "/" . $programId);?></td>
+			<td><?php echo $this->html->link($outcome['Outcome']['name'], "/outcomes/linkToProgram/" . $outcome['Outcome']['id'] . "/" . $program['Program']['id']);?></td>
 		</tr>
 	<?php endforeach;?>
 </table>

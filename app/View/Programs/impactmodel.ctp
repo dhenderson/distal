@@ -20,7 +20,9 @@
 			<?php endforeach; ?>
 			<?php foreach ($outcomes as $outcome): ?>	
 				<?php foreach ($outcome['Outcome']['Parent'] as $parent): ?>	
-					graph.newEdge(outcome<?php echo $outcome['Outcome']['id'];?>, outcome<?php echo $parent['id'];?>);
+					<?php if($parent['ProgramOutcome']['program_id'] == $program['Program']['id']):?>
+						graph.newEdge(outcome<?php echo $outcome['Outcome']['id'];?>, outcome<?php echo $parent['id'];?>);
+					<?php endif;?>
 				<?php endforeach;?>
 			<?php endforeach; ?>
 			
@@ -65,8 +67,23 @@
 		</script>
 	<?php endif;?>
 	<!-- impact theory chart -->
-	<div class="graph-key" style="margin-bottom: 10px; font-size: 0.8em;">
-
+	<div id="di-graph-container">
+		<?php if(sizeOf($outcomes) > 0):?>
+			<canvas id="outcomesChart" width="815" height="450" style=""/>
+		<?php endif;?>
+		<?php if(sizeOf($outcomes) == 0):?>
+			<div class="get-started">
+				<h1>Begin by setting the ultimate outcome</h1>
+				<div><?php echo $this->html->link('Create a new outcome', "/outcomes/add/$organizationId/" . $program['Program']['id']);?></div>
+				<?php if(sizeOf($organization['Outcome']) > 0):?>
+					<div>or</div>
+					<div><?php echo $this->html->link('Use an existing outcome', "/outcomes/addMostDistalOutcome/" . $program['Program']['id']);?></div>
+				<?php endif;?>
+			</div>
+		<?php endif;?>
+	</div>
+	<div style="clear:both"></div>
+	<div class="graph-key">
 		<div style="float: left; margin-right: 20px;">
 			<div class="graph-square" style="background-color: #aaccff; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #0000DD;">&nbsp;</div> <span style="color: #0000DD">Most proximal outcome</span>
 		</div>
@@ -83,20 +100,6 @@
 		</div>
 		<div style="clear:both"></div>
 	</div>
-	<div id="di-graph-container">
-		<?php if(sizeOf($outcomes) > 0):?>
-			<canvas id="outcomesChart" width="815" height="450" style=""/>
-		<?php endif;?>
-		<?php if(sizeOf($outcomes) == 0):?>
-			<div class="get-started">
-				<h1>Begin by setting the ultimate outcome</h1>
-				<div><?php echo $this->html->link('Create a new outcome', "/outcomes/add/$organizationId/" . $program['Program']['id']);?></div>
-				<div>or</div>
-				<div><?php echo $this->html->link('Use an existing outcome', "/");?></div>
-			</div>
-		<?php endif;?>
-	</div>
-	<div style="clear:both"></div>
 
 	<?php if(sizeOf($outcomes) > 0):?>
 		<!-- outcome detail -->

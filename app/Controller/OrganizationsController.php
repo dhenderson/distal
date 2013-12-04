@@ -52,7 +52,16 @@ class OrganizationsController extends AppController {
 		$organization = $this->Organization->findById($organizationId);
 		$this->set('organization', $organization);
 		
-		$outcomes = $this->Organization->Outcome->find('all', array('conditions' => array('Outcome.organization_id'=>$organizationId)));
+		//$outcomes = $this->Organization->Outcome->find('all', array('conditions' => array('Outcome.organization_id'=>$organizationId)));
+		
+		$outcomes = $this->Organization->Program->ProgramOutcome->find('all', 
+			array(
+					'conditions' => array('Program.organization_id'=>$organizationId),
+					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
+				)
+			);
+		$this->set('outcomes', $outcomes);
+		
 		$indicators = $this->Organization->Indicator->find('all', array('conditions' => array('Indicator.organization_id'=>$organizationId)));
 		$interventions = $this->Organization->Intervention->find('all', array('conditions' => array('Intervention.organization_id'=>$organizationId)));
 		$this->set('outcomes', $outcomes);

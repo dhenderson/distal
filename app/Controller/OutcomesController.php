@@ -49,12 +49,13 @@ class OutcomesController extends AppController {
 	
 	public function childOutcomeOptions($parentOutcomeId, $programId){
 		$parentOutcome = $this->Outcome->findById($parentOutcomeId);
+		$organizationId = $parentOutcome['Outcome']['organization_id'];
 		$outcomes = $this->Outcome->ProgramOutcome->find('all', 
 			array(
 				'conditions'=> array
 					(
 						'ProgramOutcome.outcome_id !=' => $parentOutcomeId,
-						'ProgramOutcome.program_id' => $programId
+						'Outcome.organization_id' => $organizationId
 					)
 				)
 			);
@@ -65,7 +66,20 @@ class OutcomesController extends AppController {
 	}
 	
 	public function addMostDistalOutcome($programId){
-	
+		$program = $this->Outcome->Organization->Program->findById($programId);
+		$organizationId = $program['Program']['organization_id'];
+		
+		$outcomes = $this->Outcome->find('all', 
+			array(
+				'conditions'=> array
+					(
+						'Outcome.organization_id' => $organizationId
+					)
+				)
+			);
+
+		$this->set('outcomes',$outcomes);
+		$this->set('program',$program);
 	}
 	
 	public function indicatorOptions($outcomeId, $programId){

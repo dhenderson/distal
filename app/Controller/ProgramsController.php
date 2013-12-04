@@ -66,12 +66,13 @@ class ProgramsController extends AppController {
 	
 	public function impactmodel($programId){
 		$program = $this->Program->findById($programId);
+		$organization = $this->Program->Organization->findById($program['Program']['organization_id']);
 		$this->set('program', $program);
+		$this->set('organization', $organization);
 		
 		$outcomes = $this->Program->ProgramOutcome->find('all', 
 			array(
-					'conditions' => array('ProgramOutcome.program_id'=>$programId),
-					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
+					'conditions' => array('ProgramOutcome.program_id'=>$programId)
 				)
 			);
 		$this->set('outcomes', $outcomes);
