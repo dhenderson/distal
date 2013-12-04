@@ -10,12 +10,6 @@
 			<?php foreach ($outcomes as $outcome): ?>
 				var outcome<?php echo $outcome['Outcome']['id'];?> = graph.newNode({outcomeId: <?php echo $outcome['Outcome']['id'];?>, 
 					label: "<?php echo $outcome['Outcome']['name'];?> (<?php echo sizeOf($outcome['Outcome']['Indicator']);?>-<?php echo sizeOf($outcome['Outcome']['Intervention']);?>)"
-					<?php if(sizeof($outcome['Outcome']['Parent']) == 0 || sizeOf($outcomes) == 1):?>
-						, color: "#DD0000"
-					<?php endif;?>
-					<?php if(sizeof($outcome['Outcome']['Child']) == 0 AND sizeOf($outcomes) > 1):?>
-						, color: "#0000DD"
-					<?php endif;?>
 					});
 			<?php endforeach; ?>
 			<?php foreach ($outcomes as $outcome): ?>	
@@ -84,21 +78,9 @@
 	</div>
 	<div style="clear:both"></div>
 	<div class="graph-key">
-		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square" style="background-color: #aaccff; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #0000DD;">&nbsp;</div> <span style="color: #0000DD">Most proximal outcome</span>
-		</div>
-		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square" style="background-color: #999; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #111;">&nbsp;</div> Intermediate outcome
-		</div>
-		<div style="float: left;">
-			<div class="graph-square" style="background-color: #ff8080; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #DD0000;">&nbsp;</div> <span style="color: #DD0000">Most distal outcome</span>
-		</div>
-		<div style="float: right">
-			<strong>
-				(#Indicators-#Interventions)
-			</strong>
-		</div>
-		<div style="clear:both"></div>
+		<strong>
+			(#Indicators-#Interventions)
+		</strong>
 	</div>
 
 	<?php if(sizeOf($outcomes) > 0):?>

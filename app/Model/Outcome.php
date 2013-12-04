@@ -7,7 +7,7 @@ class Outcome extends AppModel {
 			'className' => 'Outcome',
 			'joinTable' => 'program_outcomes',
 			'foreignKey' => 'outcome_id',
-			'associationForeignKey' => 'parent_outcome_id', 
+			'associationForeignKey' => 'parent_outcome_id',
 			'unique' => true
 		),
 		'Child' => array(
@@ -79,6 +79,69 @@ class Outcome extends AppModel {
 		}
 			
 		$this->query($sql);
+	}
+	
+	public function impactTheoryAsDot($outcomes, $programId = null, $indicatorsAndInterventions = false){
+		$dot = 'digraph G{ node [shape="plaintext"]; graph [fontname = "arial"]; node [fontname = "arial"]; edge [fontname = "arial"];';
+
+		foreach($outcomes as $outcome){
+					
+			$outcomeId = $outcome['Outcome']['id'];
+			$dot .= "outcome$outcomeId ";
+			
+			// start table
+			$dot .= '[label=<<table border="0" cellborder="1" cellspacing="0">';
+			
+			// outcome
+			$outcomeBackgroundColor = "FFFFFF";
+			if($indicatorsAndInterventions == true){
+				$outcomeBackgroundColor = "FFFFFF";
+			}
+			$dot .= '<tr><td bgcolor="#' . $outcomeBackgroundColor . '">' . $outcome['Outcome']['name'] . '</td></tr>';
+			
+			if($indicatorsAndInterventions == true){
+				if(sizeOf($outcome['Outcome']['Indicator']) > 0 OR sizeOf($outcome['Outcome']['Intervention']) > 0) {
+					
+					$dot .= '<tr><td><table border="0" cellborder="0" cellspacing="0"><tr>';
+					
+					// indicators
+					if(sizeOf($outcome['Outcome']['Indicator']) > 0) {
+						$dot .= '<td valign="top"><table border="0">';
+						$dot .= '<tr><td valign="top"><u>Indicators</u></td></tr>'; 
+						foreach($outcome['Outcome']['Indicator'] as $indicator){
+							$dot .= '<tr><td valign="top">' . $indicator['name'] . '</td></tr>';
+						}
+						$dot .= "</table></td>";
+					}
+					
+					// interventions
+					if(sizeOf($outcome['Outcome']['Intervention']) > 0) {
+						$dot .= '<td valign="top"><table border="0">';
+						$dot .= '<tr><td valign="top"><u>Interventions</u></td></tr>'; 
+						foreach($outcome['Outcome']['Intervention'] as $intervention){
+							$dot .= '<tr><td valign="top">' . $intervention['name'] . '</td></tr>';
+						}
+						$dot .= "</table></td>";
+					}
+					
+					$dot .= "</tr></table></td></tr>";
+				}
+			}
+			
+			// end table
+			$dot .= '</table>>]; ';
+			
+			// direct outcomes to parent outcomes
+			foreach($outcome['Outcome']['Parent'] as $parentOutcome){
+				if($parentOutcome['ProgramOutcome']['program_id'] == $programId || $programId == null){
+					$parentOutcomeId = $parentOutcome['id'];
+					$dot .= "outcome$outcomeId -> outcome$parentOutcomeId; ";
+				}
+			}
+		}
+		$dot .= "}";
+		
+		return $dot;
 	}
 }
 

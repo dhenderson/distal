@@ -190,9 +190,9 @@ jQuery.fn.springy = function(params) {
 
 			var weight = (edge.data.weight !== undefined) ? edge.data.weight : 1.0;
 
-			ctx.lineWidth = Math.max(weight *  2, 0.1);
-			arrowWidth = 1 + ctx.lineWidth;
-			arrowLength = 4;
+			ctx.lineWidth = Math.max(weight *  1, 0.1);
+			arrowWidth = 3 + ctx.lineWidth;
+			arrowLength = 10;
 
 			var directional = (edge.data.directional !== undefined) ? edge.data.directional : true;
 

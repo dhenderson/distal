@@ -72,7 +72,8 @@ class ProgramsController extends AppController {
 		
 		$outcomes = $this->Program->ProgramOutcome->find('all', 
 			array(
-					'conditions' => array('ProgramOutcome.program_id'=>$programId)
+					'conditions' => array('ProgramOutcome.program_id'=>$programId),
+					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
 				)
 			);
 		$this->set('outcomes', $outcomes);
@@ -104,66 +105,7 @@ class ProgramsController extends AppController {
 			);
 		$this->set('outcomes', $outcomes);
 		
-		$dot = 'digraph G{ node [shape="plaintext"]; graph [fontname = "arial"]; node [fontname = "arial"]; edge [fontname = "arial"];';
-
-		foreach($outcomes as $outcome){
-			$outcomeId = $outcome['Outcome']['id'];
-			$dot .= "outcome$outcomeId ";
-			
-			// start table
-			$dot .= '[label=<<table border="0" cellborder="1" cellspacing="0">';
-			
-			// outcome
-			$outcomeCellColor = "e6e6e6";
-			// most proximal outcome
-			if(sizeOf($outcome['Outcome']['Child']) == 0){
-				$outcomeCellColor = "aaccff";
-			}
-			// most distal outcome
-			elseif(sizeOf($outcome['Outcome']['Parent']) == 0){
-				$outcomeCellColor = "ff8080";
-			}
-			$dot .= '<tr><td bgcolor="#' . $outcomeCellColor . '">' . $outcome['Outcome']['name'] . '</td></tr>';
-			
-			if($indicatorsAndInterventions == true){
-				if(sizeOf($outcome['Outcome']['Indicator']) > 0 OR sizeOf($outcome['Outcome']['Intervention']) > 0) {
-					
-					$dot .= '<tr><td><table border="0" cellborder="0" cellspacing="0"><tr>';
-					
-					// indicators
-					if(sizeOf($outcome['Outcome']['Indicator']) > 0) {
-						$dot .= '<td valign="top"><table border="0">';
-						$dot .= '<tr><td valign="top"><u>Indicators</u></td></tr>'; 
-						foreach($outcome['Outcome']['Indicator'] as $indicator){
-							$dot .= '<tr><td valign="top">' . $indicator['name'] . '</td></tr>';
-						}
-						$dot .= "</table></td>";
-					}
-					
-					// interventions
-					if(sizeOf($outcome['Outcome']['Intervention']) > 0) {
-						$dot .= '<td valign="top"><table border="0">';
-						$dot .= '<tr><td valign="top"><u>Interventions</u></td></tr>'; 
-						foreach($outcome['Outcome']['Intervention'] as $intervention){
-							$dot .= '<tr><td valign="top">' . $intervention['name'] . '</td></tr>';
-						}
-						$dot .= "</table></td>";
-					}
-					
-					$dot .= "</tr></table></td></tr>";
-				}
-			}
-			
-			// end table
-			$dot .= '</table>>]; ';
-			
-			// direct outcomes to parent outcomes
-			foreach($outcome['Outcome']['Parent'] as $parentOutcome){
-				$parentOutcomeId = $parentOutcome['id'];
-				$dot .= "outcome$outcomeId -> outcome$parentOutcomeId; ";
-			}
-		}
-		$dot .= "}";
+		$dot = $this->Program->ProgramOutcome->Outcome->impactTheoryAsDot($outcomes, $program['Program']['id'], $indicatorsAndInterventions);
 		
 		// download
 		$this->layout = 'download';

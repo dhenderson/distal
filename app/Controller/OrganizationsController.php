@@ -92,6 +92,26 @@ class OrganizationsController extends AppController {
 		}
 	}
 	
+	public function downloadImpactModelAsDot($organizationId, $indicatorsAndInterventions = false){
+
+		$outcomes = $this->Organization->Program->ProgramOutcome->find('all', 
+			array(
+					'conditions' => array('Program.organization_id'=>$organizationId),
+					'fields' => array('DISTINCT ProgramOutcome.outcome_id')
+				)
+			);
+		$this->set('outcomes', $outcomes);
+		
+		$dot = $this->Organization->Outcome->impactTheoryAsDot($outcomes, null, $indicatorsAndInterventions);
+		
+		// download
+		$this->layout = 'download';
+		header("Content-Type: text/plain"); 
+		header('Content-Disposition: attachment; filename="impactmodel.dot"'); 
+		
+		$this->set('dot', $dot);
+	}
+	
 	public function delete($id) {
 		if(!$this->isSystemAdmin()){
 			$this->redirect('/users/home');
