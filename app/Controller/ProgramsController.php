@@ -78,7 +78,8 @@ class ProgramsController extends AppController {
 		
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
-		$navOptions['Download GraphViz file'] = '/programs/downloadImpactModelAsDot/' . $program['Program']['id'];
+		$navOptions['Export dot (outcomes only)'] = '/programs/downloadImpactModelAsDot/' . $program['Program']['id'];
+		$navOptions['Export dot (everything)'] = '/programs/downloadImpactModelAsDot/' . $program['Program']['id'] . '/true';
 		$this->set('navOptions', $navOptions);
 		
 		// title
@@ -90,9 +91,7 @@ class ProgramsController extends AppController {
 	/**
 	* Generates a Graphviz dot file of an impact model 
 	**/
-	public function downloadImpactModelAsDot($programId){
-	
-		
+	public function downloadImpactModelAsDot($programId, $indicatorsAndInterventions = false){
 	
 		$program = $this->Program->findById($programId);
 		
@@ -114,35 +113,44 @@ class ProgramsController extends AppController {
 			$dot .= '[label=<<table border="0" cellborder="1" cellspacing="0">';
 			
 			// outcome
-			$dot .= '<tr><td bgcolor="#EEEEFF">' . $outcome['Outcome']['name'] . '</td></tr>';
+			$outcomeCellColor = "e6e6e6";
+			// most proximal outcome
+			if(sizeOf($outcome['Outcome']['Child']) == 0){
+				$outcomeCellColor = "aaccff";
+			}
+			// most distal outcome
+			elseif(sizeOf($outcome['Outcome']['Parent']) == 0){
+				$outcomeCellColor = "ff8080";
+			}
+			$dot .= '<tr><td bgcolor="#' . $outcomeCellColor . '">' . $outcome['Outcome']['name'] . '</td></tr>';
 			
-			
-			if(sizeOf($outcome['Outcome']['Indicator']) > 0 OR sizeOf($outcome['Outcome']['Indicator']) > 0) {
-				
-				$dot .= '<tr><td><table border="0" cellborder="0" cellspacing="0"><tr>';
-				
-				// indicators
-				if(sizeOf($outcome['Outcome']['Indicator']) > 0) {
-					$dot .= '<td valign="top"><table border="0">';
-					$dot .= '<tr><td valign="top"><u>Indicators</u></td></tr>'; 
-					foreach($outcome['Outcome']['Indicator'] as $indicator){
-						$dot .= '<tr><td valign="top">' . $indicator['name'] . '</td></tr>';
+			if($indicatorsAndInterventions == true){
+				if(sizeOf($outcome['Outcome']['Indicator']) > 0 OR sizeOf($outcome['Outcome']['Intervention']) > 0) {
+					
+					$dot .= '<tr><td><table border="0" cellborder="0" cellspacing="0"><tr>';
+					
+					// indicators
+					if(sizeOf($outcome['Outcome']['Indicator']) > 0) {
+						$dot .= '<td valign="top"><table border="0">';
+						$dot .= '<tr><td valign="top"><u>Indicators</u></td></tr>'; 
+						foreach($outcome['Outcome']['Indicator'] as $indicator){
+							$dot .= '<tr><td valign="top">' . $indicator['name'] . '</td></tr>';
+						}
+						$dot .= "</table></td>";
 					}
-					$dot .= "</table></td>";
-				}
-				
-				// interventions
-				if(sizeOf($outcome['Outcome']['Intervention']) > 0) {
-					$dot .= '<td valign="top"><table border="0">';
-					$dot .= '<tr><td valign="top"><u>Interventions</u></td></tr>'; 
-					foreach($outcome['Outcome']['Intervention'] as $intervention){
-						$dot .= '<tr><td valign="top">' . $intervention['name'] . '</td></tr>';
+					
+					// interventions
+					if(sizeOf($outcome['Outcome']['Intervention']) > 0) {
+						$dot .= '<td valign="top"><table border="0">';
+						$dot .= '<tr><td valign="top"><u>Interventions</u></td></tr>'; 
+						foreach($outcome['Outcome']['Intervention'] as $intervention){
+							$dot .= '<tr><td valign="top">' . $intervention['name'] . '</td></tr>';
+						}
+						$dot .= "</table></td>";
 					}
-					$dot .= "</table></td>";
+					
+					$dot .= "</tr></table></td></tr>";
 				}
-				
-				$dot .= "</tr></table></td></tr>";
-				
 			}
 			
 			// end table
@@ -155,6 +163,11 @@ class ProgramsController extends AppController {
 			}
 		}
 		$dot .= "}";
+		
+		// download
+		$this->layout = 'download';
+		header("Content-Type: text/plain"); 
+		header('Content-Disposition: attachment; filename="impactmodel.dot"'); 
 		
 		$this->set('dot', $dot);
 	}

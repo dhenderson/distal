@@ -298,9 +298,6 @@ CREATE TABLE indicator_survey_sections(
 
 /** DEFAULT SETTINGS **/
 
-/** user defaults **/
-INSERT INTO users (email, system_admin, password) VALUES("root", TRUE, '1234');
-
 /** data type defaults **/
 INSERT INTO data_types (data_type, name) VALUES ('int', 'Integer');
 INSERT INTO data_types (data_type, name) VALUES ('boolean', 'Boolean');

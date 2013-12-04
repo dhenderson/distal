@@ -77,11 +77,17 @@ class UsersController extends AppController {
 	}
 	
     public function login(){
-		
+	
+		// if no users in the database, send to setup page
+		$totalNumberUsers = $this->User->find('count');
+		if($totalNumberUsers == 0){
+			$this->redirect('/users/setup');
+		}
+                
         //Don't show the error message if no data has been submitted.
         $this->set('error', false);
-		
-		$this->set('title_for_layout', 'Login');
+                
+                $this->set('title_for_layout', 'Login');
 
         // If a user has submitted form data:
         if (!empty($this->data)){
@@ -92,7 +98,9 @@ class UsersController extends AppController {
             // Let's compare the form-submitted password with the one in
             // the database.
 
-            if(!empty($someone['User']['password']) && $someone['User']['password'] == $this->data['User']['password']){
+			$passwordHasher = new SimplePasswordHasher();
+            if(!empty($someone['User']['password']) && 
+				$someone['User']['password'] == $passwordHasher->hash($this->data['User']['password'])){
                 // Note: hopefully your password in the DB is hashed,
                 // so your comparison might look more like:
                 // md5($this->data['User']['password']) == ...
@@ -103,8 +111,7 @@ class UsersController extends AppController {
 
                 // Now that we have them stored in a session, forward them on
                 // to a landing page for the application.
-				
-				$this->redirect('/users/home');
+                $this->redirect('/users/home');
             }
             // Else, they supplied incorrect data:
             else{
@@ -113,7 +120,7 @@ class UsersController extends AppController {
             }
         }
     }
-
+	
     public function logout(){
         // Redirect users to this action if they click on a Logout button.
         // All we need to do here is trash the session information:
@@ -122,5 +129,20 @@ class UsersController extends AppController {
         // And we should probably forward them somewhere, too...
         $this->redirect('login');
     }
+	
+	public function setup(){
+		$totalNumberUsers = $this->User->find('count');
+		if($totalNumberUsers > 0){
+			$this->redirect('/users/login');
+		}
+		
+		if (!empty($this->data)) {
+			if ($this->User->save($this->data)) {
+				$this->Session->setFlash('Your user has been saved.');
+				$this->Session->write('User', $this->data);
+				$this->redirect(array('action' => 'home'));
+			}
+		}
+	}
 }
 ?>

@@ -1,1 +1,1 @@
-<textarea><?php echo $dot; ?></textarea>
+<?php echo $dot; ?>

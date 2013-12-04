@@ -71,6 +71,7 @@ a .grey{color: #999;}
           } 
 #chat-box nav{padding: 0px; margin-bottom: 10px; border: none; font-size: 0.8em;}
 #di-graph-container{border: 1px solid #999; text-align: left; border-radius: 10px; width: 825px;}
+.graph-key{border: 1px solid #CCC; padding: 5px 20px; width: 785px; background-color: #EEE;}
 
 .step{width: 350px; text-align: center;}
 .step h1{font-size: 1.3em; margin: 0px; padding: 0px; font-weight: bold;}

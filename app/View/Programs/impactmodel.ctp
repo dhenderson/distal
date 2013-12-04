@@ -66,14 +66,20 @@
 	<?php endif;?>
 	<!-- impact theory chart -->
 	<div class="graph-key" style="margin-bottom: 10px; font-size: 0.8em;">
+
 		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square graph-green" style="background-color: #0000DD; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Most proximal outcome
+			<div class="graph-square" style="background-color: #aaccff; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #0000DD;">&nbsp;</div> <span style="color: #0000DD">Most proximal outcome</span>
 		</div>
 		<div style="float: left; margin-right: 20px;">
-			<div class="graph-square graph-black" style="background-color: #000; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Intermediate outcome
+			<div class="graph-square" style="background-color: #999; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #111;">&nbsp;</div> Intermediate outcome
 		</div>
-		<div style="float: left">
-			<div class="graph-square graph-red" style="background-color: #DD0000; width: 15px; height: 15px; float: left; margin-right: 5px;">&nbsp;</div> Most distal outcome
+		<div style="float: left;">
+			<div class="graph-square" style="background-color: #ff8080; width: 15px; height: 15px; float: left; margin-right: 5px; border: 1px solid #DD0000;">&nbsp;</div> <span style="color: #DD0000">Most distal outcome</span>
+		</div>
+		<div style="float: right">
+			<strong>
+				(#Indicators-#Interventions)
+			</strong>
 		</div>
 		<div style="clear:both"></div>
 	</div>

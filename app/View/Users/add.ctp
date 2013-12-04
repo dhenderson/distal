@@ -1,15 +1,15 @@
 <!-- File: /app/View/Users/add.ctp -->	
 <?php
-	echo $form->create('User');
-	echo $form->input('first_name');
-	echo $form->input('last_name');
-	echo $form->input('email');
-	echo $form->input('password');
+	echo $this->form->create('User');
+	echo $this->form->input('first_name');
+	echo $this->form->input('last_name');
+	echo $this->form->input('email');
+	echo $this->form->input('password');
 	
-	echo $form->input('active');
+	echo $this->form->input('active');
 	if($isSystemAdmin){
-		echo $form->input('system_admin');
+		echo $this->form->input('system_admin');
 	}	
 	
-	echo $form->end('Save User');
+	echo $this->form->end('Save User');
 ?>
