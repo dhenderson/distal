@@ -224,12 +224,12 @@
 /**
  * A random string used in security hashing methods.
  */
-	Configure::write('Security.salt', 'DYhd93b03yJfIbfs2guVoU3j5Wwvnmc2G0F4cC9mi');
+	Configure::write('Security.salt', 'aYhd9Lb03yJf1bfs2guVoU3E5WwvnAc2G0F4cC3mi');
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', '36859309257451192496744989275');
+	Configure::write('Security.cipherSeed', '36819009257451122496744989275');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -269,7 +269,7 @@
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	//date_default_timezone_set('UTC');
+date_default_timezone_set ("America/Los_Angeles");
 
 /**
  *
