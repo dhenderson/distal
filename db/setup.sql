@@ -18,6 +18,8 @@ CREATE TABLE `users`(
 CREATE TABLE organizations(
 	id INT NOT NULL AUTO_INCREMENT,
 	name varchar(255) NOT NULL,
+	is_active BOOLEAN DEFAULT TRUE,
+	deactivation_date datetime,
 	`created` datetime NOT NULL,
 	`modified` datetime NOT NULL,
 	PRIMARY KEY (id)

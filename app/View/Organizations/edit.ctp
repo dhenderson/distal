@@ -3,6 +3,7 @@
 	echo $this->form->create('Organization');
 	echo $this->form->input('name');
 	echo $this->form->input('id', array('type'=>'hidden'));
+	echo $this->form->input('is_active');
 	echo $this->form->end('Save organization');
 ?>
 <div class="delete">
