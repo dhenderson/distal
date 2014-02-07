@@ -47,6 +47,23 @@ class TargetsController extends AppController {
 		}
 	}
 	
+	public function listTargets($organizationId, $programId = null){
+
+		$targets = $this->Target->find('all', array('conditions' => array('Target.organization_id'=>$organizationId)));
+		
+		if($programId){
+			$this->set('programId', $programId);
+		}
+		
+		$this->set('targets', $targets);
+		$this->set('organizationId', $organizationId);
+	}
+	
+	public function linkProgramToTarget($programId, $targetId){
+		$this->Target->linkToProgram($targetId, $programId);
+		$this->redirect('/programs/about/' . $programId);
+	}
+	
 	public function delete($id) {
 		$target = $this->Target->findById($id);
 		$this->Target->delete($id);

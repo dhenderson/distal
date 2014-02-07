@@ -54,7 +54,6 @@ class ProgramsController extends AppController {
 		
 		// menu options
 		$navOptions['Back to organization'] = '/organizations/about/' . $program['Program']['organization_id'];
-		$navOptions['Add a target'] = '/targets/add/' . $programId;
 		$navOptions['Edit'] = '/programs/edit/' . $programId;
 		$this->set('navOptions', $navOptions);
 		
@@ -142,7 +141,8 @@ class ProgramsController extends AppController {
 		
 		// menu options
 		$navOptions['Back to program'] = '/programs/about/' . $program['Program']['id'];
-		$navOptions['Add a target'] = '/targets/add/' . $program['Organization']['id'] . '/' . $program['Program']['id'];
+		$navOptions['Add existing target'] = '/targets/listTargets/' . $program['Organization']['id'] . '/' . $program['Program']['id'];
+		$navOptions['New target'] = '/targets/add/' . $program['Organization']['id'] . '/' . $program['Program']['id'];
 		$this->set('navOptions', $navOptions);
 	}
 	

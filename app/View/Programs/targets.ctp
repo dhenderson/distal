@@ -1,6 +1,8 @@
 <!-- File: /app/View/Program/targets.ctp -->
+
+<h1>Targets for this program</h1>
+<ul>
 <?php foreach ($targets as $target): ?>
-	<div>
-		<?php echo $this->html->link($target['Target']['name'], '/targets/about/' . $target['Target']['id'] . '/' . $program['Program']['id']);?>
-	</div>
+	<li><?php echo $this->html->link($target['Target']['name'], '/targets/about/' . $target['Target']['id'] . '/' . $program['Program']['id']);?></li>
 <?php endforeach; ?>
+</ul>

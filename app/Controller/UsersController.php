@@ -10,7 +10,7 @@ class UsersController extends AppController {
 	public function home(){
 		$user = $this->getLoggedInUser();
 		
-		$organizations = $this->Organization->find('all');
+		$organizations = $this->Organization->find('all', array('order' => array('Organization.name ASC')));
 
 		$this->set('user', $user);
 		$this->set('organizations', $organizations);

@@ -51,9 +51,7 @@ class OrganizationsController extends AppController {
 	public function about($organizationId){
 		$organization = $this->Organization->findById($organizationId);
 		$this->set('organization', $organization);
-		
-		//$outcomes = $this->Organization->Outcome->find('all', array('conditions' => array('Outcome.organization_id'=>$organizationId)));
-		
+				
 		$outcomes = $this->Organization->Program->ProgramOutcome->find('all', 
 			array(
 					'conditions' => array('Program.organization_id'=>$organizationId),
@@ -72,6 +70,7 @@ class OrganizationsController extends AppController {
 		
 		$navOptions['Back home'] = '/users/home/';
 		$navOptions['New program'] = '/programs/add/' . $organization['Organization']['id'];
+		$navOptions['New target'] = '/targets/add/' . $organization['Organization']['id'];
 		$navOptions['Edit'] = '/organizations/edit/' . $organization['Organization']['id'];
 		$this->set('navOptions', $navOptions);
 	}

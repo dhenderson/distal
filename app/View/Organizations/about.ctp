@@ -1,6 +1,7 @@
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		
 		<li class="active"><a href="#programs" data-toggle="tab">Programs</a></li>
+		<li><a href="#targets" data-toggle="tab">Targets</a></li>
 		<?php if(sizeOf($outcomes > 0)):?>
 			<li><a href="#impactmodel" data-toggle="tab">Organization wide impact model</a></li>
 		<?php endif;?>
@@ -57,6 +58,17 @@
 					</td>
 				</tr>
 			<?php endforeach; ?>
+		</table>
+	</div>
+	<div id="targets" class="tab-pane">
+		<table class="table">
+			<?php foreach($organization['Target'] as $target):?>
+				<tr>
+					<td>
+						<?php echo $this->html->link($target['name'], '/targets/about/' . $target['id']);?>
+					</td>
+				</tr>
+			<?php endforeach;?>
 		</table>
 	</div>
 	<?php if(sizeOf($outcomes > 0)):?>
