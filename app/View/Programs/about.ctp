@@ -1,25 +1,3 @@
-<a href="<?php echo $this->webroot;?>programs/targets/<?php echo $program['Program']['id'];?>">
-	<div class="left-box <?php if(sizeOf($program['ProgramTarget']) == 0) {echo "grey";} ?>">
-		<?php $targetImage = "target.png"?>
-		<?php if(sizeOf($program['ProgramTarget']) == 0):?>
-			<?php $targetImage = "target_grey.png"?>
-		<?php endif;?>
-		<img src="<?php echo $this->webroot; ?>img/<?php echo $targetImage;?>"/>
-		<div>Program targets</div>
-	</div>
-</a>
-
-<a href="<?php echo $this->webroot;?>programs/serviceutilization/<?php echo $program['Program']['id'];?>">
-	<div class="left-box <?php if(sizeOf($steps) == 0) {echo "grey";} ?>">
-		<?php $serviceUtilizationImage = "serviceutilization.png"?>
-		<?php if(sizeOf($steps) == 0):?>
-			<?php $serviceUtilizationImage = "serviceutilization_grey.png"?>
-		<?php endif?>
-		<img src="<?php echo $this->webroot; ?>img/<?php echo $serviceUtilizationImage;?>"/>
-		<div>Service utilization</div>
-	</div>
-</a>
-
 <a href="<?php echo $this->webroot;?>programs/impactmodel/<?php echo $program['Program']['id'];?>">
 	<div class="left-box <?php if(sizeOf($outcomes) == 0) {echo "grey";} ?>">
 		<?php $impactModelImage = "impactmodel.png"?>
@@ -48,7 +26,6 @@
 		<li class="active"><a href="#outcomes" data-toggle="tab">Outcomes (<?php echo sizeof($outcomes);?>)</a></li>
 		<li><a href="#indicators" data-toggle="tab">Indicators (<?php echo sizeof($indicatorOutcomes);?>)</a></li>
 		<li><a href="#interventions" data-toggle="tab">Interventions (<?php echo sizeof($interventions);?>)</a></li>
-		<li><a href="#steps" data-toggle="tab">Service utilization steps (<?php echo sizeof($steps);?>)</a></li>
 	</ul>
 </div>
 <div class="tab-content">
@@ -131,23 +108,5 @@
 				</table>
 			</div>
 		</div>
-	</div>
-	<div id="steps" class="tab-pane">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Service utilization step</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<?php foreach ($steps as $step): ?>
-				<tr>
-					<td><?php echo $this->html->link($step['Step']['name'], '/steps/about/' . $step['Step']['id']);?></td>
-					<td><?php echo $this->html->link('Edit', '/steps/edit/' . $step['Step']['id']);?></td>
-					<td><?php echo $this->html->link('Delete', array('/steps/delete/' . $step['Step']['id']), null, 'Are you sure?' )?></td>
-				</tr>
-			<?php endforeach; ?>
-		</table>
 	</div>
 </div>

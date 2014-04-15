@@ -1,7 +1,6 @@
 <div class="tabbable" style="margin-top: 20px;">
 	<ul class="nav nav-tabs">		
 		<li class="active"><a href="#programs" data-toggle="tab">Programs</a></li>
-		<li><a href="#targets" data-toggle="tab">Targets</a></li>
 		<?php if(sizeOf($outcomes > 0)):?>
 			<li><a href="#impactmodel" data-toggle="tab">Organization wide impact model</a></li>
 		<?php endif;?>
@@ -12,32 +11,12 @@
 		<table class="table">
 			<tr>
 				<th>Program</th>
-				<th style="text-align: center;">Targets</th>
-				<th style="text-align: center;">Service utilization</th>
-				<th style="text-align: center;">Impact model</th>
+				<th style="text-align: center;">Diagrams</th>
 				<th style="text-align: center;">Surveys</th>
 			</tr>
 			<?php foreach($organization['Program'] as $program):?>
 				<tr>
 					<td><?php echo $this->html->link($program['name'], '/programs/about/' . $program['id']);?> </td>
-					<td style="text-align: center;">
-						<a href="<?php echo $this->webroot;?>programs/targets/<?php echo $program['id'];?>">
-							<?php $targetImage = "target_30.png"?>
-							<?php if(sizeOf($program['ProgramTarget']) == 0):?>
-								<?php $targetImage = "target_grey_30.png"?>
-							<?php endif;?>
-							<img src="<?php echo $this->webroot; ?>img/<?php echo $targetImage;?>"/>
-						</a>
-					</td>
-					<td style="text-align: center;">
-						<a href="<?php echo $this->webroot;?>programs/serviceutilization/<?php echo $program['id'];?>">
-							<?php $serviceUtilizationImage = "serviceutilization_30.png"?>
-							<?php if(sizeOf($program['Step']) == 0):?>
-								<?php $serviceUtilizationImage = "serviceutilization_grey_30.png"?>
-							<?php endif?>
-							<img src="<?php echo $this->webroot; ?>img/<?php echo $serviceUtilizationImage;?>"/>
-						</a>
-					</td>
 					<td style="text-align: center;">
 						<a href="<?php echo $this->webroot;?>programs/impactmodel/<?php echo $program['id'];?>">
 							<?php $impactModelImage = "impactmodel_30.png"?>
@@ -58,17 +37,6 @@
 					</td>
 				</tr>
 			<?php endforeach; ?>
-		</table>
-	</div>
-	<div id="targets" class="tab-pane">
-		<table class="table">
-			<?php foreach($organization['Target'] as $target):?>
-				<tr>
-					<td>
-						<?php echo $this->html->link($target['name'], '/targets/about/' . $target['id']);?>
-					</td>
-				</tr>
-			<?php endforeach;?>
 		</table>
 	</div>
 	<?php if(sizeOf($outcomes > 0)):?>
